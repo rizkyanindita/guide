@@ -2604,8 +2604,8 @@
         title: '📱 Single Device',
         desc: 'Jalankan test di 1 device. Ganti <code>android</code> dengan <code>ios</code> untuk iOS.',
         cmds: [
-          './run-maestro.sh android',
-          './run-maestro.sh ios'
+          './bin/run-maestro.sh android',
+          './bin/run-maestro.sh ios'
         ],
         notes: [
           '# Jalankan semua TS di device Android',
@@ -2614,14 +2614,14 @@
       },
       squad: {
         title: '👥 Squad (by Tags)',
-        desc: 'Format: <code>./run-maestro.sh squad_&lt;nama&gt;_&lt;device&gt;</code> &nbsp;|&nbsp; <code>&lt;device&gt;</code> bisa <code>android</code> atau <code>ios</code>',
+        desc: 'Format: <code>./bin/run-maestro.sh squad_&lt;nama&gt;_&lt;device&gt;</code> &nbsp;|&nbsp; <code>&lt;device&gt;</code> bisa <code>android</code> atau <code>ios</code>',
         cmds: [
-          './run-maestro.sh squad_&lt;nama&gt;_&lt;device&gt;',
+          './bin/run-maestro.sh squad_&lt;nama&gt;_&lt;device&gt;',
           '---',
-          './run-maestro.sh squad_savings_android',
-          './run-maestro.sh squad_savings_parallel',
+          './bin/run-maestro.sh squad_savings_android',
+          './bin/run-maestro.sh squad_savings_parallel',
           '---',
-          './run-maestro.sh squad_onboarding_android'
+          './bin/run-maestro.sh squad_onboarding_android'
         ],
         notes: [
           '# ← Format utama. Ganti nama squad & device sesuai kebutuhan',
@@ -2636,12 +2636,12 @@
         title: '🎯 Fitur Spesifik',
         desc: 'Gunakan nama folder fitur. Jika ada subfolder, pisahkan dengan <code>/</code>.',
         cmds: [
-          './run-maestro.sh inbox_android',
+          './bin/run-maestro.sh inbox_android',
           '---',
-          './run-maestro.sh inbox/read_android',
+          './bin/run-maestro.sh inbox/read_android',
           '---',
-          './run-maestro.sh lifegoals_android',
-          './run-maestro.sh login_android'
+          './bin/run-maestro.sh lifegoals_android',
+          './bin/run-maestro.sh login_android'
         ],
         notes: [
           '# Folder fitur: inbox → semua TS di dalamnya',
@@ -2656,10 +2656,10 @@
         title: '🔀 Parallel (2 Device)',
         desc: 'TS yang sama dijalankan di 2 device sekaligus. Butuh <code>.env.device1</code> &amp; <code>.env.device2</code>.',
         cmds: [
-          './run-maestro.sh inbox_parallel',
-          './run-maestro.sh lifegoals_parallel',
+          './bin/run-maestro.sh inbox_parallel',
+          './bin/run-maestro.sh lifegoals_parallel',
           '---',
-          './run-maestro.sh all_parallel'
+          './bin/run-maestro.sh all_parallel'
         ],
         notes: [
           '# Fitur inbox di 2 device secara bersamaan',
@@ -2672,9 +2672,9 @@
         title: '⚡ Shard (TS Dibagi 2)',
         desc: 'TS dibagi rata ke 2 device — tidak ada duplikasi. Butuh <code>.env.device1</code> &amp; <code>.env.device2</code>.',
         cmds: [
-          './run-maestro.sh inbox_shard_android',
+          './bin/run-maestro.sh inbox_shard_android',
           '---',
-          './run-maestro.sh lifegoals_shard_android'
+          './bin/run-maestro.sh lifegoals_shard_android'
         ],
         notes: [
           '# Fitur inbox dibagi ke 2 device Android',
@@ -2686,11 +2686,11 @@
         title: '🔗 Multi-Device (4 Device)',
         desc: 'TS yang sama dijalankan di 4 device. Butuh <code>.env.device1</code> s/d <code>.env.device4</code>.',
         cmds: [
-          './run-maestro.sh inbox_multi',
-          './run-maestro.sh lifegoals_multi',
+          './bin/run-maestro.sh inbox_multi',
+          './bin/run-maestro.sh lifegoals_multi',
           '---',
-          './run-maestro.sh all_android',
-          './run-maestro.sh all_ios'
+          './bin/run-maestro.sh all_android',
+          './bin/run-maestro.sh all_ios'
         ],
         notes: [
           '# Fitur inbox di 4 device',
