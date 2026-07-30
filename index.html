@@ -1405,6 +1405,328 @@
       padding-top: 0.15rem;
     }
 
+    /* ─── REPORT SECTION ─── */
+    .rep-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.1rem 0 0.55rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .rep-badge {
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--teal);
+      color: #fff;
+      padding: 0.22em 0.6em;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    .how-step.is-rep .how-num {
+      background: var(--teal);
+    }
+
+    /* ─── MOCKUP UI JENKINS ───
+       Tiruan tampilan Jenkins memakai HTML/CSS, dipakai sebagai ganti
+       screenshot supaya tetap tajam di segala zoom & tanpa file gambar. */
+    .jk {
+      --jk-blue: #1d6fd8;
+      --jk-line: #e8e8e8;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-top: 0.55rem;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: #1f2328;
+    }
+
+    .jk-top {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.7rem;
+      border-bottom: 1px solid var(--jk-line);
+    }
+
+    .jk-logo {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .jk-crumb {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      min-width: 0;
+      color: #57606a;
+    }
+
+    .jk-crumb b {
+      color: #1f2328;
+      font-weight: 700;
+    }
+
+    .jk-crumb .sep {
+      color: #c3c8ce;
+    }
+
+    .jk-body {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+    }
+
+    .jk-side {
+      background: #fcfcfc;
+      border-right: 1px solid var(--jk-line);
+      padding: 0.4rem 0.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+
+    .jk-nav {
+      padding: 0.26rem 0.45rem;
+      border-radius: 5px;
+      color: #57606a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .jk-nav.on {
+      background: #eceff4;
+      color: #1f2328;
+      font-weight: 700;
+    }
+
+    .jk-main {
+      padding: 0.7rem 0.75rem;
+      min-width: 0;
+    }
+
+    .jk-title {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .jk-ok {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid #16a34a;
+      color: #16a34a;
+      font-size: 0.52rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .jk-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.3rem 0.35rem;
+      border-radius: 6px;
+    }
+
+    .jk-ico {
+      flex-shrink: 0;
+      width: 16px;
+      text-align: center;
+    }
+
+    .jk-link {
+      color: var(--jk-blue);
+      font-weight: 700;
+    }
+
+    .jk-dim {
+      color: #57606a;
+      font-weight: 400;
+    }
+
+    .jk-row ul {
+      margin: 0.15rem 0 0 1rem;
+      color: #57606a;
+    }
+
+    /* Baris yang menjadi fokus langkah */
+    .jk-row.hot,
+    .jk-file.hot {
+      background: #fff8e1;
+      box-shadow: inset 0 0 0 2px #f59e0b;
+      border-radius: 6px;
+    }
+
+    .jk-hot-tag {
+      flex-shrink: 0;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.15em 0.45em;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .jk-row .jk-hot-tag {
+      margin-left: auto;
+    }
+
+    /* ── Mockup daftar artifact ── */
+    .jk-head2 {
+      padding: 0.6rem 0.75rem 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .jk-search {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0 0.75rem 0.5rem;
+    }
+
+    .jk-search .box {
+      flex: 1;
+      min-width: 0;
+      height: 21px;
+      border: 1px solid #d0d7de;
+      border-radius: 5px;
+    }
+
+    .jk-search .go {
+      flex-shrink: 0;
+      width: 25px;
+      height: 21px;
+      border: 1px solid #d0d7de;
+      border-radius: 5px;
+      background: #f6f8fa;
+      color: #57606a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .jk-file {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      border-top: 1px solid #f2f2f2;
+    }
+
+    .jk-fname {
+      flex: 1;
+      min-width: 0;
+      color: var(--jk-blue);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .jk-file.hot .jk-fname {
+      flex: 0 1 auto;
+    }
+
+    .jk-spacer {
+      flex: 1;
+    }
+
+    .jk-fmeta {
+      flex-shrink: 0;
+      color: #8c959f;
+      font-size: 0.65rem;
+      white-space: nowrap;
+    }
+
+    .jk-fsize {
+      flex-shrink: 0;
+      min-width: 62px;
+      text-align: right;
+      color: #57606a;
+      font-size: 0.65rem;
+      white-space: nowrap;
+    }
+
+    .jk-eye {
+      flex-shrink: 0;
+      color: var(--jk-blue);
+    }
+
+    .jk-foot {
+      text-align: center;
+      padding: 0.4rem;
+      border-top: 1px solid var(--jk-line);
+      color: var(--jk-blue);
+      font-weight: 600;
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(20, 18, 26, 0.88);
+      backdrop-filter: blur(3px);
+      cursor: zoom-out;
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      border: none;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 1.1rem;
+      line-height: 1;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
     /* ─── DIVIDER ─── */
     .divider {
       display: flex;
@@ -1696,6 +2018,16 @@
         overflow-wrap: anywhere;
         word-break: break-word;
       }
+
+      /* Mockup Jenkins: sidebar & kolom tanggal disembunyikan agar tidak sempit */
+      .jk-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .jk-side,
+      .jk-fmeta {
+        display: none;
+      }
     }
 
     /* =========================================================
@@ -1792,7 +2124,7 @@
     </div>
     <div class="progress-wrap">
       <div class="step-dots" id="stepDots"></div>
-      <div class="slide-counter" id="slideCounter">0 / 12</div>
+      <div class="slide-counter" id="slideCounter">0 / 13</div>
     </div>
     <div class="nav-btns">
       <button class="nav-btn" id="btnPrev" onclick="go(-1)" disabled>← Prev</button>
@@ -1811,7 +2143,7 @@
           <summary class="wn-badge">
             <span class="wn-spark">✨</span>
             <span>What's New</span>
-            <span class="wn-count">5</span>
+            <span class="wn-count">6</span>
             <span class="wn-chevron">▾</span>
           </summary>
           <div class="wn-body">
@@ -1838,6 +2170,12 @@
             <a class="wn-item" href="#" onclick="wnGo(event, 6)">
               <span class="wn-tag wn-tag-teal">Running</span>
               <span class="wn-text">Running By Tags — <code>includeTags</code> &amp; <code>excludeTags</code></span>
+              <span class="wn-arrow">→</span>
+            </a>
+            <a class="wn-item" href="#" onclick="wnGo(event, 13)">
+              <span class="wn-tag wn-tag-teal">Report</span>
+              <span class="wn-text"><strong>Custom Report</strong> — cara buka <code>report.html</code> dari artifact
+                Jenkins</span>
               <span class="wn-arrow">→</span>
             </a>
           </div>
@@ -1884,6 +2222,8 @@
             Mac Mini</div>
           <div class="cover-step" onclick="goTo(12)" style="cursor:pointer"><span class="step-num">12</span> Device
             Commands</div>
+          <div class="cover-step" onclick="goTo(13)" style="cursor:pointer"><span class="step-num">13</span> Lihat
+            Report</div>
         </div>
 
       </div>
@@ -2392,59 +2732,62 @@
               Copy All</button>
           </div>
           <pre id="packageJsonContent"
-            style="margin: 0; padding: 1rem; color: #a5f3a8; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; overflow-x: auto; max-height: 350px;">{
-        "name": "demo",
-        "version": "0.0.0",
-        "private": true,
-        "scripts": {
-          "dev": "nodemon ./src/app --config ./src/foundations/nodemon-config.json",
-          "start": "node ./src/app",
-          "test": "mocha",
-          "generate": "node src/main.js",
-          "worker":"node src/services/integrations/upload-worker.js"
-        },
-        "type": "module",
-        "dependencies": {
-          "@bull-board/express": "^6.18.2",
-          "allure": "^3.0.0-beta.21",
-          "axios": "^1.6.5",
-          "body-parser": "^1.20.3",
-          "bull": "^4.16.5",
-          "bullmq": "^5.69.3",
-          "cookie-parser": "~1.4.3",
-          "cross-env": "^7.0.3",
-          "crypto-js": "^4.2.0",
-          "dayjs": "^1.11.13",
-          "dotenv": "^16.3.1",
-          "express": "^4.21.2",
-          "express-async-handler": "^1.2.0",
-          "form-data": "^4.0.2",
-          "fs-extra": "^11.3.0",
-          "glob": "^10.3.10",
-          "global-agent": "^3.0.0",
-          "googleapis": "^144.0.0",
-          "handlebars": "^4.7.8",
-          "http-errors": "~1.6.2",
-          "ioredis": "^5.9.3",
-          "knex": "^3.1.0",
-          "moment": "^2.30.1",
-          "morgan": "~1.9.0",
-          "node-forge": "^1.3.1",
-          "oracledb": "^6.0.2",
-          "path": "^0.12.7",
-          "puppeteer": "^24.43.0",
-          "redis": "^5.8.2",
-          "sharp": "^0.34.5",
-          "tedious": "^18.6.1"
-        },
-        "devDependencies": {
-          "@faker-js/faker": "^9.7.0",
-          "allure-js-commons": "^3.4.2",
-          "eslint": "^9.10.0",
-          "mocha": "^11.1.0",
-          "nodemon": "^3.1.9"
-        }
-        }</pre>
+            style="margin: 0; padding: 1rem; color: #a5f3a8; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; overflow-x: auto; max-height: 350px;">
+            {
+  "name": "demo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./src/app --config ./src/foundations/nodemon-config.json",
+    "start": "node ./src/app",
+    "test": "mocha",
+    "maestro": "./bin/run-maestro.sh",
+    "generate": "node src/main.js",
+    "worker": "node src/services/integrations/upload-worker.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@bull-board/express": "^6.18.2",
+    "allure": "^3.0.0-beta.21",
+    "axios": "^1.6.5",
+    "body-parser": "^1.20.3",
+    "bull": "^4.16.5",
+    "bullmq": "^5.69.3",
+    "cookie-parser": "~1.4.3",
+    "cross-env": "^7.0.3",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "form-data": "^4.0.2",
+    "fs-extra": "^11.3.0",
+    "glob": "^10.3.10",
+    "global-agent": "^3.0.0",
+    "googleapis": "^144.0.0",
+    "handlebars": "^4.7.8",
+    "http-errors": "~1.6.2",
+    "ioredis": "^5.9.3",
+    "knex": "^3.1.0",
+    "moment": "^2.30.1",
+    "morgan": "~1.9.0",
+    "node-forge": "^1.3.1",
+    "oracledb": "^6.0.2",
+    "path": "^0.12.7",
+    "puppeteer": "^25.4.0",
+    "redis": "^5.8.2",
+    "sharp": "^0.34.5",
+    "tedious": "^18.6.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "allure-js-commons": "^3.4.2",
+    "eslint": "^9.10.0",
+    "mocha": "^11.1.0",
+    "nodemon": "^3.1.9"
+  }
+}
+       </pre>
         </div>
 
         <div
@@ -2944,10 +3287,232 @@ done</div>
       </div>
     </div>
 
+    <!-- ═══ SLIDE 12: REPORT ═══ -->
+    <div class="slide" id="slide-13">
+      <div class="slide-inner">
+        <div class="slide-label lbl-teal">📊 Report</div>
+        <div class="slide-title">📊 Melihat Report Hasil Test</div>
+        <p class="slide-sub">
+          Setiap kali pipeline selesai berjalan, seluruh hasilnya disimpan di build tersebut sebagai
+          <strong>artifact</strong>. Jadi report tidak hilang — Anda bisa membukanya kapan saja, termasuk untuk build
+          yang sudah lama.
+        </p>
+
+        <div class="card card-info" style="margin-bottom:0.4rem; padding:1rem 1.2rem; text-align:left;">
+          <h4 style="margin-bottom:0.25rem; color:var(--text);">📦 Apa itu artifact?</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.55;">
+            Artifact adalah kumpulan file hasil eksekusi yang <strong>disimpan Jenkins per build</strong> — berisi
+            report, log, dan data mentah test. Setiap build punya artifact-nya sendiri, jadi pastikan Anda membuka build
+            (nomor <code>#</code>) yang benar.
+          </p>
+        </div>
+
+        <!-- ══ 1. CUSTOM REPORT ══ -->
+        <div class="rep-head">
+          <span class="rep-badge">1</span>
+          <span>📄 Custom Report — <code>report.html</code></span>
+        </div>
+
+        <!-- ── LANGKAH 1 ── -->
+        <div class="how-step is-rep">
+          <div class="how-head">
+            <div class="how-num">1</div>
+            <h4>Buka build-nya, lalu klik “Build Artifacts”</h4>
+          </div>
+          <p class="how-why">
+            Masuk ke project (mis. <strong>testing-mobile</strong>) → pilih build yang ingin dilihat dari daftar build di
+            kiri. Di halaman <strong>Status</strong> build tersebut, klik link <strong>Build Artifacts</strong> di
+            bagian paling atas.
+          </p>
+          <div class="jk" role="img" aria-label="Tampilan halaman Status build di Jenkins, dengan link Build Artifacts
+            di bagian atas.">
+            <div class="jk-top">
+              <img class="jk-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                alt="">
+              <div class="jk-crumb"><b>Jenkins</b><span class="sep">/</span><span>testing-mobile ⌄</span><span
+                  class="sep">/</span><b>#291_v6.2.0-rnd_Tags_iOS</b></div>
+            </div>
+            <div class="jk-body">
+              <div class="jk-side">
+                <div class="jk-nav on">Status</div>
+                <div class="jk-nav">Changes</div>
+                <div class="jk-nav">Console Output</div>
+                <div class="jk-nav">Parameters</div>
+                <div class="jk-nav">Timings</div>
+                <div class="jk-nav">Allure Report</div>
+                <div class="jk-nav">Pipeline Overview</div>
+                <div class="jk-nav">Rebuild</div>
+              </div>
+              <div class="jk-main">
+                <div class="jk-title">
+                  <span class="jk-ok">✓</span>
+                  <span>#291_v6.2.0-rnd_Tags_iOS <span class="jk-dim">(Jul 29, 2026, 5:08:35 PM)</span></span>
+                </div>
+                <div class="jk-row hot">
+                  <span class="jk-ico">📦</span>
+                  <span class="jk-link">Build Artifacts</span>
+                  <span class="jk-hot-tag">klik ini</span>
+                </div>
+                <div class="jk-row">
+                  <span class="jk-ico">🕐</span>
+                  <span class="jk-dim">Started by user <span class="jk-link">ikky</span></span>
+                </div>
+                <div class="jk-row">
+                  <span class="jk-ico">⏱️</span>
+                  <div>
+                    <span class="jk-dim">This run spent:</span>
+                    <ul>
+                      <li>7 ms waiting;</li>
+                      <li>1 min 40 sec build duration;</li>
+                      <li>1 min 40 sec total from scheduled to completion.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="how-note">
+            <span>🔎</span>
+            <span>Contoh pada tampilan di atas: build <code>#291_v6.2.0-rnd_Tags_iOS</code> di project
+              <strong>testing-mobile</strong>. Tanda <strong style="color:#059669;">✓ hijau</strong> di samping nama
+              build berarti pipeline-nya sukses — kalau merah, cek <strong>Console Output</strong> dulu sebelum
+              membaca report.</span>
+          </div>
+        </div>
+
+        <!-- ── LANGKAH 2 ── -->
+        <div class="how-step is-rep">
+          <div class="how-head">
+            <div class="how-num">2</div>
+            <h4>Klik <code>report.html</code> di dalam daftar artifact</h4>
+          </div>
+          <p class="how-why">
+            Akan muncul daftar isi folder artifact. Cari file bernama <strong><code>report.html</code></strong> lalu
+            klik namanya — report langsung terbuka di browser, tidak perlu di-download.
+          </p>
+          <div class="jk" role="img" aria-label="Tampilan daftar file di dalam folder artifact Jenkins, dengan file
+            report.html di antaranya.">
+            <div class="jk-head2">Artifacts of testing-mobile #291_v6.2.0-rnd_Tags_iOS</div>
+            <div class="jk-search">
+              <span class="jk-link">#291_v6.2.0-rnd_Tags_iOS</span>
+              <span class="jk-dim">/</span>
+              <span class="box"></span>
+              <span class="go">→</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📁</span><span class="jk-fname">reports</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">allure-report.zip</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:15 PM</span>
+              <span class="jk-fsize">1008.42 KiB</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">allure-summary.json</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:15 PM</span>
+              <span class="jk-fsize">134 B</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">backend-ci.log</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:13 PM</span>
+              <span class="jk-fsize">24.41 KiB</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file hot">
+              <span class="jk-ico">📄</span><span class="jk-fname">report.html</span>
+              <span class="jk-hot-tag">klik ini</span>
+              <span class="jk-spacer"></span>
+              <span class="jk-fsize">439.56 KiB</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">report.json</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:10 PM</span>
+              <span class="jk-fsize">364 B</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">report.pdf</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:12 PM</span>
+              <span class="jk-fsize">601.19 KiB</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">report.xml</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:02 PM</span>
+              <span class="jk-fsize">502 B</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-file">
+              <span class="jk-ico">📄</span><span class="jk-fname">worker-ci.log</span>
+              <span class="jk-fmeta">Jul 29, 2026, 5:10:13 PM</span>
+              <span class="jk-fsize">370 B</span><span class="jk-eye">👁</span>
+            </div>
+            <div class="jk-foot">⤓ (all files in zip)</div>
+          </div>
+          <div class="how-note">
+            <span>💡</span>
+            <span>Ikon 👁️ di sisi kanan tiap baris berfungsi sama — <strong>melihat isi file langsung di
+                browser</strong> tanpa men-download-nya. Berguna untuk mengintip file log dengan cepat.</span>
+          </div>
+        </div>
+
+        <!-- ── ISI FOLDER ARTIFACT ── -->
+        <div class="how-step is-rep">
+          <div class="how-head">
+            <div class="how-num">3</div>
+            <h4>Kenali isi folder artifact</h4>
+          </div>
+          <p class="how-why">
+            Selain <code>report.html</code>, ada beberapa file lain yang mungkin Anda butuhkan — misalnya versi PDF
+            untuk dilampirkan ke laporan, atau file log saat perlu menelusuri kegagalan.
+          </p>
+          <div class="table-scroll">
+            <table class="env-table">
+              <thead>
+                <tr>
+                  <th style="width:30%;">File</th>
+                  <th>Isinya</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>report.html</code> <span class="badge badge-new">PAKAI INI</span></td>
+                  <td>Custom Report — dibuka langsung di browser</td>
+                </tr>
+                <tr>
+                  <td><code>report.pdf</code></td>
+                  <td>Custom Report versi PDF — untuk dilampirkan atau dibagikan</td>
+                </tr>
+                <tr>
+                  <td><code>report.json</code> / <code>report.xml</code></td>
+                  <td>Data report mentah — dipakai tools lain, bukan untuk dibaca manual</td>
+                </tr>
+                <tr>
+                  <td><code>backend-ci.log</code> / <code>worker-ci.log</code></td>
+                  <td>Log eksekusi pipeline — dibuka saat perlu menelusuri penyebab kegagalan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="how-note">
+            <span>📥</span>
+            <span>Butuh semuanya sekaligus? Di bagian bawah daftar ada link
+              <strong>(all files in zip)</strong> untuk men-download seluruh artifact dalam satu file.</span>
+          </div>
+        </div>
+
+        <div class="card card-warning" style="margin: 0 auto 1.5rem; text-align:left; padding:1rem 1.2rem;">
+          <h4 style="margin-bottom:0.25rem; color:var(--text);">⚙️ Supaya report terbuka otomatis saat running lokal</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.55;">
+            Cara di atas berlaku untuk report hasil <strong>Jenkins</strong>. Untuk running di lokal, atur
+            <code>OPEN_REPORT_TARGET=custom-report</code> di file <code>.env</code> agar
+            <code>report.html</code> + <code>report.pdf</code> terbuka sendiri setelah test selesai —
+            <a href="#" onclick="goTo(4); return false;">lihat detailnya di Step 4 — Update .env →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div><!-- end slides-wrapper -->
 
   <script>
-    const TOTAL = 13;
+    const TOTAL = 14;
     let cur = 0;
 
     const modes = {
@@ -3163,6 +3728,12 @@ done</div>
     function go(dir) { goTo(cur + dir); }
 
     document.addEventListener('keydown', e => {
+      // Saat lightbox terbuka, panah tidak boleh ikut memindah slide
+      const lb = document.getElementById('lightbox');
+      if (lb.classList.contains('is-open')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(-1);
     });
@@ -3210,6 +3781,16 @@ done</div>
       });
     }
 
+    // Perbesar screenshot. Dipanggil dari onclick pada .shot dan slide Jenkins.
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('is-open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('is-open');
+    }
+
     function copyPackageJson(btn) {
       const text = document.getElementById('packageJsonContent').textContent;
       navigator.clipboard.writeText(text).then(() => {
@@ -3236,6 +3817,11 @@ done</div>
     buildDots();
     updateBtns();
   </script>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">✕</button>
+    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+  </div>
 </body>
 
 </html>
