@@ -172,19 +172,21 @@
       z-index: 80;
     }
 
-    /* Keterangan kecil di atas pill — hanya muncul di halaman cover */
+    /* Keterangan di atas pill — hanya muncul di halaman cover.
+       Dibuat sebagai chip beraksen tipis, bukan teks telanjang:
+       tint 8% + teks indigo gelap terbaca jelas di kanvas terang
+       tanpa ikut berebut perhatian dengan judul cover. */
     .tocfab-hint {
       position: absolute;
-      bottom: calc(100% + 0.3rem);
-      left: 0.75rem;
+      bottom: calc(100% + 0.45rem);
+      left: 0.4rem;
       display: none;
       align-items: center;
-      gap: 0.25rem;
-      font-size: 0.63rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--indigo);
+      gap: 0.35rem;
+      padding: 0.24rem 0.55rem;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--indigo) 8%, var(--surface));
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo) 16%, transparent);
       white-space: nowrap;
       pointer-events: none;
     }
@@ -194,21 +196,32 @@
       animation: tocfabHintIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
     }
 
-    /* Ruang ekstra supaya keterangan tidak menempel ke topbar */
-    .tocfab.show-hint {
-      top: calc(var(--topbar-h, 54px) + clamp(1.5rem, 4vh, 2.2rem));
+    .tocfab-hint-top {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      /* Varian gelap dari aksen — teks kecil uppercase butuh kontras
+         lebih tinggi, indigo terang bikin huruf terlihat bergetar. */
+      color: var(--indigo-strong);
     }
 
     .tocfab-hint-arrow {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       line-height: 1;
+      color: color-mix(in oklab, var(--indigo) 70%, var(--text-light));
       animation: tocfabHintBob 2.4s ease-in-out infinite;
+    }
+
+    /* Ruang ekstra supaya chip tidak menempel ke topbar */
+    .tocfab.show-hint {
+      top: calc(var(--topbar-h, 54px) + clamp(1.9rem, 5vh, 2.6rem));
     }
 
     @keyframes tocfabHintIn {
       from {
         opacity: 0;
-        transform: translateY(-4px);
+        transform: translateY(-5px);
       }
 
       to {
@@ -222,7 +235,7 @@
       0%,
       100% {
         transform: translateY(0);
-        opacity: 0.75;
+        opacity: 0.65;
       }
 
       50% {
@@ -309,6 +322,20 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .tocfab-sep {
+      width: 1px;
+      align-self: stretch;
+      margin: 0.1rem 0.1rem 0.1rem 0.25rem;
+      background: var(--border);
+    }
+
+    .tocfab-press {
+      font-size: 0.63rem;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.01em;
     }
 
     .tocfab-kbd {
@@ -2809,8 +2836,14 @@
 
       /* Di layar kecil pill daftar isi cukup ikon ☰ saja */
       .tocfab-label,
+      .tocfab-sep,
+      .tocfab-press,
       .tocfab-kbd {
         display: none;
+      }
+
+      .tocfab.show-hint {
+        top: calc(var(--topbar-h, 54px) + clamp(1.6rem, 4vh, 2.2rem));
       }
 
       .tocfab-btn {
@@ -2989,7 +3022,7 @@
   <!-- DAFTAR ISI — PILL MENGAMBANG (tampil di semua halaman) -->
   <div class="tocfab" id="tocFab">
     <span class="tocfab-hint" aria-hidden="true">
-      Semua halaman ada di sini
+      <span class="tocfab-hint-top">Semua halaman ada di sini</span>
       <span class="tocfab-hint-arrow">↓</span>
     </span>
     <button class="tocfab-btn" id="btnToc" onclick="toggleToc()" aria-haspopup="dialog" aria-expanded="false"
@@ -2997,6 +3030,8 @@
       <span class="tocfab-dot"></span>
       <span class="tocfab-icon">☰</span>
       <span class="tocfab-label" id="tocBtnTitle">Daftar Isi</span>
+      <span class="tocfab-sep" aria-hidden="true"></span>
+      <span class="tocfab-press">tekan</span>
       <kbd class="tocfab-kbd">D</kbd>
     </button>
     <div class="tocfab-pop" id="tocPop" role="dialog" aria-label="Daftar isi halaman">
@@ -3023,7 +3058,7 @@
       <div class="slide-inner cover-slide">
 
         <!-- WHAT'S NEW -->
-        <details class="whatsnew">
+        <!-- <details class="whatsnew">
           <summary class="wn-badge">
             <span class="wn-spark">✨</span>
             <span>What's New</span>
@@ -3067,7 +3102,7 @@
               <span class="wn-arrow">→</span>
             </a>
           </div>
-        </details>
+        </details> -->
 
         <div class="slide-label lbl-indigo">Maestro QA Automation — Maverick</div>
         <div class="slide-title">📢 Update<br>Maestro Automation</div>
