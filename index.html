@@ -9,6 +9,14 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <style>
+    .highlight-version {
+        font-weight: bold;
+        color: white;
+        background-color: yellow;
+        width: fit-content;
+        padding: 2px 5px;
+        border-radius: 3px;
+    }
     /* ─── WARM NEUTRAL PALETTE (inspired by Linear / Raycast) ─── */
     :root {
       --bg: #f4f2ef;
@@ -1173,6 +1181,89 @@
       margin-bottom: 0.15rem;
     }
 
+    /* ─── SQUAD DEVICE GRID ─── */
+    .squad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .squad-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 0.75rem 0.85rem;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .squad-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .squad-card-head h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .squad-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--amber-light);
+      border: 1px solid var(--amber-border);
+      color: var(--amber);
+      border-radius: 999px;
+      padding: 0.16rem 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .squad-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .squad-row .plat {
+      flex: 0 0 auto;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-light);
+      width: 4.6rem;
+    }
+
+    .squad-row code {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 0.68rem;
+    }
+
+    .squad-copy {
+      flex: 0 0 auto;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      line-height: 1;
+      padding: 0.15rem;
+    }
+
     /* ─── TWO COL ─── */
     .two-col {
       display: grid;
@@ -1995,6 +2086,7 @@
       .two-col,
       .mode-grid,
       .yml-grid,
+      .squad-grid,
       .plat-grid {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -2149,7 +2241,7 @@
           <div class="wn-body">
             <a class="wn-item" href="#" onclick="wnGo(event, 0)">
               <span class="wn-tag wn-tag-amber">Setup</span>
-              <span class="wn-text">Rekomendasi versi <strong>Maestro 2.7.0</strong> + command install</span>
+              <span class="wn-text">Rekomendasi versi <div class="highlight-version">Maestro 2.8.0</div> + command install</span>
               <span class="wn-arrow">→</span>
             </a>
             <a class="wn-item" href="#" onclick="wnGo(event, 2)">
@@ -2189,7 +2281,7 @@
         </p>
         <div class="card card-warning" style="max-width:480px; margin: 0 auto 1.2rem; text-align: left;">
           <h4>💡 Rekomendasi Versi Maestro</h4>
-          <p>To minimize risk during the update, we recommend using Maestro version <strong>2.7.0</strong>.</p>
+          <p>To minimize risk during the update, we recommend using <div class="highlight-version">Maestro version 2.8.0</div></p>
           <p style="margin-bottom:0.4rem;">Install / update Maestro — jalankan di <strong>Terminal</strong> (macOS &amp;
             Linux) atau <strong>WSL / Git Bash</strong> (Windows):</p>
           <div class="cmd-block cmd-block-solo" onclick="copyCmd(this)">
@@ -2924,120 +3016,196 @@
           Berikut daftar ID perangkat (iOS dan Android) yang wajib ditambahkan di file <code>.env</code> Anda saat
           menjalankan test di Mac Mini.
         </p>
-        <div class="card card-wemulator yang sedang nyalarning" style="text-align:left;">
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Onboarding</h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:1rem;">
-            <li><strong>iOS:</strong> <code>2BA6661F-30DF-4FCC-A121-56F8BABAD62C</code> <button
-                onclick="copyText('2BA6661F-30DF-4FCC-A121-56F8BABAD62C', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>Onboarding</code> <button onclick="copyText('squad1', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Payment </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>86D1D288-A3D1-45A9-912C-57F55B92A4B1</code> <button
-                onclick="copyText('1083E347-DA2D-4BF6-B343-019671DA495B', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>Payment</code> <button onclick="copyText('squad3', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Branch & Servicing</h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>1083E347-DA2D-4BF6-B343-019671DA495B</code> <button
-                onclick="copyText('1083E347-DA2D-4BF6-B343-019671DA495B', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>Branch</code> <button onclick="copyText('squad3', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Savings</h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C</code> <button
-                onclick="copyText('6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>Savings</code> <button onclick="copyText('Savings', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Wealth & Lifestyle </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>C17BDA77-4C72-4168-B205-F26E6E734D01</code> <button
-                onclick="copyText('C17BDA77-4C72-4168-B205-F26E6E734D01', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>Lifestyle</code> <button onclick="copyText('Lifestyle', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Lending </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>EE3843D3-2742-4339-A799-6382DFC82CEC</code> <button
-                onclick="copyText('EE3843D3-2742-4339-A799-6382DFC82CEC', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>CC</code> <button onclick="copyText('CC', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 International Bussiness </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE</code> <button
-                onclick="copyText('15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>IB</code> <button onclick="copyText('IB', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Tech Improvement </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>7132AA52-0635-425D-9E10-03E84CF087D2</code> <button
-                onclick="copyText('7132AA52-0635-425D-9E10-03E84CF087D2', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>TechImprove</code> <button onclick="copyText('TechImprove', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 Fraud Audit </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>C8091684-7C54-4DF9-B2CB-B2AC80CAE38C</code> <button
-                onclick="copyText('C8091684-7C54-4DF9-B2CB-B2AC80CAE38C', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>FraudAudit</code> <button onclick="copyText('FraudAudit', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-          <h4 style="color:var(--text); margin-bottom:0.8rem;">📱 RnD </h4>
-          <ul style="font-size:0.85rem; color:var(--text-muted); margin-left:1.5rem; margin-bottom:0;">
-            <li><strong>iOS:</strong> <code>2FD315D1-9F41-4150-9215-9F2F6E588204</code> <button
-                onclick="copyText('2FD315D1-9F41-4150-9215-9F2F6E588204', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-            <li><strong>Android:</strong> <code>RnD</code> <button onclick="copyText('RnD', this)"
-                style="border:none; background:none; cursor:pointer; font-size:1rem; vertical-align:middle; margin-left:4px;"
-                title="Copy">📋</button></li>
-          </ul>
-
-
-
+        <div class="card card-info" style="margin-bottom:0.75rem;">
+          <h4>🏷️ Nama Squad = argumen command</h4>
+          <p>Nilai pada badge oranye adalah <strong>nama squad</strong> yang dipakai saat running —
+            <code>./bin/run-maestro.sh squad_&lt;nama&gt;_android</code>. Tulis persis seperti tertera
+            (huruf kecil semua, tanpa spasi). Squad di luar daftar ini memakai namanya sendiri.</p>
         </div>
+
+        <div class="squad-grid">
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🏦 Onboarding</h4>
+              <span class="squad-name">onboarding
+                <button class="squad-copy" onclick="copyText('onboarding', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>2BA6661F-30DF-4FCC-A121-56F8BABAD62C</code>
+              <button class="squad-copy" onclick="copyText('2BA6661F-30DF-4FCC-A121-56F8BABAD62C', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>Onboarding</code>
+              <button class="squad-copy" onclick="copyText('Onboarding', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>💳 Payment &amp; Transaction</h4>
+              <span class="squad-name">paymenttransaction
+                <button class="squad-copy" onclick="copyText('paymenttransaction', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>86D1D288-A3D1-45A9-912C-57F55B92A4B1</code>
+              <button class="squad-copy" onclick="copyText('86D1D288-A3D1-45A9-912C-57F55B92A4B1', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>Payment</code>
+              <button class="squad-copy" onclick="copyText('Payment', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🏢 Branch &amp; Servicing</h4>
+              <span class="squad-name">branchintelligent
+                <button class="squad-copy" onclick="copyText('branchintelligent', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>1083E347-DA2D-4BF6-B343-019671DA495B</code>
+              <button class="squad-copy" onclick="copyText('1083E347-DA2D-4BF6-B343-019671DA495B', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>Branch</code>
+              <button class="squad-copy" onclick="copyText('Branch', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>💰 Savings</h4>
+              <span class="squad-name">savings
+                <button class="squad-copy" onclick="copyText('savings', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C</code>
+              <button class="squad-copy" onclick="copyText('6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>Savings</code>
+              <button class="squad-copy" onclick="copyText('Savings', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>💎 Wealth &amp; Lifestyle</h4>
+              <span class="squad-name">wealthnlifestyle
+                <button class="squad-copy" onclick="copyText('wealthnlifestyle', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>C17BDA77-4C72-4168-B205-F26E6E734D01</code>
+              <button class="squad-copy" onclick="copyText('C17BDA77-4C72-4168-B205-F26E6E734D01', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>Lifestyle</code>
+              <button class="squad-copy" onclick="copyText('Lifestyle', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>📄 Lending</h4>
+              <span class="squad-name">lendings
+                <button class="squad-copy" onclick="copyText('lendings', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>EE3843D3-2742-4339-A799-6382DFC82CEC</code>
+              <button class="squad-copy" onclick="copyText('EE3843D3-2742-4339-A799-6382DFC82CEC', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>CC</code>
+              <button class="squad-copy" onclick="copyText('CC', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🌏 International Bussiness</h4>
+              <span class="squad-name">internationalbussiness
+                <button class="squad-copy" onclick="copyText('internationalbussiness', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE</code>
+              <button class="squad-copy" onclick="copyText('15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>IB</code>
+              <button class="squad-copy" onclick="copyText('IB', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🛠️ Tech Improvement</h4>
+              <span class="squad-name">techimprovement
+                <button class="squad-copy" onclick="copyText('techimprovement', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>7132AA52-0635-425D-9E10-03E84CF087D2</code>
+              <button class="squad-copy" onclick="copyText('7132AA52-0635-425D-9E10-03E84CF087D2', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>TechImprove</code>
+              <button class="squad-copy" onclick="copyText('TechImprove', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🕵️ Fraud Audit</h4>
+              <span class="squad-name">fraudaudit
+                <button class="squad-copy" onclick="copyText('fraudaudit', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>C8091684-7C54-4DF9-B2CB-B2AC80CAE38C</code>
+              <button class="squad-copy" onclick="copyText('C8091684-7C54-4DF9-B2CB-B2AC80CAE38C', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>FraudAudit</code>
+              <button class="squad-copy" onclick="copyText('FraudAudit', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🧪 RnD</h4>
+              <span class="squad-name">rnd
+                <button class="squad-copy" onclick="copyText('rnd', this)" title="Copy nama squad">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>2FD315D1-9F41-4150-9215-9F2F6E588204</code>
+              <button class="squad-copy" onclick="copyText('2FD315D1-9F41-4150-9215-9F2F6E588204', this)" title="Copy UDID">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>RnD</code>
+              <button class="squad-copy" onclick="copyText('RnD', this)" title="Copy nama device">📋</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
