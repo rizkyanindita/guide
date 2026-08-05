@@ -501,6 +501,74 @@
       }
     }
 
+    /* ─── KREDIT DESAINER ─── */
+    .credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 1.5rem auto 0;
+      padding: 0.5rem 1rem 0.5rem 0.5rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(91, 95, 227, 0.09), rgba(91, 95, 227, 0.02));
+      box-shadow: 0 0 0 1px rgba(91, 95, 227, 0.16);
+      animation: kbarIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+    }
+
+    .credit-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(140deg, #6f73ec, #4a4ecb);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 3px 10px -2px rgba(91, 95, 227, 0.55), 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+    }
+
+    .credit-text {
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .credit-role {
+      display: block;
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      opacity: 0.75;
+    }
+
+    .credit-name {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    /* Kredit ringkas di topbar — ikut terlihat di semua halaman */
+    .brand-credit {
+      font-weight: 500;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .brand-credit b {
+      font-weight: 700;
+      color: var(--indigo);
+    }
+
+    .brand-sep {
+      color: var(--border);
+      margin: 0 0.15rem;
+    }
+
     .toc-btn .toc-btn-title {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2561,6 +2629,18 @@
         font-size: 0.78rem;
       }
 
+      /* Di layar sempit judul dipangkas, kredit tetap tampil */
+      .brand-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 38vw;
+      }
+
+      .brand-credit {
+        font-size: 0.68rem;
+      }
+
       .nav-btn {
         min-height: 40px;
         padding: 0.35rem 0.6rem;
@@ -2738,7 +2818,9 @@
   <div class="topbar">
     <div class="topbar-brand">
       <div class="brand-pip"></div>
-      Maestro Automation — Update &amp; Panduan
+      <span class="brand-title">Maestro Automation — Update &amp; Panduan</span>
+      <span class="brand-sep">•</span>
+      <span class="brand-credit">designed by <b>Andi Kusnadi</b></span>
     </div>
     <div class="progress-wrap">
       <div class="step-dots" id="stepDots"></div>
@@ -2891,6 +2973,15 @@
             Commands</div>
           <div class="cover-step" onclick="goTo(13)" style="cursor:pointer"><span class="step-num">13</span> Lihat
             Report</div>
+        </div>
+
+        <!-- KREDIT DESAINER -->
+        <div class="credit">
+          <span class="credit-avatar">AK</span>
+          <span class="credit-text">
+            <span class="credit-role">Designed by</span>
+            <span class="credit-name">Andi Kusnadi</span>
+          </span>
         </div>
 
 
