@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep '</div>$')",
+      "Bash(python3 -c ' *)",
+      "Bash(grep -n 'h1, h2, h3, h4, h5, h6\\\\|slide-title\\\\|\\\\.card {' /Users/64664/guide/guide/index.html)",
+      "Bash(sed -n '/^    \\\\.step-dot {/,/^    }/p' index.html)",
+      "Bash(sed -n '/^    \\\\.kbar {/,/^    }/p' index.html)",
+      "Bash(python3 -)",
+      "Bash(grep -n '#[0-9a-fA-F]\\\\{3,6\\\\}' index.html)",
+      "Bash(grep -o '#[0-9a-fA-F]\\\\{3,6\\\\}')",
+      "Bash(awk 'NR>=2650 && NR<=2910' index.html)",
+      "Bash(awk 'NR>=2650 && NR<=2915' index.html)",
+      "Bash(cat > *)",
+      "Bash(git -C . diff --stat)",
+      "Bash(node -e \"try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer ok'\\)}catch\\(e\\){console.log\\('no puppeteer'\\)}\")",
+      "Bash(sed -n '/^    \\\\.tocfab-pop {/,/^    }/p' index.html)",
+      "Bash(sed -n '/^    \\\\.toc-item {/,/^    }/p' index.html)",
+      "Bash(awk 'NR>=1505 && NR<=1525' index.html)",
+      "Bash(awk 'NR>=1418 && NR<=1430' index.html)",
+      "Bash(sed -n '/^    \\\\.slide {/,/^    }/p' index.html)",
+      "Bash(sed -n '/^    \\\\.slide\\\\.is-active {/,/^    }/p' index.html)",
+      "WebSearch",
+      "WebFetch(domain:m3.material.io)",
+      "WebFetch(domain:seeds.sproutsocial.com)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

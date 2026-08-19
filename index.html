@@ -6,70 +6,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📢 Update Maestro Automation V1</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <style>
     .highlight-version {
-        font-weight: bold;
-        color: white;
-        background-color: yellow;
-        width: fit-content;
-        padding: 2px 5px;
-        border-radius: 3px;
+      display: inline-block;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      color: #1c140f;
+      background: linear-gradient(90deg, #e8944a, #e2725b);
+      width: fit-content;
+      padding: 4px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 24px rgba(226, 114, 91, 0.3);
     }
-    /* ─── PALETTE ────────────────────────────────────────────
-       Ditulis dalam OKLCH (ruang warna persepsual) mengikuti
-       praktik Tailwind v4 / shadcn 2025: kanvas netral sejuk,
-       satu aksen kuat, warna semantik yang diturunkan chroma-nya
-       supaya tidak terasa seperti palet bootstrap. */
+    /* ─── PALETTE — WARM FUTURISTIC ────────────────────────
+       Dark warm theme dengan amber & terracotta accents
+       Glass morphism dengan backdrop blur & ambient orbs */
     :root {
-      /* Kanvas & permukaan — netral dengan jejak biru sangat tipis */
-      --bg: oklch(0.977 0.003 280);
-      --surface: oklch(1 0 0);
-      --surface-2: oklch(0.965 0.004 280);
-      --border: oklch(0.912 0.006 280);
-      --border-soft: oklch(0.948 0.004 280);
+      /* Background & surfaces — warm near-black brown */
+      --bg: #1c140f;
+      --surface: rgba(255, 235, 215, 0.05);
+      --surface-2: rgba(255, 235, 215, 0.08);
+      --surface-glass: rgba(255, 235, 215, 0.05);
+      --border: rgba(255, 235, 215, 0.15);
+      --border-strong: rgba(255, 235, 215, 0.3);
+      --border-soft: rgba(255, 235, 215, 0.08);
 
-      /* Teks — tiga langkah kontras yang jelas terbaca */
-      --text: oklch(0.24 0.017 280);
-      --text-muted: oklch(0.52 0.014 280);
-      --text-light: oklch(0.66 0.012 280);
+      /* Text — warm off-white dengan opacity untuk hierarchy */
+      --text: #f3ece4;
+      --text-muted: rgba(243, 236, 228, 0.66);
+      --text-light: rgba(243, 236, 228, 0.52);
 
-      /* Aksen utama — electric indigo */
-      --indigo: oklch(0.55 0.213 275);
-      --indigo-strong: oklch(0.47 0.205 275);
-      --indigo-soft: oklch(0.72 0.145 275);
-      --indigo-light: oklch(0.968 0.021 275);
-      --indigo-mid: oklch(0.86 0.075 275);
+      /* Aksen utama — warm amber */
+      --amber: #e8944a;
+      --amber-light: #f2b073;
+      /* Alas badge/chip — sengaja dipisah dari --amber-light yang solid,
+         supaya teks --amber di atasnya tetap terbaca. */
+      --amber-tint: rgba(232, 148, 74, 0.15);
+      --amber-pale: #f7d9b8;
+      --amber-glow: rgba(232, 148, 74, 0.3);
 
-      /* Aksen kedua — dipakai hanya untuk gradient judul & spark */
-      --violet: oklch(0.62 0.22 315);
+      /* Aksen sekunder — terracotta */
+      --terracotta: #e2725b;
+      --terracotta-pale: #ffe4d6;
+      --terracotta-glow: rgba(226, 114, 91, 0.25);
 
-      /* Semantik — chroma diturunkan, hue digeser agar lebih lembut */
-      --red: oklch(0.58 0.19 22);
-      --red-light: oklch(0.972 0.016 22);
-      --red-border: oklch(0.885 0.062 22);
+      /* Border tipis untuk badge & chip — sewarna aksennya, opasitas rendah */
+      --amber-border: rgba(232, 148, 74, 0.32);
+      --emerald-border: rgba(168, 213, 186, 0.28);
+      --teal-border: rgba(127, 201, 217, 0.28);
 
-      --amber: oklch(0.66 0.145 68);
-      --amber-light: oklch(0.975 0.026 78);
-      --amber-border: oklch(0.885 0.078 78);
+      /* Aksen tambahan untuk compatibility */
+      --indigo: #e8944a;
+      --indigo-light: rgba(232, 148, 74, 0.15);
+      --indigo-mid: rgba(232, 148, 74, 0.32);
+      --indigo-soft: #f2b073;
+      --violet: #e2725b;
+      --red: #e2725b;
+      --red-light: rgba(226, 114, 91, 0.15);
+      --emerald: #a8d5ba;
+      --emerald-light: rgba(168, 213, 186, 0.15);
+      --teal: #7fc9d9;
+      --teal-light: rgba(127, 201, 217, 0.15);
 
-      --emerald: oklch(0.62 0.128 166);
-      --emerald-light: oklch(0.972 0.026 166);
-      --emerald-border: oklch(0.878 0.068 166);
+      /* Terminal */
+      --terminal-bg: #120b07;
 
-      --teal: oklch(0.63 0.115 218);
-      --teal-light: oklch(0.972 0.024 218);
-      --teal-border: oklch(0.878 0.062 218);
+      /* Motion — token Material Design 3.
+         Durasi: short4 200ms · medium1 250ms · medium2 300ms.
+         Easing: emphasized untuk gerak dalam layar, decelerate untuk masuk,
+         accelerate untuk keluar (yang keluar harus lebih cepat dari yang masuk,
+         supaya pergantian terasa gesit dan tidak saling menunggu). */
+      --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+      --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+      --ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+      --dur-short: 150ms;
+      --dur-enter: 250ms;
+      --dur-exit: 200ms;
 
-      /* Elevasi — bayangan diberi rona netral, bukan hitam murni */
-      --shadow-xs: 0 1px 2px oklch(0.24 0.017 280 / 0.05);
-      --shadow-sm:
-        0 1px 3px oklch(0.24 0.017 280 / 0.06),
-        0 1px 2px oklch(0.24 0.017 280 / 0.04);
-      --shadow:
-        0 8px 24px -10px oklch(0.24 0.017 280 / 0.15),
-        0 2px 6px -2px oklch(0.24 0.017 280 / 0.07);
+      /* Shadows — warm tone */
+      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
     *,
@@ -88,37 +107,91 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
-    /* ─── TOP BAR ─── */
+    /* Ambient background orbs */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 500px;
+      height: 500px;
+      top: -200px;
+      left: -150px;
+      background: radial-gradient(circle at 30% 30%, #e8944a 0%, rgba(232, 148, 74, 0.1) 50%, transparent 70%);
+      animation: driftOrb 16s ease-in-out infinite;
+    }
+
+    body::after {
+      width: 600px;
+      height: 600px;
+      bottom: -250px;
+      right: -200px;
+      background: radial-gradient(circle at 40% 40%, #e2725b 0%, rgba(226, 114, 91, 0.1) 50%, transparent 70%);
+      animation: driftOrb 18s ease-in-out infinite reverse;
+    }
+
+    /* Orb ketiga — elemen nyata, bukan pseudo-element pada <main> yang tidak ada di sini */
+    .orb-c {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      bottom: -160px;
+      left: 30%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240, 178, 90, 0.3), transparent 70%);
+      filter: blur(100px);
+      animation: driftOrb 18s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── TOP BAR — GLASS HEADER ─── */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 1.5rem;
       height: 54px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-xs);
+      background: rgba(255, 235, 215, 0.05);
+      border-bottom: 1px solid rgba(255, 235, 215, 0.12);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
       flex-shrink: 0;
       gap: 1rem;
+      position: relative;
+      z-index: 100;
     }
 
     .topbar-brand {
       font-weight: 700;
       font-size: 0.85rem;
-      color: var(--text);
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       white-space: nowrap;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-family: 'Sora', -apple-system, sans-serif;
     }
 
     .brand-pip {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--indigo);
+      background: var(--amber);
+      animation: pulseDot 2s ease-in-out infinite;
+      box-shadow: 0 0 12px var(--amber-glow);
     }
 
     /* ─── PROGRESS DOTS ─── */
@@ -140,17 +213,21 @@
       border-radius: 4px;
       background: var(--border);
       cursor: pointer;
-      transition: all 0.3s;
+      transition:
+        background var(--dur-short) var(--ease-emphasized),
+        width var(--dur-enter) var(--ease-emphasized),
+        flex-grow var(--dur-enter) var(--ease-emphasized);
       width: 28px;
     }
 
     .step-dot.active {
-      background: var(--indigo);
+      background: linear-gradient(90deg, #e8944a, #e2725b);
+      box-shadow: 0 0 10px rgba(226, 114, 91, 0.6);
       width: 44px;
     }
 
     .step-dot.done {
-      background: var(--indigo);
+      background: rgba(232, 148, 74, 0.45);
       opacity: 0.35;
     }
 
@@ -172,76 +249,11 @@
       z-index: 80;
     }
 
-    /* Keterangan di atas pill — hanya muncul di halaman cover.
-       Dibuat sebagai chip beraksen tipis, bukan teks telanjang:
-       tint 8% + teks indigo gelap terbaca jelas di kanvas terang
-       tanpa ikut berebut perhatian dengan judul cover. */
-    .tocfab-hint {
-      position: absolute;
-      bottom: calc(100% + 0.45rem);
-      left: 0.4rem;
+    /* Cover sudah punya baris "Daftar Isi" sendiri di dalam konten, jadi pill
+       mengambang di sana hanya duplikat yang menutupi hero. Halaman 1 ke atas
+       tetap menampilkannya sebagai satu-satunya jalan pintas yang terlihat. */
+    .tocfab.on-cover .tocfab-btn {
       display: none;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.24rem 0.55rem;
-      border-radius: 999px;
-      background: color-mix(in oklab, var(--indigo) 8%, var(--surface));
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo) 16%, transparent);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .tocfab.show-hint .tocfab-hint {
-      display: inline-flex;
-      animation: tocfabHintIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
-    }
-
-    .tocfab-hint-top {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      /* Varian gelap dari aksen — teks kecil uppercase butuh kontras
-         lebih tinggi, indigo terang bikin huruf terlihat bergetar. */
-      color: var(--indigo-strong);
-    }
-
-    .tocfab-hint-arrow {
-      font-size: 0.75rem;
-      line-height: 1;
-      color: color-mix(in oklab, var(--indigo) 70%, var(--text-light));
-      animation: tocfabHintBob 2.4s ease-in-out infinite;
-    }
-
-    /* Ruang ekstra supaya chip tidak menempel ke topbar */
-    .tocfab.show-hint {
-      top: calc(var(--topbar-h, 54px) + clamp(1.9rem, 5vh, 2.6rem));
-    }
-
-    @keyframes tocfabHintIn {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    @keyframes tocfabHintBob {
-
-      0%,
-      100% {
-        transform: translateY(0);
-        opacity: 0.65;
-      }
-
-      50% {
-        transform: translateY(2px);
-        opacity: 1;
-      }
     }
 
     .tocfab-btn {
@@ -252,11 +264,13 @@
       padding: 0.42rem 0.7rem 0.42rem 0.55rem;
       border: none;
       border-radius: 999px;
-      background: var(--surface);
+      background: #241a13;
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
       box-shadow:
-        0 0 0 1px color-mix(in oklab, var(--indigo) 22%, transparent),
-        0 10px 26px -12px oklch(0.24 0.017 280 / 0.45);
-      color: var(--indigo);
+        0 0 0 1px rgba(232,148,74,0.32),
+        0 10px 26px -12px rgba(0,0,0,0.7);
+      color: var(--amber);
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
@@ -273,8 +287,8 @@
     .tocfab-btn:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 0 1px color-mix(in oklab, var(--indigo) 45%, transparent),
-        0 14px 30px -12px color-mix(in oklab, var(--indigo) 60%, transparent);
+        0 0 0 1px rgba(232,148,74,0.45),
+        0 14px 30px -12px rgba(232,148,74,0.60);
     }
 
     .tocfab-btn:active {
@@ -283,12 +297,12 @@
 
     .tocfab-btn:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px color-mix(in oklab, var(--indigo) 55%, transparent);
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px rgba(232,148,74,0.55);
     }
 
     .tocfab.is-open .tocfab-btn {
       background: var(--indigo-light);
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo) 50%, transparent);
+      box-shadow: 0 0 0 1px rgba(232,148,74,0.50);
     }
 
     /* Titik indigo berdenyut pelan — penanda "ada sesuatu di sini" tanpa hover */
@@ -305,11 +319,11 @@
 
       0%,
       100% {
-        box-shadow: 0 0 0 2px color-mix(in oklab, var(--indigo) 10%, transparent);
+        box-shadow: 0 0 0 2px rgba(232,148,74,0.10);
       }
 
       50% {
-        box-shadow: 0 0 0 5px color-mix(in oklab, var(--indigo) 16%, transparent);
+        box-shadow: 0 0 0 5px rgba(232,148,74,0.16);
       }
     }
 
@@ -345,7 +359,7 @@
       line-height: 1;
       color: var(--indigo);
       background: var(--bg);
-      border: 1px solid color-mix(in oklab, var(--indigo) 30%, transparent);
+      border: 1px solid rgba(232,148,74,0.30);
       border-radius: 4px;
       padding: 0.16rem 0.28rem;
     }
@@ -359,18 +373,21 @@
       max-height: min(62vh, 460px);
       overflow-y: auto;
       padding: 0.55rem;
-      background: var(--surface);
+      background: #241a13;
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      backdrop-filter: blur(20px) saturate(140%);
       border-radius: 16px;
       box-shadow:
-        0 0 0 1px var(--border),
-        0 28px 56px -22px oklch(0.24 0.017 280 / 0.4),
-        0 6px 14px -8px oklch(0.24 0.017 280 / 0.14);
+        0 0 0 1px rgba(255, 235, 215, 0.14),
+        0 28px 56px -22px rgba(0, 0, 0, 0.75),
+        0 6px 14px -8px rgba(0, 0, 0, 0.5);
       display: none;
+      z-index: 2;
     }
 
     .tocfab.is-open .tocfab-pop {
       display: block;
-      animation: tocfabPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: tocfabPop var(--dur-enter) var(--ease-decelerate) both;
     }
 
     @keyframes tocfabPop {
@@ -426,14 +443,14 @@
       padding: 0.34rem 0.4rem 0.34rem 0.9rem;
       border-radius: 16px;
       background:
-        linear-gradient(180deg, oklch(0.31 0.02 280 / 0.93), oklch(0.22 0.018 280 / 0.95));
+        linear-gradient(180deg, rgba(52,36,26,0.93), rgba(28,20,15,0.96));
       -webkit-backdrop-filter: blur(16px) saturate(150%);
       backdrop-filter: blur(16px) saturate(150%);
       box-shadow:
         0 1px 0 0 rgba(255, 255, 255, 0.07) inset,
         0 0 0 1px rgba(255, 255, 255, 0.07),
-        0 14px 34px -12px oklch(0.24 0.017 280 / 0.55),
-        0 2px 6px -2px oklch(0.24 0.017 280 / 0.3);
+        0 14px 34px -12px rgba(20,10,5,0.6),
+        0 2px 6px -2px rgba(20,10,5,0.4);
       font-size: 0.74rem;
       color: rgba(255, 255, 255, 0.6);
       user-select: none;
@@ -596,12 +613,12 @@
     .kbar-item.is-pressed {
       color: #fff;
       background: color-mix(in oklab, var(--indigo-soft) 22%, transparent);
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo-soft) 55%, transparent);
+      box-shadow: 0 0 0 1px rgba(242,176,115,0.55);
       transform: translateY(0) scale(0.97);
     }
 
     .kbar-item.is-pressed kbd {
-      background: color-mix(in oklab, var(--indigo-soft) 55%, transparent);
+      background: rgba(242,176,115,0.55);
       border-color: rgba(255, 255, 255, 0.45);
       color: #fff;
     }
@@ -637,7 +654,89 @@
       box-shadow:
         0 1px 0 0 rgba(255, 255, 255, 0.07) inset,
         0 0 0 1px rgba(255, 255, 255, 0.07),
-        0 8px 20px -12px oklch(0.24 0.017 280 / 0.5);
+        0 8px 20px -12px rgba(20,10,5,0.55);
+    }
+
+    /* ─── ANIMATIONS — WARM FUTURISTIC ─── */
+    @keyframes driftOrb {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(20px, -30px) scale(1.05);
+      }
+      50% {
+        transform: translate(-10px, 20px) scale(0.95);
+      }
+      75% {
+        transform: translate(30px, 10px) scale(1.02);
+      }
+    }
+
+    @keyframes floatIcon {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(8deg);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 8px #e8944a);
+      }
+      50% {
+        filter: drop-shadow(0 0 16px #e2725b);
+      }
+    }
+
+    @keyframes pulseDot {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(232, 148, 74, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(232, 148, 74, 0);
+      }
+    }
+
+    @keyframes blink {
+      0%, 49% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        transform: translateY(10px);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceChevron {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(5px);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.8);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -661,8 +760,8 @@
       gap: 0.6rem;
       text-align: left;
       width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: rgba(255, 235, 215, 0.06);
+      border: 1px solid rgba(255, 235, 215, 0.12);
       border-radius: 10px;
       padding: 0.55rem 0.7rem;
       cursor: pointer;
@@ -741,8 +840,8 @@
       height: 0;
       width: 0;
       border-radius: 8px;
-      background: color-mix(in oklab, var(--indigo) 7%, transparent);
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo) 35%, transparent);
+      background: rgba(232,148,74,0.7);
+      box-shadow: 0 0 0 1px rgba(232,148,74,0.35);
       opacity: 0;
       pointer-events: none;
       z-index: 2;
@@ -763,11 +862,11 @@
       display: flex;
       align-items: center;
       gap: 0.3rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: rgba(255, 235, 215, 0.05);
+      border: 1px solid rgba(255, 235, 215, 0.15);
       border-radius: 7px;
       color: var(--text-muted);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Sora', -apple-system, sans-serif;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 0.38rem 0.85rem;
@@ -781,20 +880,20 @@
     }
 
     .nav-btn:hover:not(:disabled) {
-      border-color: var(--indigo);
-      color: var(--indigo);
-      background: var(--indigo-light);
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(232, 148, 74, 0.1);
       transform: translateY(-1px);
+      box-shadow: 0 0 12px rgba(232, 148, 74, 0.15);
     }
 
     .nav-btn:active:not(:disabled) {
       transform: translateY(0) scale(0.97);
     }
 
-
     .nav-btn:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px color-mix(in oklab, var(--indigo) 55%, transparent);
+      box-shadow: 0 0 0 2px rgba(255, 235, 215, 0.1), 0 0 0 4px rgba(232, 148, 74, 0.3);
     }
 
     .nav-btn:disabled {
@@ -803,17 +902,18 @@
     }
 
     .nav-btn.primary {
-      background: var(--indigo);
-      border-color: var(--indigo);
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
+      border-color: var(--amber);
       color: white;
-      box-shadow: 0 2px 8px color-mix(in oklab, var(--indigo) 25%, transparent);
+      box-shadow: 0 2px 8px rgba(232, 148, 74, 0.3);
     }
 
     .nav-btn.primary:hover:not(:disabled) {
-      background: var(--indigo-strong);
-      border-color: var(--indigo-strong);
+      background: linear-gradient(135deg, var(--amber-light) 0%, #d87a6a 100%);
+      border-color: var(--amber-light);
       color: white;
-      box-shadow: 0 6px 16px -4px color-mix(in oklab, var(--indigo) 50%, transparent);
+      box-shadow: 0 8px 20px rgba(232, 148, 74, 0.35);
+      transform: translateY(-2px);
     }
 
     /* Denyut singkat saat tombol panah keyboard ditekan */
@@ -825,17 +925,17 @@
     @keyframes navKey {
       0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 color-mix(in oklab, var(--indigo) 45%, transparent);
+        box-shadow: 0 0 0 0 rgba(232,148,74,0.45);
       }
 
       35% {
         transform: scale(0.96);
-        box-shadow: 0 0 0 5px color-mix(in oklab, var(--indigo) 12%, transparent);
+        box-shadow: 0 0 0 5px rgba(232,148,74,0.12);
       }
 
       100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 color-mix(in oklab, var(--indigo) 0%, transparent);
+        box-shadow: 0 0 0 0 rgba(232,148,74,0.0);
       }
     }
 
@@ -844,8 +944,7 @@
       .nav-hl,
       .nav-btn,
       .tocfab-btn,
-      .tocfab-dot,
-      .tocfab-hint-arrow {
+      .tocfab-dot {
         transition: none;
         animation: none;
       }
@@ -856,6 +955,7 @@
       flex: 1;
       overflow: hidden;
       position: relative;
+      z-index: 10;
     }
 
     .slide {
@@ -869,11 +969,13 @@
       overflow-y: auto;
       visibility: hidden;
       opacity: 0;
+      z-index: 1;
     }
 
     .slide.is-active {
       visibility: visible;
       opacity: 1;
+      z-index: 10;
     }
 
     .slide-inner {
@@ -886,7 +988,7 @@
     @keyframes inRight {
       from {
         opacity: 0;
-        transform: translateX(40px);
+        transform: translateX(22px) scale(0.985);
       }
 
       to {
@@ -898,7 +1000,7 @@
     @keyframes inLeft {
       from {
         opacity: 0;
-        transform: translateX(-40px);
+        transform: translateX(-22px) scale(0.985);
       }
 
       to {
@@ -915,7 +1017,7 @@
 
       to {
         opacity: 0;
-        transform: translateX(-40px);
+        transform: translateX(-22px) scale(0.985);
       }
     }
 
@@ -927,24 +1029,26 @@
 
       to {
         opacity: 0;
-        transform: translateX(40px);
+        transform: translateX(22px) scale(0.985);
       }
     }
 
-    .anim-in-r {
-      animation: inRight 0.3s cubic-bezier(.4, 0, .2, 1) forwards;
+    /* Spesifisitas dinaikkan (.slide.anim-*) agar tidak kalah dari
+       `.slide.is-active` saat kedua kelas menempel bersamaan. */
+    .slide.anim-in-r {
+      animation: inRight var(--dur-enter) var(--ease-decelerate) forwards;
     }
 
-    .anim-in-l {
-      animation: inLeft 0.3s cubic-bezier(.4, 0, .2, 1) forwards;
+    .slide.anim-in-l {
+      animation: inLeft var(--dur-enter) var(--ease-decelerate) forwards;
     }
 
-    .anim-out-l {
-      animation: outLeft 0.25s cubic-bezier(.4, 0, .2, 1) forwards;
+    .slide.anim-out-l {
+      animation: outLeft var(--dur-exit) var(--ease-accelerate) forwards;
     }
 
-    .anim-out-r {
-      animation: outRight 0.25s cubic-bezier(.4, 0, .2, 1) forwards;
+    .slide.anim-out-r {
+      animation: outRight var(--dur-exit) var(--ease-accelerate) forwards;
     }
 
     @keyframes reminderShake {
@@ -980,6 +1084,15 @@
       .reminder-shake {
         animation: none;
       }
+
+      /* Pergantian halaman cukup muncul-hilang, tanpa geser */
+      .slide.anim-in-r,
+      .slide.anim-in-l,
+      .slide.anim-out-l,
+      .slide.anim-out-r,
+      .cv-stack > * {
+        animation-duration: 1ms;
+      }
     }
 
     /* ─── LABEL ─── */
@@ -989,46 +1102,49 @@
       gap: 0.35rem;
       font-size: 0.68rem;
       font-weight: 700;
+      font-family: 'Sora', -apple-system, sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.28em 0.75em;
       border-radius: 20px;
       margin-bottom: 0.9rem;
+      backdrop-filter: blur(8px);
     }
 
     .lbl-indigo {
-      background: var(--indigo-light);
-      border: 1px solid var(--indigo-mid);
-      color: var(--indigo);
+      background: rgba(232, 148, 74, 0.15);
+      border: 1px solid rgba(232, 148, 74, 0.3);
+      color: var(--amber);
     }
 
     .lbl-red {
-      background: var(--red-light);
-      border: 1px solid var(--red-border);
-      color: var(--red);
+      background: rgba(226, 114, 91, 0.15);
+      border: 1px solid rgba(226, 114, 91, 0.3);
+      color: var(--terracotta);
     }
 
     .lbl-amber {
-      background: var(--amber-light);
-      border: 1px solid var(--amber-border);
+      background: rgba(232, 148, 74, 0.15);
+      border: 1px solid rgba(232, 148, 74, 0.3);
       color: var(--amber);
     }
 
     .lbl-emerald {
-      background: var(--emerald-light);
-      border: 1px solid var(--emerald-border);
-      color: var(--emerald);
+      background: rgba(168, 213, 186, 0.12);
+      border: 1px solid rgba(168, 213, 186, 0.25);
+      color: #a8d5ba;
     }
 
     .lbl-teal {
-      background: var(--teal-light);
-      border: 1px solid var(--teal-border);
-      color: var(--teal);
+      background: rgba(127, 201, 217, 0.12);
+      border: 1px solid rgba(127, 201, 217, 0.25);
+      color: #7fc9d9;
     }
 
     .slide-title {
       font-size: 1.85rem;
       font-weight: 800;
+      font-family: 'Sora', -apple-system, sans-serif;
       line-height: 1.2;
       color: var(--text);
       margin-bottom: 0.5rem;
@@ -1048,7 +1164,8 @@
 
     .cover-slide .slide-title {
       font-size: 2.4rem;
-      background: linear-gradient(135deg, var(--indigo) 0%, var(--violet) 100%);
+      font-family: 'Sora', -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1107,46 +1224,56 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* ─── CARDS ─── */
+    /* ─── CARDS — GLASS MORPHISM ─── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: rgba(255, 235, 215, 0.05);
+      border: 1px solid rgba(255, 235, 215, 0.15);
+      border-radius: 14px;
       padding: 1.1rem 1.3rem;
       box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
       margin-bottom: 0.65rem;
+      transition:
+        background var(--dur-short) var(--ease-emphasized),
+        border-color var(--dur-short) var(--ease-emphasized),
+        box-shadow var(--dur-short) var(--ease-emphasized);
+    }
+
+    .card:hover {
+      background: rgba(255, 235, 215, 0.08);
+      border-color: rgba(255, 235, 215, 0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .card-danger {
-      border-left: 3px solid var(--red);
-      background: var(--red-light);
+      border-left: 3px solid var(--terracotta);
+      background: rgba(226, 114, 91, 0.1);
     }
 
     .card-success {
-      border-left: 3px solid var(--emerald);
-      background: var(--emerald-light);
+      border-left: 3px solid var(--amber-pale);
+      background: rgba(232, 148, 74, 0.08);
     }
 
     .card-warning {
       border-left: 3px solid var(--amber);
-      background: var(--amber-light);
+      background: rgba(232, 148, 74, 0.1);
+      box-shadow: 0 0 24px rgba(232, 148, 74, 0.15);
     }
 
     .card-red {
-      border-left: 3px solid var(--amber);
-      background: var(--amber-light);
-      color: var(--red);
-
+      border-left: 3px solid var(--terracotta);
+      background: rgba(226, 114, 91, 0.1);
     }
 
     .card-info {
-      border-left: 3px solid var(--teal);
-      background: var(--teal-light);
+      border-left: 3px solid var(--amber-light);
+      background: rgba(232, 148, 74, 0.07);
     }
 
     .card-neutral {
-      border-left: 3px solid var(--indigo);
-      background: var(--indigo-light);
+      border-left: 3px solid var(--amber);
+      background: rgba(232, 148, 74, 0.08);
     }
 
     .card h4 {
@@ -1221,7 +1348,7 @@
       min-width: 22px;
       height: 22px;
       border-radius: 5px;
-      background: var(--amber-light);
+      background: var(--amber-tint);
       border: 1px solid var(--amber-border);
       color: var(--amber);
       font-weight: 800;
@@ -1266,11 +1393,11 @@
       gap: 0.45rem;
       padding: 0.34rem 0.7rem 0.34rem 0.55rem;
       border-radius: 999px;
-      background: var(--surface);
+      background: #241a13;
       box-shadow:
-        0 0 0 1px color-mix(in oklab, var(--indigo) 22%, transparent),
-        0 6px 18px -10px color-mix(in oklab, var(--indigo) 55%, transparent);
-      color: var(--indigo);
+        0 0 0 1px rgba(232,148,74,0.32),
+        0 6px 18px -10px rgba(232,148,74,0.55);
+      color: var(--amber);
       font-size: 0.71rem;
       font-weight: 600;
       letter-spacing: -0.005em;
@@ -1300,13 +1427,13 @@
     .wn-badge:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 0 1px color-mix(in oklab, var(--indigo) 40%, transparent),
-        0 10px 22px -10px color-mix(in oklab, var(--indigo) 60%, transparent);
+        0 0 0 1px rgba(232,148,74,0.40),
+        0 10px 22px -10px rgba(232,148,74,0.60);
     }
 
     .whatsnew[open] .wn-badge {
       background: var(--indigo-light);
-      box-shadow: 0 0 0 1px color-mix(in oklab, var(--indigo) 45%, transparent);
+      box-shadow: 0 0 0 1px rgba(232,148,74,0.45);
     }
 
     /* Titik gradient kecil menggantikan emoji ✨ */
@@ -1315,7 +1442,7 @@
       height: 7px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--indigo), var(--violet));
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--indigo) 14%, transparent);
+      box-shadow: 0 0 0 3px rgba(232,148,74,0.14);
       font-size: 0;
       flex-shrink: 0;
       animation: wnPing 3s ease-in-out infinite;
@@ -1325,11 +1452,11 @@
 
       0%,
       100% {
-        box-shadow: 0 0 0 2px color-mix(in oklab, var(--indigo) 10%, transparent);
+        box-shadow: 0 0 0 2px rgba(232,148,74,0.10);
       }
 
       50% {
-        box-shadow: 0 0 0 5px color-mix(in oklab, var(--indigo) 16%, transparent);
+        box-shadow: 0 0 0 5px rgba(232,148,74,0.16);
       }
     }
 
@@ -1366,12 +1493,14 @@
       flex-direction: column;
       gap: 0.15rem;
       padding: 0.45rem;
-      background: var(--surface);
+      background: #241a13;
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      backdrop-filter: blur(20px) saturate(140%);
       border-radius: 14px;
       box-shadow:
-        0 0 0 1px var(--border),
-        0 24px 48px -20px oklch(0.24 0.017 280 / 0.35),
-        0 4px 12px -6px oklch(0.24 0.017 280 / 0.12);
+        0 0 0 1px rgba(255, 235, 215, 0.14),
+        0 24px 48px -20px rgba(20,10,5,0.45),
+        0 4px 12px -6px rgba(20,10,5,0.22);
       animation: wnPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
@@ -1452,7 +1581,7 @@
     }
 
     .wn-tag-amber {
-      background: var(--amber-light);
+      background: var(--amber-tint);
       border: 1px solid var(--amber-border);
       color: var(--amber);
     }
@@ -1485,7 +1614,7 @@
     /* ─── STANDALONE CMD BLOCK (outside terminal chrome) ─── */
     /* Doubled class keeps this above the later responsive `.cmd-block` rule. */
     .cmd-block.cmd-block-solo {
-      background: oklch(0.205 0.014 280);
+      background: #120b07;
       border-radius: 7px;
       margin-top: 0.15rem;
       /* Wrap instead of scrolling: the always-visible copy hint is pinned to
@@ -1540,7 +1669,7 @@
 
     .tag-card-exclude {
       border-left: 3px solid var(--amber);
-      background: var(--amber-light);
+      background: var(--amber-tint);
     }
 
     .tag-card-top {
@@ -1606,19 +1735,19 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       line-height: 1.6;
-      color: oklch(0.87 0.115 158);
+      color: var(--amber-pale);
     }
 
     .yml-code .y-key {
-      color: oklch(0.62 0.02 280);
+      color: var(--text-light);
     }
 
     .yml-code .y-val {
-      color: oklch(0.84 0.14 82);
+      color: var(--amber-light);
     }
 
     .yml-code .y-item {
-      color: oklch(0.79 0.135 165);
+      color: var(--amber);
       margin-left: 1.2rem;
     }
 
@@ -1628,23 +1757,24 @@
     }
 
     .yml-code .y-in2 {
-      color: oklch(0.79 0.135 165);
+      color: var(--amber);
       margin-left: 2.4rem;
     }
 
     /* trailing inline comment */
     .yml-code .y-note {
-      color: oklch(0.52 0.02 280);
+      color: var(--text-light);
       margin-left: 0.6rem;
     }
 
     /* ─── CMD TERMINAL BLOCK ─── */
     .terminal {
-      background: oklch(0.205 0.014 280);
+      background: #120b07;
       border-radius: 10px;
       overflow: hidden;
       margin-top: 0.6rem;
       box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 235, 215, 0.1);
     }
 
     .terminal-bar {
@@ -1652,8 +1782,8 @@
       align-items: center;
       gap: 0.4rem;
       padding: 0.55rem 0.9rem;
-      background: oklch(0.255 0.016 280);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid rgba(255, 235, 215, 0.08);
     }
 
     .terminal-bar .dot {
@@ -1663,21 +1793,21 @@
     }
 
     .dot-red {
-      background: #ff5f57;
+      background: #e2725b;
     }
 
     .dot-amber {
-      background: #febc2e;
+      background: #e8944a;
     }
 
     .dot-green {
-      background: #28c840;
+      background: #a8d5ba;
     }
 
     .terminal-bar span {
       margin-left: auto;
       font-size: 0.68rem;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(243, 236, 228, 0.35);
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -1693,22 +1823,22 @@
       align-items: flex-start;
       gap: 0.5rem;
       padding: 0.45rem 0.6rem;
-
       border-radius: 6px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
-      color: oklch(0.87 0.115 158);
+      color: var(--amber-pale);
       cursor: pointer;
-      transition: background 0.15s;
+      transition: background 0.15s, box-shadow 0.15s;
       position: relative;
     }
 
     .cmd-block:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 235, 215, 0.06);
+      box-shadow: 0 0 12px rgba(232, 148, 74, 0.15);
     }
 
     .cmd-block .prompt {
-      color: oklch(0.52 0.02 280);
+      color: var(--text-light);
       user-select: none;
       flex-shrink: 0;
     }
@@ -1719,9 +1849,9 @@
       top: 50%;
       transform: translateY(-50%);
       font-size: 0.62rem;
-      color: oklch(0.52 0.02 280);
+      color: var(--text-light);
       opacity: 0;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, transform 0.15s;
       font-family: 'Inter', sans-serif;
     }
 
@@ -1730,12 +1860,14 @@
     }
 
     .cmd-block.copied {
-      background: rgba(5, 150, 105, 0.12);
+      background: rgba(232, 148, 74, 0.15);
+      box-shadow: 0 0 16px rgba(232, 148, 74, 0.2);
     }
 
     .cmd-block.copied .copy-hint {
-      color: oklch(0.79 0.135 165);
+      color: var(--amber);
       opacity: 1;
+      animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
     /* Standalone blocks always show the affordance — there is no
@@ -1746,7 +1878,7 @@
 
     .cmd-comment {
       font-size: 0.72rem;
-      color: oklch(0.62 0.02 280);
+      color: var(--text-light);
       padding: 0.35rem 0.6rem 0.15rem;
       font-family: 'JetBrains Mono', monospace;
     }
@@ -1881,7 +2013,7 @@
     }
 
     .ts-diff {
-      background: var(--amber-light);
+      background: var(--amber-tint);
       border: 1px solid var(--amber-border);
       color: var(--amber);
     }
@@ -1970,7 +2102,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      background: var(--amber-light);
+      background: var(--amber-tint);
       border: 1px solid var(--amber-border);
       color: var(--amber);
       border-radius: 999px;
@@ -2013,6 +2145,436 @@
       font-size: 0.85rem;
       line-height: 1;
       padding: 0.15rem;
+    }
+
+    /* ─── LIST CIF PER SQUAD ─── */
+    .cif-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .cif-search {
+      flex: 1 1 auto;
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.42rem 0.85rem;
+      font-family: inherit;
+      font-size: 0.78rem;
+      color: var(--text);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .cif-search:focus {
+      outline: none;
+      border-color: var(--indigo-mid);
+      box-shadow: 0 0 0 3px var(--indigo-light);
+    }
+
+    .cif-legend {
+      flex: 0 0 auto;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .cif-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .cif-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 0.7rem 0.8rem;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+    }
+
+    .cif-card.is-hidden {
+      display: none;
+    }
+
+    .cif-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 0.45rem;
+    }
+
+    .cif-card-head h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .cif-count {
+      flex: 0 0 auto;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-light);
+      border-radius: 999px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.63rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .cif-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .cif-num {
+      flex: 0 0 auto;
+      width: 1.1rem;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .cif-plat {
+      flex: 0 0 auto;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-light);
+      width: 4.2rem;
+    }
+
+    .cif-row code {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── COVER — WARM FUTURISTIC ───
+       Susunan mengikuti mockup: chip outline → pill langkah → tag kategori →
+       hero ikon+judul → subjudul → bar shortcut → kartu callout → baris daftar isi.
+       Semua entrance meng-animasikan transform saja (bukan opacity), supaya isi
+       tetap terlihat kalau tab di-background dan animasi ter-pause di tengah. */
+    .cv-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.35rem;
+      max-width: 740px;
+      margin: 0 auto;
+      padding-block: 1rem 2rem;
+    }
+
+    .cv-stack > * {
+      animation: fadeUp 420ms var(--ease-decelerate) both;
+    }
+
+    .cv-stack > *:nth-child(1) { animation-delay: 0s; }
+    .cv-stack > *:nth-child(2) { animation-delay: 0.04s; }
+    .cv-stack > *:nth-child(3) { animation-delay: 0.08s; }
+    .cv-stack > *:nth-child(4) { animation-delay: 0.12s; }
+    .cv-stack > *:nth-child(5) { animation-delay: 0.16s; }
+    .cv-stack > *:nth-child(6) { animation-delay: 0.2s; }
+    .cv-stack > *:nth-child(7) { animation-delay: 0.24s; }
+    .cv-stack > *:nth-child(8) { animation-delay: 0.28s; }
+
+    /* Chip tombol keyboard di bar shortcut */
+    .cv-kbd {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 235, 215, 0.2);
+      border-radius: 6px;
+      padding: 0.12rem 0.5rem;
+      background: rgba(255, 235, 215, 0.08);
+      flex: none;
+    }
+
+    /* 3 — tag kategori */
+    .cv-tag {
+      display: inline-flex;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.09em;
+      background: linear-gradient(90deg, rgba(232, 148, 74, 0.22), rgba(226, 114, 91, 0.22));
+      border: 1px solid rgba(232, 148, 74, 0.45);
+      color: var(--amber-pale);
+      padding: 0.42rem 1rem;
+      border-radius: 999px;
+    }
+
+    /* 4 — hero */
+    .cv-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 3.25rem;
+      line-height: 1.05;
+      margin: 0.3rem 0 0;
+      background: linear-gradient(100deg, #f2b073, #e8944a 40%, #e2725b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .cv-hero svg {
+      flex: none;
+      animation:
+        floatIcon 4.5s ease-in-out infinite,
+        pulseGlow 3s ease-in-out infinite;
+    }
+
+    .cv-sub {
+      max-width: 56ch;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text);
+      opacity: 0.68;
+      margin: 0;
+    }
+
+    /* 6 — bar shortcut */
+    .cv-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.35rem;
+      background: rgba(255, 235, 215, 0.06);
+      border: 1px solid rgba(226, 114, 91, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 0.85rem 1.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(226, 114, 91, 0.08);
+    }
+
+    .cv-bar-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      flex: none;
+    }
+
+    .cv-bar-label::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+
+    .cv-bar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+
+    .cv-bar-item:hover {
+      color: var(--amber-light);
+    }
+
+    .cv-bar-item.is-pressed {
+      color: var(--amber-light);
+    }
+
+    .cv-bar-item.is-pressed .cv-kbd {
+      border-color: rgba(232, 148, 74, 0.6);
+      background: rgba(232, 148, 74, 0.25);
+      color: var(--amber-pale);
+    }
+
+    /* 7 — kartu callout */
+    .cv-callout {
+      text-align: left;
+      width: 100%;
+      border: 1px solid rgba(232, 148, 74, 0.35);
+      background: linear-gradient(160deg, rgba(232, 148, 74, 0.14), rgba(226, 114, 91, 0.07));
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 1.7rem 1.85rem;
+      box-shadow: 0 20px 60px rgba(180, 90, 30, 0.18);
+    }
+
+    .cv-callout-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 1.22rem;
+      color: #f7ddb8;
+      margin-bottom: 0.7rem;
+    }
+
+    .cv-callout-head svg {
+      flex: none;
+      animation: pulseGlow 2.6s ease-in-out infinite;
+    }
+
+    .cv-callout p {
+      margin: 0 0 0.25rem;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+      opacity: 0.82;
+    }
+
+    /* Blok terminal dengan prompt $ + kursor berkedip */
+    .cv-term {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--terminal-bg);
+      border: 1px solid rgba(226, 114, 91, 0.25);
+      color: var(--terracotta-pale);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      box-shadow: inset 0 0 30px rgba(226, 114, 91, 0.06);
+    }
+
+    .cv-term-line {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+      min-width: 0;
+    }
+
+    .cv-term-line .prompt,
+    .cv-caret {
+      color: var(--terracotta);
+    }
+
+    .cv-caret {
+      animation: blink 1s step-end infinite;
+    }
+
+    .cv-copy {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      background: rgba(255, 235, 215, 0.05);
+      border: 1px solid rgba(255, 235, 215, 0.2);
+      color: var(--terracotta-pale);
+      border-radius: 8px;
+      padding: 0.38rem 0.75rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cv-copy:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+      box-shadow: 0 0 16px rgba(226, 114, 91, 0.3);
+    }
+
+    .cv-copy svg {
+      flex: none;
+    }
+
+    .cv-copy.is-copied svg {
+      animation: popIn 0.35s ease;
+    }
+
+    /* 8 — baris daftar isi */
+    .cv-toc {
+      width: 100%;
+      background: rgba(255, 235, 215, 0.05);
+      border: 1px solid rgba(255, 235, 215, 0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.05rem 1.6rem;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cv-toc:hover {
+      border-color: rgba(226, 114, 91, 0.4);
+      box-shadow: 0 0 24px rgba(226, 114, 91, 0.12);
+    }
+
+    .cv-toc-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-width: 0;
+    }
+
+    .cv-toc-left svg {
+      flex: none;
+    }
+
+    .cv-toc-title {
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+
+    .cv-toc-count {
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      background: rgba(255, 235, 215, 0.1);
+      border: 1px solid rgba(255, 235, 215, 0.18);
+      color: var(--text);
+      opacity: 0.8;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .cv-toc-chevron {
+      opacity: 0.6;
+      flex: none;
+      animation: bounceChevron 1.8s ease-in-out infinite;
     }
 
     /* ─── TWO COL ─── */
@@ -2094,7 +2656,7 @@
     }
 
     .how-note.is-warn {
-      background: var(--amber-light);
+      background: var(--amber-tint);
       border: 1px solid var(--amber-border);
     }
 
@@ -2162,7 +2724,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       line-height: 1.55;
-      color: oklch(0.87 0.115 158);
+      color: var(--amber-pale);
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
     }
@@ -2196,14 +2758,14 @@
     }
 
     .cmd-scroll .prompt {
-      color: oklch(0.52 0.02 280);
+      color: var(--text-light);
       user-select: none;
       margin-right: 0.45rem;
     }
 
     /* Placeholder yang harus diganti nilai asli, mis. <UDID> */
     .cmd-scroll .ph {
-      color: oklch(0.84 0.14 82);
+      color: var(--amber-light);
     }
 
     .cmd-copy {
@@ -2211,7 +2773,7 @@
       align-self: center;
       border: none;
       background: rgba(255, 255, 255, 0.07);
-      color: oklch(0.62 0.02 280);
+      color: var(--text-light);
       font-family: 'Inter', sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
@@ -2225,19 +2787,19 @@
 
     .cmd-copy:hover {
       background: rgba(255, 255, 255, 0.16);
-      color: oklch(0.93 0.008 280);
+      color: var(--text);
     }
 
     .cmd-copy.copied {
-      background: color-mix(in oklab, oklch(0.79 0.135 165) 18%, transparent);
-      color: oklch(0.79 0.135 165);
+      background: color-mix(in oklab, var(--amber) 18%, transparent);
+      color: var(--amber);
     }
 
     /* Komentar penjelas di atas tiap command */
     .cmd-note {
       font-size: 0.7rem;
       line-height: 1.45;
-      color: oklch(0.62 0.02 280);
+      color: var(--text-light);
       font-family: 'JetBrains Mono', monospace;
       padding: 0.45rem 0.55rem 0.2rem;
       white-space: normal;
@@ -2278,9 +2840,9 @@
        Tiruan tampilan Jenkins memakai HTML/CSS, dipakai sebagai ganti
        screenshot supaya tetap tajam di segala zoom & tanpa file gambar. */
     .jk {
-      --jk-blue: #1d6fd8;
-      --jk-line: #e8e8e8;
-      background: #fff;
+      --jk-blue: #e8944a;
+      --jk-line: rgba(255,235,215,0.12);
+      background: #241a13;
       border: 1px solid var(--border);
       border-radius: 9px;
       overflow: hidden;
@@ -2288,7 +2850,7 @@
       margin-top: 0.55rem;
       font-size: 0.72rem;
       line-height: 1.45;
-      color: #1f2328;
+      color: var(--text);
     }
 
     .jk-top {
@@ -2311,16 +2873,16 @@
       gap: 0.3rem;
       flex-wrap: wrap;
       min-width: 0;
-      color: #57606a;
+      color: rgba(243,236,228,0.62);
     }
 
     .jk-crumb b {
-      color: #1f2328;
+      color: var(--text);
       font-weight: 700;
     }
 
     .jk-crumb .sep {
-      color: #c3c8ce;
+      color: rgba(243,236,228,0.35);
     }
 
     .jk-body {
@@ -2328,8 +2890,17 @@
       grid-template-columns: 132px minmax(0, 1fr);
     }
 
+    /* Mockup Build with Parameters: sidebar memuat daftar build bernama panjang */
+    .jk.is-params .jk-body {
+      grid-template-columns: 152px minmax(0, 1fr);
+    }
+
+    .jk.is-params .jk-nav {
+      font-size: 0.68rem;
+    }
+
     .jk-side {
-      background: #fcfcfc;
+      background: rgba(255,235,215,0.04);
       border-right: 1px solid var(--jk-line);
       padding: 0.4rem 0.3rem;
       display: flex;
@@ -2340,15 +2911,15 @@
     .jk-nav {
       padding: 0.26rem 0.45rem;
       border-radius: 5px;
-      color: #57606a;
+      color: rgba(243,236,228,0.62);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .jk-nav.on {
-      background: #eceff4;
-      color: #1f2328;
+      background: rgba(232,148,74,0.16);
+      color: var(--text);
       font-weight: 700;
     }
 
@@ -2371,8 +2942,8 @@
       height: 15px;
       flex-shrink: 0;
       border-radius: 50%;
-      border: 1.5px solid #16a34a;
-      color: #16a34a;
+      border: 1.5px solid #a8d5ba;
+      color: #a8d5ba;
       font-size: 0.52rem;
       font-weight: 900;
       display: flex;
@@ -2400,27 +2971,27 @@
     }
 
     .jk-dim {
-      color: #57606a;
+      color: rgba(243,236,228,0.62);
       font-weight: 400;
     }
 
     .jk-row ul {
       margin: 0.15rem 0 0 1rem;
-      color: #57606a;
+      color: rgba(243,236,228,0.62);
     }
 
     /* Baris yang menjadi fokus langkah */
     .jk-row.hot,
     .jk-file.hot {
-      background: #fff8e1;
-      box-shadow: inset 0 0 0 2px #f59e0b;
+      background: rgba(232,148,74,0.14);
+      box-shadow: inset 0 0 0 2px var(--amber);
       border-radius: 6px;
     }
 
     .jk-hot-tag {
       flex-shrink: 0;
-      background: #f59e0b;
-      color: #fff;
+      background: var(--amber);
+      color: #1c140f;
       font-size: 0.55rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -2452,7 +3023,7 @@
       flex: 1;
       min-width: 0;
       height: 21px;
-      border: 1px solid #d0d7de;
+      border: 1px solid rgba(255,235,215,0.16);
       border-radius: 5px;
     }
 
@@ -2460,10 +3031,10 @@
       flex-shrink: 0;
       width: 25px;
       height: 21px;
-      border: 1px solid #d0d7de;
+      border: 1px solid rgba(255,235,215,0.16);
       border-radius: 5px;
-      background: #f6f8fa;
-      color: #57606a;
+      background: rgba(255,235,215,0.05);
+      color: rgba(243,236,228,0.62);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2474,7 +3045,7 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.3rem 0.75rem;
-      border-top: 1px solid #f2f2f2;
+      border-top: 1px solid rgba(255,235,215,0.06);
     }
 
     .jk-fname {
@@ -2497,7 +3068,7 @@
 
     .jk-fmeta {
       flex-shrink: 0;
-      color: #8c959f;
+      color: rgba(243,236,228,0.42);
       font-size: 0.65rem;
       white-space: nowrap;
     }
@@ -2506,7 +3077,7 @@
       flex-shrink: 0;
       min-width: 62px;
       text-align: right;
-      color: #57606a;
+      color: rgba(243,236,228,0.62);
       font-size: 0.65rem;
       white-space: nowrap;
     }
@@ -2522,6 +3093,197 @@
       border-top: 1px solid var(--jk-line);
       color: var(--jk-blue);
       font-weight: 600;
+    }
+
+    /* ── Mockup form Jenkins: login & build parameters ── */
+    .jk-auth {
+      padding: 1.1rem 0.9rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .jk-auth-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 0.1rem;
+    }
+
+    .jk-field {
+      width: min(230px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+
+    .jk-field span {
+      font-size: 0.62rem;
+      color: rgba(243, 236, 228, 0.62);
+    }
+
+    .jk-input {
+      height: 24px;
+      border: 1px solid rgba(255, 235, 215, 0.16);
+      border-radius: 5px;
+      background: rgba(255, 235, 215, 0.05);
+      display: flex;
+      align-items: center;
+      padding: 0 0.45rem;
+      font-size: 0.66rem;
+      color: rgba(243, 236, 228, 0.52);
+    }
+
+    .jk-btn {
+      margin-top: 0.35rem;
+      background: var(--amber);
+      color: #1c140f;
+      font-size: 0.66rem;
+      font-weight: 800;
+      border-radius: 5px;
+      padding: 0.3rem 1.1rem;
+      white-space: nowrap;
+    }
+
+    .jk-btn.is-ghost {
+      background: none;
+      border: 1px solid rgba(255, 235, 215, 0.16);
+      color: var(--jk-blue);
+      font-weight: 600;
+    }
+
+    /* Blok parameter — menumpuk vertikal seperti halaman Build with Parameters:
+       nama parameter → keterangan → kontrol. */
+    .jk-param {
+      display: flex;
+      flex-direction: column;
+      gap: 0.22rem;
+      padding: 0.3rem 0.35rem 0.55rem;
+      border-radius: 6px;
+    }
+
+    .jk-param > b {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Keterangan di bawah nama parameter — di Jenkins asli berwarna biru link */
+    .jk-pdesc {
+      font-size: 0.64rem;
+      line-height: 1.45;
+      color: var(--jk-blue);
+    }
+
+    .jk-pwarn {
+      font-size: 0.64rem;
+      line-height: 1.45;
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    .jk-req {
+      font-size: 0.68rem;
+      color: var(--jk-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Kotak Filter kecil di bawah dropdown TAG_NAME */
+    .jk-filter {
+      width: min(150px, 60%);
+      height: 21px;
+      border: 1px solid rgba(255, 235, 215, 0.16);
+      border-radius: 5px;
+      background: rgba(255, 235, 215, 0.05);
+      display: flex;
+      align-items: center;
+      padding: 0 0.45rem;
+      font-size: 0.64rem;
+      color: rgba(243, 236, 228, 0.52);
+      margin-top: 0.1rem;
+    }
+
+    /* Baris upload: tombol Choose File + status berkas */
+    .jk-upload {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.1rem;
+    }
+
+    .jk-choose {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      border: 1px solid rgba(255, 235, 215, 0.18);
+      background: rgba(255, 235, 215, 0.07);
+      border-radius: 5px;
+      padding: 0.22rem 0.55rem;
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .jk-upload span {
+      font-size: 0.64rem;
+      color: rgba(243, 236, 228, 0.52);
+    }
+
+    /* Daftar build di bawah menu sidebar */
+    .jk-builds {
+      margin-top: 0.5rem;
+      padding-top: 0.45rem;
+      border-top: 1px solid var(--jk-line);
+      display: flex;
+      flex-direction: column;
+      gap: 0.28rem;
+    }
+
+    .jk-builds-head {
+      font-size: 0.64rem;
+      font-weight: 800;
+      color: var(--text);
+      padding: 0 0.45rem;
+    }
+
+    .jk-build {
+      display: grid;
+      grid-template-columns: 12px minmax(0, 1fr);
+      gap: 0.3rem;
+      padding: 0 0.45rem;
+      font-size: 0.6rem;
+      line-height: 1.35;
+      color: rgba(243, 236, 228, 0.62);
+    }
+
+    .jk-build .ok {
+      color: #a8d5ba;
+    }
+
+    .jk-build time {
+      color: var(--jk-blue);
+      font-size: 0.58rem;
+    }
+
+    .jk-select {
+      flex: 1;
+      min-width: 0;
+      height: 22px;
+      border: 1px solid rgba(255, 235, 215, 0.16);
+      border-radius: 5px;
+      background: rgba(255, 235, 215, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.45rem;
+      font-size: 0.66rem;
+      color: var(--text);
+    }
+
+    .jk-select i {
+      font-style: normal;
+      opacity: 0.5;
     }
 
     /* ─── LIGHTBOX ─── */
@@ -2546,8 +3308,8 @@
       max-width: 100%;
       max-height: 100%;
       border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      background: #241a13;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
     }
 
     .lightbox-close {
@@ -2805,6 +3567,10 @@
       .toc-list {
         grid-template-columns: minmax(0, 1fr);
       }
+
+      .cif-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     /* =========================================================
@@ -2842,10 +3608,6 @@
         display: none;
       }
 
-      .tocfab.show-hint {
-        top: calc(var(--topbar-h, 54px) + clamp(1.6rem, 4vh, 2.2rem));
-      }
-
       .tocfab-btn {
         padding: 0.5rem 0.6rem;
       }
@@ -2881,6 +3643,7 @@
       .mode-grid,
       .yml-grid,
       .squad-grid,
+      .cif-grid,
       .plat-grid {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -3002,6 +3765,8 @@
 
 <body>
 
+  <div class="orb-c" aria-hidden="true"></div>
+
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-brand">
@@ -3021,10 +3786,6 @@
 
   <!-- DAFTAR ISI — PILL MENGAMBANG (tampil di semua halaman) -->
   <div class="tocfab" id="tocFab">
-    <span class="tocfab-hint" aria-hidden="true">
-      <span class="tocfab-hint-top">Semua halaman ada di sini</span>
-      <span class="tocfab-hint-arrow">↓</span>
-    </span>
     <button class="tocfab-btn" id="btnToc" onclick="toggleToc()" aria-haspopup="dialog" aria-expanded="false"
       title="Daftar isi — semua halaman (tekan D)">
       <span class="tocfab-dot"></span>
@@ -3104,41 +3865,91 @@
           </div>
         </details> -->
 
-        <div class="slide-label lbl-indigo">Maestro QA Automation — Maverick</div>
-        <div class="slide-title">📢 Update<br>Maestro Automation</div>
-        <p class="slide-sub" style="max-width:460px;margin:0.5rem auto 1.2rem;">
-          Ada beberapa update penting yang perlu diperhatikan dan disesuaikan di lokal masing-masing squad sebelum mulai
-          running test.
-        </p>
-        <!-- COMMAND BAR SHORTCUT -->
-        <div class="kbar-wrap">
-          <div class="kbar" id="kbar">
-            <span class="kbar-label">Shortcut</span>
-            <button type="button" class="kbar-item" data-k="d" onclick="toggleToc()">
-              <kbd>D</kbd> daftar isi
+        <div class="cv-stack">
+
+          <!-- 3 — tag kategori -->
+          <span class="cv-tag">Maestro QA Automation — Maverick</span>
+
+          <!-- 4 — hero -->
+          <h1 class="cv-hero">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#f2b073" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 11 18-5v12L3 14v-3z" />
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+            </svg>
+            Update Maestro Automation
+          </h1>
+
+          <!-- 5 — subjudul -->
+          <p class="cv-sub">
+            Ada beberapa update penting yang perlu diperhatikan dan disesuaikan di lokal masing-masing squad sebelum
+            mulai running test.
+          </p>
+
+          <!-- 6 — bar shortcut -->
+          <div class="cv-bar">
+            <span class="cv-bar-label">Shortcut</span>
+            <button type="button" class="cv-bar-item" data-k="d" onclick="toggleToc()">
+              <span class="cv-kbd">D</span> daftar isi
             </button>
-            <button type="button" class="kbar-item" data-k="digit" onclick="openToc()">
-              <kbd>0</kbd>–<kbd>9</kbd> loncat ke halaman
+            <button type="button" class="cv-bar-item" data-k="digit" onclick="openToc()">
+              <span class="cv-kbd">0</span>–<span class="cv-kbd">9</span> loncat ke halaman
             </button>
-            <button type="button" class="kbar-item" data-k="arrow" onclick="go(1)">
-              <kbd>←</kbd><kbd>→</kbd> pindah halaman
+            <button type="button" class="cv-bar-item" data-k="arrow" onclick="go(1)">
+              <span class="cv-kbd">←</span><span class="cv-kbd">→</span> pindah halaman
             </button>
           </div>
-        </div>
-        <div class="card card-warning" style="max-width:480px; margin: 0 auto 1.2rem; text-align: left;">
-          <h4>💡 Rekomendasi Versi Maestro</h4>
-          <p>To minimize risk during the update, we recommend using <div class="highlight-version">Maestro version 2.8.0</div></p>
-          <p style="margin-bottom:0.4rem;">Install / update Maestro — jalankan di <strong>Terminal</strong> (macOS &amp;
-            Linux) atau <strong>WSL / Git Bash</strong> (Windows):</p>
-          <div class="cmd-block cmd-block-solo" onclick="copyCmd(this)">
-            <span class="prompt">$</span> curl -fsSL "https://get.maestro.mobile.dev" | bash
-            <span class="copy-hint">📋 copy</span>
+
+          <!-- 7 — kartu rekomendasi versi -->
+          <div class="cv-callout">
+            <div class="cv-callout-head">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#f7d9b8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5a5.5 5.5 0 1 0-9 0c.8.8 1.3 1.5 1.5 2.5" />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+              </svg>
+              Rekomendasi Versi Maestro
+            </div>
+            <p>To minimize risk during the update, we recommend using</p>
+            <div class="highlight-version" style="margin:0.4rem 0 0.9rem;">Maestro version 2.8.0</div>
+            <p style="margin-bottom:1rem;">
+              Install / update Maestro — jalankan di <strong>Terminal</strong> (macOS &amp; Linux) atau
+              <strong>WSL / Git Bash</strong> (Windows):
+            </p>
+            <div class="cv-term">
+              <span class="cv-term-line" id="cvCommand"><span class="prompt">$</span> curl -fsSL
+                "https://get.maestro.mobile.dev" | bash<span class="cv-caret" aria-hidden="true">▌</span></span>
+              <button type="button" class="cv-copy" onclick="copyInstallCmd(this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+                <span class="cv-copy-label">copy</span>
+              </button>
+            </div>
           </div>
+
+          <!-- 8 — baris daftar isi -->
+          <button type="button" class="cv-toc" data-toc-trigger onclick="openToc()">
+            <span class="cv-toc-left">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e2725b" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 7v14" />
+                <path
+                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+              </svg>
+              <span class="cv-toc-title">Daftar Isi</span>
+              <span class="cv-toc-count" id="cvTocCount">15 Halaman</span>
+            </span>
+            <svg class="cv-toc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+
         </div>
-
-
-
-
 
       </div>
     </div>
@@ -3205,7 +4016,7 @@
         <!-- CHERRY-PICK CALLOUT -->
         <div style="display:flex;align-items:stretch;gap:0.9rem;margin-bottom:0.9rem;">
           <div
-            style="background:linear-gradient(135deg,#5b5fe3,#8b5cf6);border-radius:12px;padding:1rem 1.2rem;flex:1;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 16px color-mix(in oklab, var(--indigo) 25%, transparent);">
+            style="background:linear-gradient(135deg,#e8944a,#e2725b);border-radius:12px;padding:1rem 1.2rem;flex:1;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 16px rgba(232,148,74,0.25);">
             <div
               style="font-size:0.65rem;font-weight:800;letter-spacing:0.12em;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:0.3rem;">
               Metode yang Digunakan</div>
@@ -3631,9 +4442,9 @@
           semua dependencies sinkron.</p>
 
         <div
-          style="position: relative; background: oklch(0.205 0.014 280); border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
+          style="position: relative; background: #120b07; border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
           <div
-            style="display: flex; justify-content: space-between; align-items: center; background: oklch(0.255 0.016 280); padding: 0.55rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 10px 10px 0 0;">
+            style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); padding: 0.55rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 10px 10px 0 0;">
             <div style="display: flex; gap: 0.4rem; align-items: center;">
               <div class="dot dot-red"></div>
               <div class="dot dot-amber"></div>
@@ -3646,7 +4457,7 @@
               Copy All</button>
           </div>
           <pre id="packageJsonContent"
-            style="margin: 0; padding: 1rem; color: oklch(0.87 0.115 158); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; overflow-x: auto; max-height: 350px;">
+            style="margin: 0; padding: 1rem; color: var(--amber-pale); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; overflow-x: auto; max-height: 350px;">
             {
   "name": "demo",
   "version": "0.0.0",
@@ -3784,45 +4595,200 @@
             style="height:32px; vertical-align:text-bottom; margin-right:8px;">
           How to Use Jenkins
         </div>
+        <p class="slide-sub">
+          Empat langkah dari membuka Jenkins sampai pipeline berjalan. Tampilan di tiap langkah digambarkan
+          persis seperti yang akan Anda lihat di layar.
+        </p>
 
-        <div class="two-col" style="margin-bottom:1rem; align-items: stretch;">
-          <div class="card card-info" style="margin-bottom:0; padding:1.2rem;">
-            <h4 style="margin-bottom:0.4rem; color:var(--text);">1. Buka URL Jenkins</h4>
-            <ul style="font-size:0.85rem; line-height:1.6; margin-left:1.2rem; margin-bottom: 0.8rem;">
-              <li><strong>Mac Mini:</strong> <a href="http://10.54.134.99:8082/"
-                  target="_blank">http://10.54.134.99:8082/</a></li>
-            </ul>
-
-            <h4 style="margin-bottom:0.4rem; color:var(--text);">2. Login atau Register</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">
-              Gunakan akun Anda atau buat akun baru terlebih dahulu.
-            </p>
-            <img src="attachment1.png" alt="Jenkins Login"
-              style="width:100%; height:auto; max-height:280px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--border); box-shadow:var(--shadow-sm); cursor:pointer;"
-              onclick="openLightbox(this.src)">
+        <!-- ── LANGKAH 1: URL ── -->
+        <div class="how-step">
+          <div class="how-head">
+            <div class="how-num">1</div>
+            <h4>🌐 Buka URL Jenkins</h4>
           </div>
+          <p class="how-why">
+            Jenkins berjalan di Mac Mini, bukan di laptop Anda. Buka alamat berikut lewat browser —
+            pastikan Anda berada di jaringan kantor.
+          </p>
+          <div class="cmd-block cmd-block-solo" onclick="copyCmd(this)">
+            <span class="prompt">$</span> http://10.54.134.99:8082/
+            <span class="copy-hint">📋 copy</span>
+          </div>
+        </div>
 
-          <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <div class="card card-info" style="margin-bottom:0; padding:1.2rem; flex: 1;">
-              <h4 style="margin-bottom:0.4rem; color:var(--text);">3. Pilih Project</h4>
-              <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">
-                <strong>testing-mobile</strong> — untuk mobile testing<br>
-                <strong>api-testing</strong> — untuk api testing
-              </p>
-              <img src="attachment2.png" alt="Jenkins Dashboard"
-                style="width:100%; height:auto; max-height:150px; object-fit:cover; object-position:left; border-radius:6px; border:1px solid var(--border); box-shadow:var(--shadow-sm); cursor:pointer;"
-                onclick="openLightbox(this.src)">
+        <!-- ── LANGKAH 2: LOGIN ── -->
+        <div class="how-step">
+          <div class="how-head">
+            <div class="how-num">2</div>
+            <h4>🔑 Login atau Register</h4>
+          </div>
+          <p class="how-why">
+            Masuk dengan akun Anda. Kalau belum punya, klik <strong>Create an account</strong> di bawah tombol
+            Sign in untuk mendaftar lebih dulu.
+          </p>
+          <div class="jk" role="img" aria-label="Halaman login Jenkins berisi kolom Username, Password, tombol Sign in,
+            dan tautan Create an account.">
+            <div class="jk-top">
+              <img class="jk-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                alt="">
+              <div class="jk-crumb"><b>Jenkins</b></div>
+            </div>
+            <div class="jk-auth">
+              <div class="jk-auth-title">Sign in to Jenkins</div>
+              <div class="jk-field">
+                <span>Username</span>
+                <div class="jk-input">nama.anda</div>
+              </div>
+              <div class="jk-field">
+                <span>Password</span>
+                <div class="jk-input">••••••••</div>
+              </div>
+              <div class="jk-btn">Sign in</div>
+              <span class="jk-link" style="font-size:0.66rem;">Create an account</span>
             </div>
           </div>
+        </div>
 
-          <div class="card card-info" style="margin-bottom:0; padding:1.2rem; flex: 1;">
-            <h4 style="margin-bottom:0.4rem; color:var(--text);">4. Build with Parameters</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">
-              Klik <strong>Build with Parameters</strong>, lalu atur modenya.
-            </p>
-            <img src="attachment3.png" alt="Build with Parameters"
-              style="width:100%; height:auto; max-height:200px; object-fit:cover; object-position:top; border-radius:6px; border:1px solid var(--border); box-shadow:var(--shadow-sm); cursor:pointer;"
-              onclick="openLightbox(this.src)">
+        <!-- ── LANGKAH 3: PILIH PROJECT ── -->
+        <div class="how-step">
+          <div class="how-head">
+            <div class="how-num">3</div>
+            <h4>📂 Pilih Project</h4>
+          </div>
+          <p class="how-why">
+            Di Dashboard ada dua project. Pilih <strong>testing-mobile</strong> untuk mobile testing, atau
+            <strong>api-testing</strong> untuk API testing.
+          </p>
+          <div class="jk" role="img" aria-label="Dashboard Jenkins berisi daftar project testing-mobile dan
+            api-testing.">
+            <div class="jk-top">
+              <img class="jk-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                alt="">
+              <div class="jk-crumb"><b>Jenkins</b><span class="sep">/</span><span>Dashboard</span></div>
+            </div>
+            <div class="jk-body">
+              <div class="jk-side">
+                <div class="jk-nav on">Dashboard</div>
+                <div class="jk-nav">New Item</div>
+                <div class="jk-nav">People</div>
+                <div class="jk-nav">Build History</div>
+                <div class="jk-nav">Manage Jenkins</div>
+              </div>
+              <div class="jk-main">
+                <div class="jk-title"><span>All projects</span></div>
+                <div class="jk-row hot">
+                  <span class="jk-ico">📱</span>
+                  <span class="jk-link">testing-mobile</span>
+                  <span class="jk-dim">— mobile testing</span>
+                  <span class="jk-hot-tag">klik ini</span>
+                </div>
+                <div class="jk-row">
+                  <span class="jk-ico">🔌</span>
+                  <span class="jk-link">api-testing</span>
+                  <span class="jk-dim">— api testing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── LANGKAH 4: BUILD WITH PARAMETERS ── -->
+        <div class="how-step">
+          <div class="how-head">
+            <div class="how-num">4</div>
+            <h4>▶️ Build with Parameters</h4>
+          </div>
+          <p class="how-why">
+            Di menu kiri project, klik <strong>Build with Parameters</strong>. Isi parameternya dari atas ke
+            bawah — <strong>Run_By</strong> harus dipilih lebih dulu, karena parameter di bawahnya menyesuaikan
+            mode yang Anda pilih.
+          </p>
+          <div class="jk is-params" role="img" aria-label="Halaman Build with Parameters project testing-mobile di
+            Jenkins, berisi parameter Run_By, TAG_NAME, Dynamic_Input, ENV_UPLOAD, dan ENV_UPLOAD_DEVICE1.">
+            <div class="jk-top">
+              <img class="jk-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                alt="">
+              <div class="jk-crumb"><b>Jenkins</b><span class="sep">/</span><span>testing-mobile ⌄</span></div>
+            </div>
+            <div class="jk-body">
+              <div class="jk-side">
+                <div class="jk-nav">Status</div>
+                <div class="jk-nav">Changes</div>
+                <div class="jk-nav on">Build with Parameters</div>
+                <div class="jk-nav">Delete Pipeline</div>
+                <div class="jk-nav">Configure</div>
+                <div class="jk-nav">Rename</div>
+                <div class="jk-nav">Move</div>
+                <div class="jk-nav">Full Stage View</div>
+                <div class="jk-nav">Stages</div>
+                <div class="jk-nav">Allure Report</div>
+                <div class="jk-nav">Pipeline Syntax</div>
+                <div class="jk-builds">
+                  <div class="jk-builds-head">Builds ›</div>
+                  <div class="jk-build">
+                    <span class="ok">✓</span>
+                    <span>#445_v6.4.2-onboarding_Tags_Android<br><time>2:53 PM</time></span>
+                  </div>
+                  <div class="jk-build">
+                    <span class="ok">✓</span>
+                    <span>#444_v6.4.2-onboarding_Tags_Android<br><time>2:49 PM</time></span>
+                  </div>
+                  <div class="jk-build">
+                    <span class="ok">✓</span>
+                    <span>#443_v6.4.3-onboarding_Tags_Android<br><time>2:41 PM</time></span>
+                  </div>
+                </div>
+              </div>
+              <div class="jk-main">
+                <div class="jk-title"><span>Pipeline testing-mobile</span></div>
+                <div class="jk-req">This build requires parameters:</div>
+
+                <div class="jk-param hot">
+                  <b>Run_By</b>
+                  <span class="jk-pdesc">Pilih mode eksekusi</span>
+                  <span class="jk-select">-- Pilih Mode -- <i>⌄</i></span>
+                  <span class="jk-hot-tag">isi ini dulu</span>
+                </div>
+
+                <div class="jk-param">
+                  <b>TAG_NAME</b>
+                  <span class="jk-pdesc">🏷️ Pilih tag GitLab (aktif saat Run_By = Tags_*). Diperbarui setiap
+                    build.</span>
+                  <span class="jk-select">(tidak aktif — pilih mode Tags_*) <i>⌄</i></span>
+                  <span class="jk-filter">Filter</span>
+                </div>
+
+                <div class="jk-param">
+                  <b>Dynamic_Input</b>
+                  <span class="jk-pdesc">Input otomatis sesuai mode (tidak berlaku untuk mode Tags)</span>
+                  <span class="jk-pwarn">⚠️ Silakan pilih mode eksekusi terlebih dahulu.</span>
+                </div>
+
+                <div class="jk-param">
+                  <b>ENV_UPLOAD</b>
+                  <span class="jk-pdesc">Upload file .env (Opsional).</span>
+                  <span class="jk-upload">
+                    <span class="jk-choose">☁ Choose File</span>
+                    <span>No file chosen</span>
+                  </span>
+                </div>
+
+                <div class="jk-param">
+                  <b>ENV_UPLOAD_DEVICE1</b>
+                  <span class="jk-pdesc">Upload file .env untuk Device 1 (Opsional) for parallel.</span>
+                  <span class="jk-upload">
+                    <span class="jk-choose">☁ Choose File</span>
+                    <span>No file chosen</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="how-note">
+            <span>🏷️</span>
+            <span><strong>TAG_NAME</strong> hanya aktif kalau <strong>Run_By</strong> diisi mode
+              <code>Tags_*</code>. Daftar tag-nya diambil dari tag Git yang Anda push di
+              <a href="#" onclick="goTo(9); return false;">Step 9 — Push with Tag in Git →</a></span>
           </div>
         </div>
       </div>
@@ -3856,12 +4822,30 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>2BA6661F-30DF-4FCC-A121-56F8BABAD62C</code>
-              <button class="squad-copy" onclick="copyText('2BA6661F-30DF-4FCC-A121-56F8BABAD62C', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 2BA6661F-30DF-4FCC-A121-56F8BABAD62C', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>Onboarding</code>
-              <button class="squad-copy" onclick="copyText('Onboarding', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd Onboarding &amp;', this)" title="Copy command jalankan emulator">📋</button>
+            </div>
+          </div>
+          <div class="squad-card">
+            <div class="squad-card-head">
+              <h4>🔬 Non-Onboarding</h4>
+              <span class="squad-name" style="background: var(--teal-light); border-color: var(--teal-border); color: var(--teal);">onboarding
+                <button class="squad-copy" onclick="copyText('test', this)" title="Copy nama device">📋</button>
+              </span>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🍏 iOS</span>
+              <code>22915D7F-B117-4A70-B983-BB4114D929EC</code>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 22915D7F-B117-4A70-B983-BB4114D929EC', this)" title="Copy xcrun boot command">📋</button>
+            </div>
+            <div class="squad-row">
+              <span class="plat">🤖 Android</span>
+              <code>NonOnboarding</code>
+              <button class="squad-copy" onclick="copyText('emulator -avd Onboarding_1 &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3874,12 +4858,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>86D1D288-A3D1-45A9-912C-57F55B92A4B1</code>
-              <button class="squad-copy" onclick="copyText('86D1D288-A3D1-45A9-912C-57F55B92A4B1', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 86D1D288-A3D1-45A9-912C-57F55B92A4B1', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>Payment</code>
-              <button class="squad-copy" onclick="copyText('Payment', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd Payment &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3892,12 +4876,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>1083E347-DA2D-4BF6-B343-019671DA495B</code>
-              <button class="squad-copy" onclick="copyText('1083E347-DA2D-4BF6-B343-019671DA495B', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 1083E347-DA2D-4BF6-B343-019671DA495B', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>Branch</code>
-              <button class="squad-copy" onclick="copyText('Branch', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd Branch &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3910,12 +4894,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C</code>
-              <button class="squad-copy" onclick="copyText('6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 6EC7DD02-78AD-43D8-BF6F-2E51923FFB3C', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>Savings</code>
-              <button class="squad-copy" onclick="copyText('Savings', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd Savings &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3928,12 +4912,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>C17BDA77-4C72-4168-B205-F26E6E734D01</code>
-              <button class="squad-copy" onclick="copyText('C17BDA77-4C72-4168-B205-F26E6E734D01', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot C17BDA77-4C72-4168-B205-F26E6E734D01', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>Lifestyle</code>
-              <button class="squad-copy" onclick="copyText('Lifestyle', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd Lifestyle &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3946,12 +4930,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>EE3843D3-2742-4339-A799-6382DFC82CEC</code>
-              <button class="squad-copy" onclick="copyText('EE3843D3-2742-4339-A799-6382DFC82CEC', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot EE3843D3-2742-4339-A799-6382DFC82CEC', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>CC</code>
-              <button class="squad-copy" onclick="copyText('CC', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd CC &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3964,12 +4948,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE</code>
-              <button class="squad-copy" onclick="copyText('15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 15CFAFB5-F3B0-49E4-81A5-BBA6CD9DF8FE', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>IB</code>
-              <button class="squad-copy" onclick="copyText('IB', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd IB &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -3982,12 +4966,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>7132AA52-0635-425D-9E10-03E84CF087D2</code>
-              <button class="squad-copy" onclick="copyText('7132AA52-0635-425D-9E10-03E84CF087D2', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 7132AA52-0635-425D-9E10-03E84CF087D2', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>TechImprove</code>
-              <button class="squad-copy" onclick="copyText('TechImprove', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd TechImprove &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -4000,12 +4984,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>C8091684-7C54-4DF9-B2CB-B2AC80CAE38C</code>
-              <button class="squad-copy" onclick="copyText('C8091684-7C54-4DF9-B2CB-B2AC80CAE38C', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot C8091684-7C54-4DF9-B2CB-B2AC80CAE38C', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>FraudAudit</code>
-              <button class="squad-copy" onclick="copyText('FraudAudit', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd FraudAudit &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
           <div class="squad-card">
@@ -4018,12 +5002,12 @@
             <div class="squad-row">
               <span class="plat">🍏 iOS</span>
               <code>2FD315D1-9F41-4150-9215-9F2F6E588204</code>
-              <button class="squad-copy" onclick="copyText('2FD315D1-9F41-4150-9215-9F2F6E588204', this)" title="Copy UDID">📋</button>
+              <button class="squad-copy" onclick="copyText('xcrun simctl boot 2FD315D1-9F41-4150-9215-9F2F6E588204', this)" title="Copy xcrun boot command">📋</button>
             </div>
             <div class="squad-row">
               <span class="plat">🤖 Android</span>
               <code>RnD</code>
-              <button class="squad-copy" onclick="copyText('RnD', this)" title="Copy nama device">📋</button>
+              <button class="squad-copy" onclick="copyText('emulator -avd RnD &amp;', this)" title="Copy command jalankan emulator">📋</button>
             </div>
           </div>
         </div>
@@ -4499,10 +5483,198 @@ done</div>
       </div>
     </div>
 
+    <div class="slide" id="slide-14">
+      <div class="slide-inner">
+        <div class="slide-label lbl-indigo">CIF List</div>
+        <div class="slide-title">🆔 List CIF per Squad</div>
+        <p class="slide-sub">
+          Daftar nomor CIF yang dipakai tiap squad untuk menjalankan test. Klik ikon 📋 untuk menyalin
+          nomornya, atau ketik di kotak pencarian untuk memfilter squad / CIF.
+        </p>
+
+        <div class="cif-toolbar">
+          <input class="cif-search" id="cifSearch" type="search" placeholder="🔎 Cari squad atau nomor CIF…"
+            oninput="filterCif(this.value)" aria-label="Cari squad atau nomor CIF">
+          <span class="cif-legend" id="cifLegend">9 squad · 18 CIF</span>
+        </div>
+
+        <div class="cif-grid" id="cifGrid">
+          <div class="cif-card" data-cif-search="branch & servicing 10001450206 10001450228">
+            <div class="cif-card-head">
+              <h4>🏢 Branch &amp; Servicing</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001450206</code>
+              <button class="squad-copy" onclick="copyText('10001450206', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001450228</code>
+              <button class="squad-copy" onclick="copyText('10001450228', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="onboarding 10001090557 10001092929">
+            <div class="cif-card-head">
+              <h4>🏦 Onboarding</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001090557</code>
+              <button class="squad-copy" onclick="copyText('10001090557', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001092929</code>
+              <button class="squad-copy" onclick="copyText('10001092929', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="payment & transaction 10001448196 10001448163">
+            <div class="cif-card-head">
+              <h4>💳 Payment &amp; Transaction</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001448196</code>
+              <button class="squad-copy" onclick="copyText('10001448196', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001448163</code>
+              <button class="squad-copy" onclick="copyText('10001448163', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="fraud & audit 10001450182 10001450193">
+            <div class="cif-card-head">
+              <h4>🛡️ Fraud &amp; Audit</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001450182</code>
+              <button class="squad-copy" onclick="copyText('10001450182', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001450193</code>
+              <button class="squad-copy" onclick="copyText('10001450193', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="savings 10001414756 10001306772">
+            <div class="cif-card-head">
+              <h4>💰 Savings</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001414756</code>
+              <button class="squad-copy" onclick="copyText('10001414756', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001306772</code>
+              <button class="squad-copy" onclick="copyText('10001306772', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="landing ber cc 10001424323 10001424334">
+            <div class="cif-card-head">
+              <h4>🧾 Landing Ber CC</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001424323</code>
+              <button class="squad-copy" onclick="copyText('10001424323', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001424334</code>
+              <button class="squad-copy" onclick="copyText('10001424334', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="tech improvement 10001450273 10001450295">
+            <div class="cif-card-head">
+              <h4>🔧 Tech Improvement</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001450273</code>
+              <button class="squad-copy" onclick="copyText('10001450273', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001450295</code>
+              <button class="squad-copy" onclick="copyText('10001450295', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="lifestyle & wealth 10000878887 10000993901">
+            <div class="cif-card-head">
+              <h4>💎 Lifestyle &amp; Wealth</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10000878887</code>
+              <button class="squad-copy" onclick="copyText('10000878887', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10000993901</code>
+              <button class="squad-copy" onclick="copyText('10000993901', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+          <div class="cif-card" data-cif-search="international business 10001450386 10001450397">
+            <div class="cif-card-head">
+              <h4>🌏 International Business</h4>
+              <span class="cif-count">2 CIF</span>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">1.</span>
+              <span class="cif-plat">🍏 iOS</span>
+              <code>10001450386</code>
+              <button class="squad-copy" onclick="copyText('10001450386', this)" title="Copy CIF">📋</button>
+            </div>
+            <div class="cif-row">
+              <span class="cif-num">2.</span>
+              <span class="cif-plat">🤖 Android</span>
+              <code>10001450397</code>
+              <button class="squad-copy" onclick="copyText('10001450397', this)" title="Copy CIF">📋</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-warning" style="margin-top:0.75rem; text-align:left;">
+          <h4>➕ Daftar masih bertambah</h4>
+          <p>Squad lain menyusul. Kalau squad Anda belum ada di sini atau nomornya berubah, kabari Bp ANDI KUSNADI
+          langsung saja agar segera diperbarui.</p>
+        </div>
+      </div>
+    </div>
+
   </div><!-- end slides-wrapper -->
 
   <script>
-    const TOTAL = 14;
+    const TOTAL = 15;
     let cur = 0;
 
     // Judul tiap halaman — dipakai untuk daftar isi, tooltip dot, dan label tombol.
@@ -4521,6 +5693,7 @@ done</div>
       { title: '📱 Daftar Device untuk .env', sub: 'Device list Mac Mini' },
       { title: '💻 Menyalakan & Mematikan Device', sub: 'Device commands' },
       { title: '📊 Melihat Report Hasil Test', sub: 'Report' },
+      { title: '🆔 List CIF per Squad', sub: 'CIF list' },
     ];
 
     const modes = {
@@ -4740,8 +5913,7 @@ done</div>
       document.getElementById('btnNext').textContent = cur === TOTAL - 2 ? 'Selesai 🎉' : 'Next →';
       document.getElementById('slideCounter').textContent = `${cur} / ${TOTAL - 1}`;
       document.getElementById('tocBtnTitle').textContent = `${cur}. ${SLIDES[cur].title}`;
-      // Keterangan di atas pill hanya relevan di halaman cover
-      document.getElementById('tocFab').classList.toggle('show-hint', cur === 0);
+      document.getElementById('tocFab').classList.toggle('on-cover', cur === 0);
       document.title = `${cur}. ${SLIDES[cur].title} — Maestro Automation`;
       if (tocIsOpen()) buildToc();
       // Lebar tombol berubah mengikuti judul halaman → sorotan diukur ulang
@@ -4774,7 +5946,7 @@ done</div>
         toEl.className = 'slide is-active';
         toEl.style.visibility = '';
         toEl.style.opacity = '';
-      }, 310);
+      }, 250);
 
       cur = next;
       syncHash();
@@ -4880,6 +6052,10 @@ done</div>
       const wn = document.querySelector('.whatsnew');
       if (wn && wn.open && !wn.contains(e.target)) wn.open = false;
       const fab = document.getElementById('tocFab');
+      // Tombol pembuka TOC di luar fab (chip, pill, baris footer di cover) tidak
+      // boleh dianggap "klik di luar" — kalau tidak, panel tertutup di klik yang
+      // sama saat ia baru saja dibuka.
+      if (e.target.closest('[data-toc-trigger]')) return;
       if (tocIsOpen() && !fab.contains(e.target)) closeToc();
     });
 
@@ -4902,7 +6078,7 @@ done</div>
       else if (key === 'Escape') k = 'esc';
       else if (key.toLowerCase() === 'd') k = 'd';
       if (!k) return;
-      document.querySelectorAll(`.kbar-item[data-k="${k}"]`).forEach(el => {
+      document.querySelectorAll(`.kbar-item[data-k="${k}"], .cv-bar-item[data-k="${k}"]`).forEach(el => {
         el.classList.add('is-pressed');
         setTimeout(() => el.classList.remove('is-pressed'), 260);
       });
@@ -4999,6 +6175,22 @@ done</div>
       });
     }
 
+    // Filter kartu CIF berdasarkan nama squad atau nomor CIF.
+    function filterCif(q) {
+      const key = q.trim().toLowerCase();
+      const cards = document.querySelectorAll('#cifGrid .cif-card');
+      let shown = 0;
+      cards.forEach(c => {
+        const hit = !key || c.dataset.cifSearch.includes(key);
+        c.classList.toggle('is-hidden', !hit);
+        if (hit) shown++;
+      });
+      const legend = document.getElementById('cifLegend');
+      legend.textContent = key
+        ? `${shown} dari ${cards.length} squad`
+        : `${cards.length} squad · ${document.querySelectorAll('#cifGrid .cif-row').length} CIF`;
+    }
+
     function copyText(text, btn) {
       navigator.clipboard.writeText(text).then(() => {
         const origText = btn.textContent;
@@ -5008,6 +6200,33 @@ done</div>
         }, 1500);
       });
     }
+
+    // Tombol copy di terminal cover: ikon berganti centang lalu balik lagi.
+    const CV_COPY_ICON = document.querySelector('.cv-copy')?.innerHTML;
+
+    function copyInstallCmd(btn) {
+      // Ambil teks command tanpa prompt "$" dan tanpa kursor "▌".
+      const line = document.getElementById('cvCommand');
+      const cmd = line.textContent
+        .replace(/^\s*\$\s*/, '')
+        .replace(/▌\s*$/, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      navigator.clipboard.writeText(cmd).then(() => {
+        btn.classList.add('is-copied');
+        btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5" /></svg><span class="cv-copy-label">Copied</span>`;
+        setTimeout(() => {
+          btn.classList.remove('is-copied');
+          btn.innerHTML = CV_COPY_ICON;
+        }, 1600);
+      });
+    }
+
+    // Jumlah halaman di baris daftar isi ikut TOTAL, supaya tidak basi saat slide bertambah.
+    document.getElementById('cvTocCount').textContent = `${TOTAL} Halaman`;
 
     // Buka di halaman sesuai URL (mis. #slide-6) — refresh tidak lagi kembali ke cover.
     const startSlide = slideFromHash();
