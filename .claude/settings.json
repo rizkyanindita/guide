@@ -22,7 +22,11 @@
       "Bash(sed -n '/^    \\\\.slide\\\\.is-active {/,/^    }/p' index.html)",
       "WebSearch",
       "WebFetch(domain:m3.material.io)",
-      "WebFetch(domain:seeds.sproutsocial.com)"
+      "WebFetch(domain:seeds.sproutsocial.com)",
+      "Bash(sed -n '/^    \\\\.cv-bar-item {/,/^    }/p' index.html)",
+      "Bash(sed -n '/^    \\\\.cv-bar-item:hover {/,/^    }/p' index.html)",
+      "Bash(sed -n '/^    \\\\.cv-bar {/,/^    }/p' index.html)",
+      "WebFetch(domain:design-system.service.gov.uk)"
     ],
     "additionalDirectories": [
       "/tmp"

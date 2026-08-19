@@ -2418,6 +2418,65 @@
       color: var(--amber-pale);
     }
 
+    /* ── Tuts menekan sendiri ───────────────────────────────
+       Chip kbd "ditekan" bergiliran dari kiri ke kanan: turun sedikit,
+       memantul, lalu diam lama. Tujuannya mengajarkan afordansi — ini
+       tuts yang bisa Anda tekan — bukan sekadar menarik mata.
+       Jeda antar siklus sengaja panjang (4.2s) supaya tidak berisik
+       saat pengguna sedang membaca isi cover. */
+    .cv-bar .cv-kbd {
+      animation: keyTap 4.2s var(--ease-emphasized) infinite;
+    }
+
+    .cv-bar-item:nth-of-type(1) .cv-kbd {
+      animation-delay: 0s;
+    }
+
+    .cv-bar-item:nth-of-type(2) .cv-kbd {
+      animation-delay: 0.22s;
+    }
+
+    .cv-bar-item:nth-of-type(3) .cv-kbd {
+      animation-delay: 0.44s;
+    }
+
+    @keyframes keyTap {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      3% {
+        transform: translateY(2px);
+        box-shadow: 0 0 0 3px rgba(232, 148, 74, 0.16);
+      }
+
+      9% {
+        transform: translateY(0);
+        box-shadow: 0 0 10px rgba(232, 148, 74, 0.3);
+      }
+
+      18% {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+    }
+
+    /* Begitu kursor masuk ke bar, pengguna sudah menaruh perhatian —
+       nudge-nya berhenti agar tidak mengganggu saat dibaca. */
+    .cv-bar:hover .cv-kbd,
+    .cv-bar:focus-within .cv-kbd {
+      animation: none;
+    }
+
+    /* Setelah shortcut-nya benar-benar dipakai sekali, petunjuknya sudah
+       menunaikan tugas — semua nudge dimatikan permanen. */
+    .cv-bar.is-learned .cv-kbd,
+    .cv-bar.is-learned .cv-bar-item.is-primary {
+      animation: none;
+    }
+
     /* 7 — kartu callout */
     .cv-callout {
       text-align: left;
@@ -2658,6 +2717,234 @@
     .how-note.is-warn {
       background: var(--amber-tint);
       border: 1px solid var(--amber-border);
+    }
+
+    /* ─── CTA "MAU LEBIH MUDAH?" (khusus slide Device Commands) ───
+       Ditaruh sebelum empat langkah command: kalau ada jalan yang lebih
+       singkat, pengguna harus tahu sebelum menempuh jalan panjangnya.
+       Tiga lapis penarik perhatian — halo berdenyut, kilau menyapu, dan
+       panah yang memanggil — semuanya berhenti saat di-hover karena
+       perhatiannya sudah didapat. */
+    .easy-cta {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 1rem 1.3rem;
+      border-radius: 16px;
+      border: 1px solid rgba(232, 148, 74, 0.5);
+      background: linear-gradient(135deg, rgba(232, 148, 74, 0.24), rgba(226, 114, 91, 0.14));
+      color: var(--text);
+      text-decoration: none;
+      text-align: left;
+      box-shadow: 0 8px 26px rgba(20, 10, 5, 0.4);
+      animation: easyGlow 2.6s var(--ease-emphasized) infinite;
+      transition:
+        border-color var(--dur-short) var(--ease-emphasized),
+        box-shadow var(--dur-short) var(--ease-emphasized),
+        transform var(--dur-short) var(--ease-emphasized);
+    }
+
+    /* Kilau yang menyapu dari kiri ke kanan */
+    .easy-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 -35%;
+      width: 35%;
+      background: linear-gradient(100deg,
+          transparent,
+          rgba(255, 235, 215, 0.16),
+          transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+      animation: easyShine 4.2s ease-in-out infinite;
+    }
+
+    .easy-cta:hover,
+    .easy-cta:focus-visible {
+      animation: none;
+      outline: none;
+      border-color: var(--amber);
+      transform: translateY(-2px);
+      box-shadow:
+        0 14px 34px rgba(20, 10, 5, 0.5),
+        0 0 26px rgba(232, 148, 74, 0.3);
+    }
+
+    .easy-cta:hover::after,
+    .easy-cta:focus-visible::after {
+      animation: none;
+      opacity: 0;
+    }
+
+    .easy-cta:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .easy-icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--amber), var(--terracotta));
+      font-size: 1.15rem;
+      box-shadow: 0 0 18px rgba(232, 148, 74, 0.35);
+    }
+
+    .easy-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .easy-title {
+      display: block;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 1.02rem;
+      color: #fff;
+      margin-bottom: 0.12rem;
+    }
+
+    .easy-desc {
+      display: block;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--amber-pale);
+    }
+
+    /* Teks hanya untuk pembaca layar — disembunyikan secara visual tanpa
+       dikeluarkan dari pohon aksesibilitas (display:none akan menghapusnya). */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .easy-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.32rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Syarat jaringan — mengikuti pola "warning text" GOV.UK: ikon "!" dalam
+       lingkaran pejal + teks tebal + kata "Perhatian" untuk pembaca layar.
+       Sebelumnya ini chip kecil 0.6rem huruf kapital berikon 🔒; bentuk itu
+       terbaca sebagai hiasan, bukan syarat yang bisa membuat klik gagal. */
+    .easy-warn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      width: 100%;
+      padding: 0.4rem 0.6rem 0.4rem 0.45rem;
+      border-radius: 9px;
+      background: rgba(20, 10, 5, 0.45);
+      border-left: 4px solid var(--amber);
+    }
+
+    .easy-warn-icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: #1c140f;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .easy-warn strong {
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #fff;
+    }
+
+    .easy-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      overflow-wrap: anywhere;
+      min-width: 0;
+      padding-left: 0.1rem;
+    }
+
+    .easy-go {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Sora', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--amber-pale);
+      white-space: nowrap;
+    }
+
+    .easy-go svg {
+      animation: easyNudge 1.6s var(--ease-emphasized) infinite;
+    }
+
+    .easy-cta:hover .easy-go svg {
+      animation: none;
+      transform: translateX(3px);
+    }
+
+    @keyframes easyGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 26px rgba(20, 10, 5, 0.4);
+      }
+
+      50% {
+        box-shadow:
+          0 8px 26px rgba(20, 10, 5, 0.4),
+          0 0 0 6px rgba(232, 148, 74, 0.1),
+          0 0 26px rgba(232, 148, 74, 0.26);
+      }
+    }
+
+    @keyframes easyShine {
+
+      0%,
+      62% {
+        left: -35%;
+      }
+
+      92%,
+      100% {
+        left: 135%;
+      }
+    }
+
+    @keyframes easyNudge {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(4px);
+      }
     }
 
     /* ─── PLATFORM COLUMNS (iOS vs Android) ─── */
@@ -3888,7 +4175,7 @@
 
           <!-- 6 — bar shortcut -->
           <div class="cv-bar">
-            <span class="cv-bar-label">Shortcut</span>
+            <span class="cv-bar-label">Shortcut Keyboard</span>
             <button type="button" class="cv-bar-item" data-k="d" onclick="toggleToc()">
               <span class="cv-kbd">D</span> daftar isi
             </button>
@@ -5025,6 +5312,40 @@
           Anda dari nol: masuk ke Mac Mini, cek device yang aktif, menyalakannya, lalu mematikannya lagi.
         </p>
 
+        <!-- ── JALAN PINTAS: DEVICE CONTROL ──
+             Sengaja diletakkan sebelum empat langkah command di bawah, supaya
+             pengguna tahu ada cara singkat sebelum menempuh jalan panjangnya. -->
+        <a class="easy-cta" href="http://10.54.134.99:3000/pages/device-control" target="_blank" rel="noopener"
+          aria-label="Mau lebih mudah? Buka halaman Device Control untuk menyalakan dan mematikan device lewat
+            browser, tanpa SSH dan tanpa command. Hanya bisa diakses lewat intranet. Terbuka di tab baru.">
+          <span class="easy-icon" aria-hidden="true">✨</span>
+          <span class="easy-body">
+            <span class="easy-title">Mau lebih mudah?</span>
+            <span class="easy-desc">
+              Nyalakan &amp; matikan device langsung dari browser lewat <strong>Device Control</strong> —
+              tanpa SSH, tanpa hafal command.
+            </span>
+            <span class="easy-meta">
+              <span class="easy-warn">
+                <span class="easy-warn-icon" aria-hidden="true">!</span>
+                <strong>
+                  <span class="sr-only">Perhatian: </span>
+                  Hanya bisa dibuka jika menggunakan intranet
+                </strong>
+              </span>
+              <span class="easy-url">10.54.134.99:3000/pages/device-control</span>
+            </span>
+          </span>
+          <span class="easy-go">
+            Buka
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+
         <!-- ── LANGKAH 1: SSH ── -->
         <div class="how-step">
           <div class="how-head">
@@ -6082,6 +6403,11 @@ done</div>
         el.classList.add('is-pressed');
         setTimeout(() => el.classList.remove('is-pressed'), 260);
       });
+
+      // Shortcut-nya sudah dipakai — nudge "tuts menekan sendiri" di cover
+      // tidak lagi perlu, dan animasi tanpa henti yang tidak berguna justru
+      // mengganggu. Dimatikan untuk sisa sesi ini.
+      document.querySelector('.cv-bar')?.classList.add('is-learned');
     }
 
     document.addEventListener('keydown', e => {
