@@ -6,78 +6,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📢 Update Maestro Automation V1</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Reenie+Beanie&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <style>
     .highlight-version {
       display: inline-block;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 700;
-      color: #1c140f;
-      background: linear-gradient(90deg, #e8944a, #e2725b);
+      color: #292524;
+      background: linear-gradient(90deg, #FFB7B2, #E8A09A);
       width: fit-content;
       padding: 4px 12px;
       border-radius: 8px;
-      box-shadow: 0 0 24px rgba(226, 114, 91, 0.3);
+      box-shadow: 0 0 24px rgba(214, 112, 104, 0.3);
     }
     /* ─── PALETTE — WARM FUTURISTIC ────────────────────────
        Dark warm theme dengan amber & terracotta accents
        Glass morphism dengan backdrop blur & ambient orbs */
     :root {
-      /* Background & surfaces — warm near-black brown */
-      --bg: #1c140f;
-      --surface: rgba(255, 235, 215, 0.05);
-      --surface-2: rgba(255, 235, 215, 0.08);
-      --surface-glass: rgba(255, 235, 215, 0.05);
-      --border: rgba(255, 235, 215, 0.15);
-      --border-strong: rgba(255, 235, 215, 0.3);
-      --border-soft: rgba(255, 235, 215, 0.08);
+      /* ─── PALETTE — SOFTLY ─────────────────────────────────
+         Krem hangat + pastel sage/lavender/coral, grain halus.
+         Coral pastel (#FFB7B2) dipakai untuk isian; teks beraksen
+         memakai coral yang lebih dalam supaya tetap terbaca. */
+      --bg: #FDFCF8;
+      --sage: #E8EFE8;
+      --lavender: #EFEDF4;
+      --coral: #FFB7B2;
+      --ink: #292524;
+      --surface: #ffffff;
+      --surface-2: #F5F5F4;
+      --surface-glass: rgba(41, 37, 36, 0.42);
+      --border: #E7E5E4;
+      --border-strong: #D6D3D1;
+      --border-soft: #F5F5F4;
 
-      /* Text — warm off-white dengan opacity untuk hierarchy */
-      --text: #f3ece4;
-      --text-muted: rgba(243, 236, 228, 0.66);
-      --text-light: rgba(243, 236, 228, 0.52);
+      --text: #292524;
+      --text-muted: #78716C;
+      --text-light: #857D77;
 
-      /* Aksen utama — warm amber */
-      --amber: #e8944a;
-      --amber-light: #f2b073;
-      /* Alas badge/chip — sengaja dipisah dari --amber-light yang solid,
-         supaya teks --amber di atasnya tetap terbaca. */
-      --amber-tint: rgba(232, 148, 74, 0.15);
-      --amber-pale: #f7d9b8;
-      --amber-glow: rgba(232, 148, 74, 0.3);
+      /* Aksen utama — coral (teks memakai varian gelap) */
+      --amber: #B85A52;
+      --amber-light: #FFB7B2;
+      --amber-tint: rgba(255, 183, 178, 0.28);
+      --amber-pale: #FFE4E1;
+      --amber-glow: rgba(255, 183, 178, 0.45);
 
-      /* Aksen sekunder — terracotta */
-      --terracotta: #e2725b;
-      --terracotta-pale: #ffe4d6;
-      --terracotta-glow: rgba(226, 114, 91, 0.25);
+      /* Aksen sekunder — lavender */
+      --terracotta: #7A6AA6;
+      --terracotta-pale: #EFEDF4;
+      --terracotta-glow: rgba(122, 106, 166, 0.2);
 
-      /* Border tipis untuk badge & chip — sewarna aksennya, opasitas rendah */
-      --amber-border: rgba(232, 148, 74, 0.32);
-      --emerald-border: rgba(168, 213, 186, 0.28);
-      --teal-border: rgba(127, 201, 217, 0.28);
+      --amber-border: rgba(184, 90, 82, 0.28);
+      --emerald-border: rgba(94, 132, 102, 0.3);
+      --teal-border: rgba(84, 128, 136, 0.3);
 
-      /* Aksen tambahan untuk compatibility */
-      --indigo: #e8944a;
-      --indigo-light: rgba(232, 148, 74, 0.15);
-      --indigo-mid: rgba(232, 148, 74, 0.32);
-      --indigo-soft: #f2b073;
-      --violet: #e2725b;
-      --red: #e2725b;
-      --red-light: rgba(226, 114, 91, 0.15);
-      --emerald: #a8d5ba;
-      --emerald-light: rgba(168, 213, 186, 0.15);
-      --teal: #7fc9d9;
-      --teal-light: rgba(127, 201, 217, 0.15);
+      --indigo: #B85A52;
+      --indigo-light: rgba(255, 183, 178, 0.28);
+      --indigo-mid: rgba(184, 90, 82, 0.32);
+      --indigo-soft: #FFB7B2;
+      --violet: #7A6AA6;
+      --red: #B5483F;
+      --red-light: rgba(181, 72, 63, 0.1);
+      --emerald: #5E8466;
+      --emerald-light: #E8EFE8;
+      --teal: #548088;
+      --teal-light: rgba(84, 128, 136, 0.12);
 
-      /* Terminal */
-      --terminal-bg: #120b07;
+      /* Terminal tetap gelap — stone #292524 */
+      --terminal-bg: #292524;
 
-      /* Motion — token Material Design 3.
-         Durasi: short4 200ms · medium1 250ms · medium2 300ms.
-         Easing: emphasized untuk gerak dalam layar, decelerate untuk masuk,
-         accelerate untuk keluar (yang keluar harus lebih cepat dari yang masuk,
-         supaya pergantian terasa gesit dan tidak saling menunggu). */
       --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
       --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
       --ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
@@ -85,10 +82,10 @@
       --dur-enter: 250ms;
       --dur-exit: 200ms;
 
-      /* Shadows — warm tone */
-      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
-      --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      /* Shadows — lembut */
+      --shadow-xs: 0 1px 3px -1px rgba(0, 0, 0, 0.009);
+      --shadow-sm: 0 4px 20px -2px rgba(0, 0, 0, 0.009);
+      --shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.014);
     }
 
     *,
@@ -100,7 +97,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       height: 100vh;
@@ -126,7 +123,7 @@
       height: 500px;
       top: -200px;
       left: -150px;
-      background: radial-gradient(circle at 30% 30%, #e8944a 0%, rgba(232, 148, 74, 0.1) 50%, transparent 70%);
+      background: radial-gradient(circle at 30% 30%, #FFB7B2 0%, rgba(232, 130, 122, 0.1) 50%, transparent 70%);
       animation: driftOrb 16s ease-in-out infinite;
     }
 
@@ -135,7 +132,7 @@
       height: 600px;
       bottom: -250px;
       right: -200px;
-      background: radial-gradient(circle at 40% 40%, #e2725b 0%, rgba(226, 114, 91, 0.1) 50%, transparent 70%);
+      background: radial-gradient(circle at 40% 40%, #E8A09A 0%, rgba(214, 112, 104, 0.1) 50%, transparent 70%);
       animation: driftOrb 18s ease-in-out infinite reverse;
     }
 
@@ -147,7 +144,7 @@
       bottom: -160px;
       left: 30%;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(240, 178, 90, 0.3), transparent 70%);
+      background: radial-gradient(circle, rgba(232, 239, 232, 0.9), transparent 70%);
       filter: blur(100px);
       animation: driftOrb 18s ease-in-out infinite;
       pointer-events: none;
@@ -161,10 +158,10 @@
       justify-content: space-between;
       padding: 0 1.5rem;
       height: 54px;
-      background: rgba(255, 235, 215, 0.05);
-      border-bottom: 1px solid rgba(255, 235, 215, 0.12);
+      background: rgba(41, 37, 36, 0.03);
+      border-bottom: 1px solid rgba(41, 37, 36, 0.072);
       backdrop-filter: blur(14px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.036);
       flex-shrink: 0;
       gap: 1rem;
       position: relative;
@@ -182,7 +179,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
     }
 
     .brand-pip {
@@ -221,13 +218,13 @@
     }
 
     .step-dot.active {
-      background: linear-gradient(90deg, #e8944a, #e2725b);
-      box-shadow: 0 0 10px rgba(226, 114, 91, 0.6);
+      background: linear-gradient(90deg, #FFB7B2, #E8A09A);
+      box-shadow: 0 0 10px rgba(214, 112, 104, 0.6);
       width: 44px;
     }
 
     .step-dot.done {
-      background: rgba(232, 148, 74, 0.45);
+      background: rgba(232, 130, 122, 0.45);
       opacity: 0.35;
     }
 
@@ -264,14 +261,14 @@
       padding: 0.42rem 0.7rem 0.42rem 0.55rem;
       border: none;
       border-radius: 999px;
-      background: #241a13;
+      background: #FFFFFF;
       -webkit-backdrop-filter: blur(16px) saturate(140%);
       backdrop-filter: blur(16px) saturate(140%);
       box-shadow:
-        0 0 0 1px rgba(232,148,74,0.32),
-        0 10px 26px -12px rgba(0,0,0,0.7);
+        0 0 0 1px rgba(232, 130, 122, 0.32),
+        0 10px 26px -12px rgba(0, 0, 0, 0.126);
       color: var(--amber);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: -0.005em;
@@ -287,8 +284,8 @@
     .tocfab-btn:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 0 1px rgba(232,148,74,0.45),
-        0 14px 30px -12px rgba(232,148,74,0.60);
+        0 0 0 1px rgba(232, 130, 122, 0.45),
+        0 14px 30px -12px rgba(232, 130, 122, 0.6);
     }
 
     .tocfab-btn:active {
@@ -297,12 +294,12 @@
 
     .tocfab-btn:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px rgba(232,148,74,0.55);
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px rgba(232, 130, 122, 0.55);
     }
 
     .tocfab.is-open .tocfab-btn {
       background: var(--indigo-light);
-      box-shadow: 0 0 0 1px rgba(232,148,74,0.50);
+      box-shadow: 0 0 0 1px rgba(232, 130, 122, 0.5);
     }
 
     /* Titik indigo berdenyut pelan — penanda "ada sesuatu di sini" tanpa hover */
@@ -323,7 +320,7 @@
       }
 
       50% {
-        box-shadow: 0 0 0 5px rgba(232,148,74,0.16);
+        box-shadow: 0 0 0 5px rgba(232, 130, 122, 0.16);
       }
     }
 
@@ -359,7 +356,7 @@
       line-height: 1;
       color: var(--indigo);
       background: var(--bg);
-      border: 1px solid rgba(232,148,74,0.30);
+      border: 1px solid rgba(232, 130, 122, 0.3);
       border-radius: 4px;
       padding: 0.16rem 0.28rem;
     }
@@ -373,14 +370,14 @@
       max-height: min(62vh, 460px);
       overflow-y: auto;
       padding: 0.55rem;
-      background: #241a13;
+      background: #FFFFFF;
       -webkit-backdrop-filter: blur(20px) saturate(140%);
       backdrop-filter: blur(20px) saturate(140%);
       border-radius: 16px;
       box-shadow:
-        0 0 0 1px rgba(255, 235, 215, 0.14),
-        0 28px 56px -22px rgba(0, 0, 0, 0.75),
-        0 6px 14px -8px rgba(0, 0, 0, 0.5);
+        0 0 0 1px rgba(41, 37, 36, 0.084),
+        0 28px 56px -22px rgba(0, 0, 0, 0.135),
+        0 6px 14px -8px rgba(0, 0, 0, 0.09);
       display: none;
       z-index: 2;
     }
@@ -443,16 +440,16 @@
       padding: 0.34rem 0.4rem 0.34rem 0.9rem;
       border-radius: 16px;
       background:
-        linear-gradient(180deg, rgba(52,36,26,0.93), rgba(28,20,15,0.96));
+        linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7));
       -webkit-backdrop-filter: blur(16px) saturate(150%);
       backdrop-filter: blur(16px) saturate(150%);
       box-shadow:
-        0 1px 0 0 rgba(255, 255, 255, 0.07) inset,
-        0 0 0 1px rgba(255, 255, 255, 0.07),
-        0 14px 34px -12px rgba(20,10,5,0.6),
-        0 2px 6px -2px rgba(20,10,5,0.4);
+        0 1px 0 0 rgba(41, 37, 36, 0.042) inset,
+        0 0 0 1px rgba(41, 37, 36, 0.042),
+        0 14px 34px -12px rgba(41, 37, 36, 0.09),
+        0 2px 6px -2px rgba(41, 37, 36, 0.06);
       font-size: 0.74rem;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(41, 37, 36, 0.36);
       user-select: none;
       animation: kbarIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
@@ -464,7 +461,7 @@
       inset: 0;
       border-radius: inherit;
       background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
-          rgba(255, 255, 255, 0.09), transparent 62%);
+          rgba(41, 37, 36, 0.054), transparent 62%);
       opacity: 0;
       transition: opacity 0.35s ease;
       pointer-events: none;
@@ -482,7 +479,7 @@
       inset: 0 18% auto;
       height: 1px;
       border-radius: inherit;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      background: linear-gradient(90deg, transparent, rgba(41, 37, 36, 0.21), transparent);
       pointer-events: none;
     }
 
@@ -508,7 +505,7 @@
       font-weight: 700;
       letter-spacing: 0.11em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(41, 37, 36, 0.24);
       margin-right: 0.5rem;
       white-space: nowrap;
     }
@@ -547,10 +544,10 @@
       border-radius: 11px;
       border: none;
       background: none;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 0.73rem;
       letter-spacing: -0.005em;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(41, 37, 36, 0.36);
       cursor: pointer;
       white-space: nowrap;
       transition:
@@ -589,7 +586,7 @@
     }
 
     .kbar-item:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(41, 37, 36, 0.048);
       color: #fff;
       transform: translateY(-1px);
     }
@@ -604,8 +601,8 @@
     }
 
     .kbar-item:hover kbd {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(41, 37, 36, 0.108);
+      border-color: rgba(41, 37, 36, 0.168);
       transform: translateY(-0.5px);
     }
 
@@ -613,13 +610,13 @@
     .kbar-item.is-pressed {
       color: #fff;
       background: color-mix(in oklab, var(--indigo-soft) 22%, transparent);
-      box-shadow: 0 0 0 1px rgba(242,176,115,0.55);
+      box-shadow: 0 0 0 1px rgba(255, 183, 178, 0.55);
       transform: translateY(0) scale(0.97);
     }
 
     .kbar-item.is-pressed kbd {
-      background: rgba(242,176,115,0.55);
-      border-color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 183, 178, 0.55);
+      border-color: rgba(41, 37, 36, 0.27);
       color: #fff;
     }
 
@@ -631,14 +628,14 @@
       font-size: 0.66rem;
       font-weight: 600;
       line-height: 1.35;
-      color: rgba(255, 255, 255, 0.92);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(41, 37, 36, 0.552);
+      background: rgba(41, 37, 36, 0.06);
+      border: 1px solid rgba(41, 37, 36, 0.084);
       border-radius: 6px;
       padding: 0.08rem 0.34rem;
       box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.12) inset,
-        0 1px 2px rgba(0, 0, 0, 0.35);
+        0 1px 0 rgba(41, 37, 36, 0.072) inset,
+        0 1px 2px rgba(0, 0, 0, 0.063);
       transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
     }
 
@@ -652,9 +649,9 @@
       border-radius: 14px;
       font-size: 0.7rem;
       box-shadow:
-        0 1px 0 0 rgba(255, 255, 255, 0.07) inset,
-        0 0 0 1px rgba(255, 255, 255, 0.07),
-        0 8px 20px -12px rgba(20,10,5,0.55);
+        0 1px 0 0 rgba(41, 37, 36, 0.042) inset,
+        0 0 0 1px rgba(41, 37, 36, 0.042),
+        0 8px 20px -12px rgba(41, 37, 36, 0.083);
     }
 
     /* ─── ANIMATIONS — WARM FUTURISTIC ─── */
@@ -684,19 +681,19 @@
 
     @keyframes pulseGlow {
       0%, 100% {
-        filter: drop-shadow(0 0 8px #e8944a);
+        filter: drop-shadow(0 0 8px #FFB7B2);
       }
       50% {
-        filter: drop-shadow(0 0 16px #e2725b);
+        filter: drop-shadow(0 0 16px #E8A09A);
       }
     }
 
     @keyframes pulseDot {
       0%, 100% {
-        box-shadow: 0 0 0 0 rgba(232, 148, 74, 0.7);
+        box-shadow: 0 0 0 0 rgba(232, 130, 122, 0.7);
       }
       50% {
-        box-shadow: 0 0 0 6px rgba(232, 148, 74, 0);
+        box-shadow: 0 0 0 6px rgba(232, 130, 122, 0);
       }
     }
 
@@ -760,12 +757,12 @@
       gap: 0.6rem;
       text-align: left;
       width: 100%;
-      background: rgba(255, 235, 215, 0.06);
-      border: 1px solid rgba(255, 235, 215, 0.12);
+      background: rgba(41, 37, 36, 0.036);
+      border: 1px solid rgba(41, 37, 36, 0.072);
       border-radius: 10px;
       padding: 0.55rem 0.7rem;
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       transition: all 0.15s;
     }
 
@@ -840,8 +837,8 @@
       height: 0;
       width: 0;
       border-radius: 8px;
-      background: rgba(232,148,74,0.7);
-      box-shadow: 0 0 0 1px rgba(232,148,74,0.35);
+      background: rgba(232, 130, 122, 0.7);
+      box-shadow: 0 0 0 1px rgba(232, 130, 122, 0.35);
       opacity: 0;
       pointer-events: none;
       z-index: 2;
@@ -862,11 +859,11 @@
       display: flex;
       align-items: center;
       gap: 0.3rem;
-      background: rgba(255, 235, 215, 0.05);
-      border: 1px solid rgba(255, 235, 215, 0.15);
+      background: rgba(41, 37, 36, 0.03);
+      border: 1px solid rgba(41, 37, 36, 0.09);
       border-radius: 7px;
       color: var(--text-muted);
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 0.38rem 0.85rem;
@@ -882,9 +879,9 @@
     .nav-btn:hover:not(:disabled) {
       border-color: var(--amber);
       color: var(--amber);
-      background: rgba(232, 148, 74, 0.1);
+      background: rgba(232, 130, 122, 0.1);
       transform: translateY(-1px);
-      box-shadow: 0 0 12px rgba(232, 148, 74, 0.15);
+      box-shadow: 0 0 12px rgba(232, 130, 122, 0.15);
     }
 
     .nav-btn:active:not(:disabled) {
@@ -893,7 +890,7 @@
 
     .nav-btn:focus-visible {
       outline: none;
-      box-shadow: 0 0 0 2px rgba(255, 235, 215, 0.1), 0 0 0 4px rgba(232, 148, 74, 0.3);
+      box-shadow: 0 0 0 2px rgba(41, 37, 36, 0.06), 0 0 0 4px rgba(232, 130, 122, 0.3);
     }
 
     .nav-btn:disabled {
@@ -905,14 +902,14 @@
       background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
       border-color: var(--amber);
       color: white;
-      box-shadow: 0 2px 8px rgba(232, 148, 74, 0.3);
+      box-shadow: 0 2px 8px rgba(232, 130, 122, 0.3);
     }
 
     .nav-btn.primary:hover:not(:disabled) {
       background: linear-gradient(135deg, var(--amber-light) 0%, #d87a6a 100%);
       border-color: var(--amber-light);
       color: white;
-      box-shadow: 0 8px 20px rgba(232, 148, 74, 0.35);
+      box-shadow: 0 8px 20px rgba(232, 130, 122, 0.35);
       transform: translateY(-2px);
     }
 
@@ -925,17 +922,17 @@
     @keyframes navKey {
       0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(232,148,74,0.45);
+        box-shadow: 0 0 0 0 rgba(232, 130, 122, 0.45);
       }
 
       35% {
         transform: scale(0.96);
-        box-shadow: 0 0 0 5px rgba(232,148,74,0.12);
+        box-shadow: 0 0 0 5px rgba(232, 130, 122, 0.12);
       }
 
       100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(232,148,74,0.0);
+        box-shadow: 0 0 0 0 rgba(232, 130, 122, 0);
       }
     }
 
@@ -970,6 +967,10 @@
       visibility: hidden;
       opacity: 0;
       z-index: 1;
+    }
+
+    .slide[hidden] {
+      display: none;
     }
 
     .slide.is-active {
@@ -1102,7 +1103,7 @@
       gap: 0.35rem;
       font-size: 0.68rem;
       font-weight: 700;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.28em 0.75em;
@@ -1112,39 +1113,39 @@
     }
 
     .lbl-indigo {
-      background: rgba(232, 148, 74, 0.15);
-      border: 1px solid rgba(232, 148, 74, 0.3);
+      background: rgba(232, 130, 122, 0.15);
+      border: 1px solid rgba(232, 130, 122, 0.3);
       color: var(--amber);
     }
 
     .lbl-red {
-      background: rgba(226, 114, 91, 0.15);
-      border: 1px solid rgba(226, 114, 91, 0.3);
+      background: rgba(214, 112, 104, 0.15);
+      border: 1px solid rgba(214, 112, 104, 0.3);
       color: var(--terracotta);
     }
 
     .lbl-amber {
-      background: rgba(232, 148, 74, 0.15);
-      border: 1px solid rgba(232, 148, 74, 0.3);
+      background: rgba(232, 130, 122, 0.15);
+      border: 1px solid rgba(232, 130, 122, 0.3);
       color: var(--amber);
     }
 
     .lbl-emerald {
       background: rgba(168, 213, 186, 0.12);
       border: 1px solid rgba(168, 213, 186, 0.25);
-      color: #a8d5ba;
+      color: #5E8466;
     }
 
     .lbl-teal {
       background: rgba(127, 201, 217, 0.12);
       border: 1px solid rgba(127, 201, 217, 0.25);
-      color: #7fc9d9;
+      color: #548088;
     }
 
     .slide-title {
       font-size: 1.85rem;
       font-weight: 800;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       line-height: 1.2;
       color: var(--text);
       margin-bottom: 0.5rem;
@@ -1164,7 +1165,7 @@
 
     .cover-slide .slide-title {
       font-size: 2.4rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       background: linear-gradient(135deg, var(--amber) 0%, var(--terracotta) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1221,13 +1222,13 @@
       border-radius: 4px;
       padding: 0.1em 0.45em;
       font-size: 0.72rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     /* ─── CARDS — GLASS MORPHISM ─── */
     .card {
-      background: rgba(255, 235, 215, 0.05);
-      border: 1px solid rgba(255, 235, 215, 0.15);
+      background: rgba(41, 37, 36, 0.03);
+      border: 1px solid rgba(41, 37, 36, 0.09);
       border-radius: 14px;
       padding: 1.1rem 1.3rem;
       box-shadow: var(--shadow-sm);
@@ -1240,40 +1241,40 @@
     }
 
     .card:hover {
-      background: rgba(255, 235, 215, 0.08);
-      border-color: rgba(255, 235, 215, 0.25);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: rgba(41, 37, 36, 0.048);
+      border-color: rgba(41, 37, 36, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.054);
     }
 
     .card-danger {
       border-left: 3px solid var(--terracotta);
-      background: rgba(226, 114, 91, 0.1);
+      background: rgba(214, 112, 104, 0.1);
     }
 
     .card-success {
       border-left: 3px solid var(--amber-pale);
-      background: rgba(232, 148, 74, 0.08);
+      background: rgba(232, 130, 122, 0.08);
     }
 
     .card-warning {
       border-left: 3px solid var(--amber);
-      background: rgba(232, 148, 74, 0.1);
-      box-shadow: 0 0 24px rgba(232, 148, 74, 0.15);
+      background: rgba(232, 130, 122, 0.1);
+      box-shadow: 0 0 24px rgba(232, 130, 122, 0.15);
     }
 
     .card-red {
       border-left: 3px solid var(--terracotta);
-      background: rgba(226, 114, 91, 0.1);
+      background: rgba(214, 112, 104, 0.1);
     }
 
     .card-info {
       border-left: 3px solid var(--amber-light);
-      background: rgba(232, 148, 74, 0.07);
+      background: rgba(232, 130, 122, 0.07);
     }
 
     .card-neutral {
       border-left: 3px solid var(--amber);
-      background: rgba(232, 148, 74, 0.08);
+      background: rgba(232, 130, 122, 0.08);
     }
 
     .card h4 {
@@ -1393,10 +1394,10 @@
       gap: 0.45rem;
       padding: 0.34rem 0.7rem 0.34rem 0.55rem;
       border-radius: 999px;
-      background: #241a13;
+      background: #FFFFFF;
       box-shadow:
-        0 0 0 1px rgba(232,148,74,0.32),
-        0 6px 18px -10px rgba(232,148,74,0.55);
+        0 0 0 1px rgba(232, 130, 122, 0.32),
+        0 6px 18px -10px rgba(232, 130, 122, 0.55);
       color: var(--amber);
       font-size: 0.71rem;
       font-weight: 600;
@@ -1427,13 +1428,13 @@
     .wn-badge:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 0 0 1px rgba(232,148,74,0.40),
-        0 10px 22px -10px rgba(232,148,74,0.60);
+        0 0 0 1px rgba(232, 130, 122, 0.4),
+        0 10px 22px -10px rgba(232, 130, 122, 0.6);
     }
 
     .whatsnew[open] .wn-badge {
       background: var(--indigo-light);
-      box-shadow: 0 0 0 1px rgba(232,148,74,0.45);
+      box-shadow: 0 0 0 1px rgba(232, 130, 122, 0.45);
     }
 
     /* Titik gradient kecil menggantikan emoji ✨ */
@@ -1442,7 +1443,7 @@
       height: 7px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--indigo), var(--violet));
-      box-shadow: 0 0 0 3px rgba(232,148,74,0.14);
+      box-shadow: 0 0 0 3px rgba(232, 130, 122, 0.14);
       font-size: 0;
       flex-shrink: 0;
       animation: wnPing 3s ease-in-out infinite;
@@ -1456,7 +1457,7 @@
       }
 
       50% {
-        box-shadow: 0 0 0 5px rgba(232,148,74,0.16);
+        box-shadow: 0 0 0 5px rgba(232, 130, 122, 0.16);
       }
     }
 
@@ -1493,14 +1494,14 @@
       flex-direction: column;
       gap: 0.15rem;
       padding: 0.45rem;
-      background: #241a13;
+      background: #FFFFFF;
       -webkit-backdrop-filter: blur(20px) saturate(140%);
       backdrop-filter: blur(20px) saturate(140%);
       border-radius: 14px;
       box-shadow:
-        0 0 0 1px rgba(255, 235, 215, 0.14),
-        0 24px 48px -20px rgba(20,10,5,0.45),
-        0 4px 12px -6px rgba(20,10,5,0.22);
+        0 0 0 1px rgba(41, 37, 36, 0.084),
+        0 24px 48px -20px rgba(41, 37, 36, 0.068),
+        0 4px 12px -6px rgba(41, 37, 36, 0.033);
       animation: wnPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
@@ -1614,7 +1615,7 @@
     /* ─── STANDALONE CMD BLOCK (outside terminal chrome) ─── */
     /* Doubled class keeps this above the later responsive `.cmd-block` rule. */
     .cmd-block.cmd-block-solo {
-      background: #120b07;
+      background: #292524;
       border-radius: 7px;
       margin-top: 0.15rem;
       /* Wrap instead of scrolling: the always-visible copy hint is pinned to
@@ -1769,7 +1770,7 @@
 
     /* ─── CMD TERMINAL BLOCK ─── */
     .terminal {
-      background: #120b07;
+      background: #292524;
       border-radius: 10px;
       overflow: hidden;
       margin-top: 0.6rem;
@@ -1793,11 +1794,11 @@
     }
 
     .dot-red {
-      background: #e2725b;
+      background: #FFB7B2;
     }
 
     .dot-amber {
-      background: #e8944a;
+      background: #F5D08A;
     }
 
     .dot-green {
@@ -1834,7 +1835,7 @@
 
     .cmd-block:hover {
       background: rgba(255, 235, 215, 0.06);
-      box-shadow: 0 0 12px rgba(232, 148, 74, 0.15);
+      box-shadow: 0 0 12px rgba(255, 183, 178, 0.15);
     }
 
     .cmd-block .prompt {
@@ -1852,7 +1853,7 @@
       color: var(--text-light);
       opacity: 0;
       transition: opacity 0.15s, transform 0.15s;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     .cmd-block:hover .copy-hint {
@@ -1860,8 +1861,8 @@
     }
 
     .cmd-block.copied {
-      background: rgba(232, 148, 74, 0.15);
-      box-shadow: 0 0 16px rgba(232, 148, 74, 0.2);
+      background: rgba(255, 183, 178, 0.15);
+      box-shadow: 0 0 16px rgba(255, 183, 178, 0.2);
     }
 
     .cmd-block.copied .copy-hint {
@@ -2297,22 +2298,22 @@
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 0.72rem;
       font-weight: 600;
-      border: 1px solid rgba(255, 235, 215, 0.2);
+      border: 1px solid rgba(41, 37, 36, 0.12);
       border-radius: 6px;
       padding: 0.12rem 0.5rem;
-      background: rgba(255, 235, 215, 0.08);
+      background: rgba(41, 37, 36, 0.048);
       flex: none;
     }
 
     /* 3 — tag kategori */
     .cv-tag {
       display: inline-flex;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 700;
       font-size: 0.72rem;
       letter-spacing: 0.09em;
-      background: linear-gradient(90deg, rgba(232, 148, 74, 0.22), rgba(226, 114, 91, 0.22));
-      border: 1px solid rgba(232, 148, 74, 0.45);
+      background: linear-gradient(90deg, rgba(232, 130, 122, 0.22), rgba(214, 112, 104, 0.22));
+      border: 1px solid rgba(232, 130, 122, 0.45);
       color: var(--amber-pale);
       padding: 0.42rem 1rem;
       border-radius: 999px;
@@ -2324,12 +2325,12 @@
       align-items: center;
       justify-content: center;
       gap: 1.1rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 800;
       font-size: 3.25rem;
       line-height: 1.05;
       margin: 0.3rem 0 0;
-      background: linear-gradient(100deg, #f2b073, #e8944a 40%, #e2725b);
+      background: linear-gradient(100deg, #FFCFCB, #FFB7B2 40%, #E8A09A);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -2357,21 +2358,21 @@
       display: inline-flex;
       align-items: center;
       gap: 1.35rem;
-      background: rgba(255, 235, 215, 0.06);
-      border: 1px solid rgba(226, 114, 91, 0.3);
+      background: rgba(41, 37, 36, 0.036);
+      border: 1px solid rgba(214, 112, 104, 0.3);
       backdrop-filter: blur(12px);
       border-radius: 16px;
       padding: 0.85rem 1.6rem;
       flex-wrap: wrap;
       justify-content: center;
-      box-shadow: 0 0 30px rgba(226, 114, 91, 0.08);
+      box-shadow: 0 0 30px rgba(214, 112, 104, 0.08);
     }
 
     .cv-bar-label {
       display: inline-flex;
       align-items: center;
       gap: 0.42rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 600;
       font-size: 0.68rem;
       letter-spacing: 0.1em;
@@ -2413,8 +2414,8 @@
     }
 
     .cv-bar-item.is-pressed .cv-kbd {
-      border-color: rgba(232, 148, 74, 0.6);
-      background: rgba(232, 148, 74, 0.25);
+      border-color: rgba(232, 130, 122, 0.6);
+      background: rgba(232, 130, 122, 0.25);
       color: var(--amber-pale);
     }
 
@@ -2449,12 +2450,12 @@
 
       3% {
         transform: translateY(2px);
-        box-shadow: 0 0 0 3px rgba(232, 148, 74, 0.16);
+        box-shadow: 0 0 0 3px rgba(232, 130, 122, 0.16);
       }
 
       9% {
         transform: translateY(0);
-        box-shadow: 0 0 10px rgba(232, 148, 74, 0.3);
+        box-shadow: 0 0 10px rgba(232, 130, 122, 0.3);
       }
 
       18% {
@@ -2481,22 +2482,22 @@
     .cv-callout {
       text-align: left;
       width: 100%;
-      border: 1px solid rgba(232, 148, 74, 0.35);
-      background: linear-gradient(160deg, rgba(232, 148, 74, 0.14), rgba(226, 114, 91, 0.07));
+      border: 1px solid rgba(232, 130, 122, 0.35);
+      background: linear-gradient(160deg, rgba(232, 130, 122, 0.14), rgba(214, 112, 104, 0.07));
       backdrop-filter: blur(14px);
       border-radius: 18px;
       padding: 1.7rem 1.85rem;
-      box-shadow: 0 20px 60px rgba(180, 90, 30, 0.18);
+      box-shadow: 0 20px 60px rgba(41, 37, 36, 0.05);
     }
 
     .cv-callout-head {
       display: flex;
       align-items: center;
       gap: 0.55rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 700;
       font-size: 1.22rem;
-      color: #f7ddb8;
+      color: #292524;
       margin-bottom: 0.7rem;
     }
 
@@ -2520,11 +2521,11 @@
       justify-content: space-between;
       gap: 1rem;
       background: var(--terminal-bg);
-      border: 1px solid rgba(226, 114, 91, 0.25);
+      border: 1px solid rgba(255, 183, 178, 0.25);
       color: var(--terracotta-pale);
       border-radius: 12px;
       padding: 0.9rem 1.1rem;
-      box-shadow: inset 0 0 30px rgba(226, 114, 91, 0.06);
+      box-shadow: inset 0 0 30px rgba(255, 183, 178, 0.06);
     }
 
     .cv-term-line {
@@ -2555,7 +2556,7 @@
       color: var(--terracotta-pale);
       border-radius: 8px;
       padding: 0.38rem 0.75rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 0.78rem;
       cursor: pointer;
       transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
@@ -2564,7 +2565,7 @@
     .cv-copy:hover {
       border-color: var(--terracotta);
       color: var(--terracotta);
-      box-shadow: 0 0 16px rgba(226, 114, 91, 0.3);
+      box-shadow: 0 0 16px rgba(255, 183, 178, 0.3);
     }
 
     .cv-copy svg {
@@ -2578,8 +2579,8 @@
     /* 8 — baris daftar isi */
     .cv-toc {
       width: 100%;
-      background: rgba(255, 235, 215, 0.05);
-      border: 1px solid rgba(255, 235, 215, 0.12);
+      background: rgba(41, 37, 36, 0.03);
+      border: 1px solid rgba(41, 37, 36, 0.072);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       display: flex;
@@ -2595,8 +2596,8 @@
     }
 
     .cv-toc:hover {
-      border-color: rgba(226, 114, 91, 0.4);
-      box-shadow: 0 0 24px rgba(226, 114, 91, 0.12);
+      border-color: rgba(214, 112, 104, 0.4);
+      box-shadow: 0 0 24px rgba(214, 112, 104, 0.12);
     }
 
     .cv-toc-left {
@@ -2611,18 +2612,18 @@
     }
 
     .cv-toc-title {
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 600;
       font-size: 1.02rem;
     }
 
     .cv-toc-count {
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 600;
       font-size: 0.68rem;
       letter-spacing: 0.06em;
-      background: rgba(255, 235, 215, 0.1);
-      border: 1px solid rgba(255, 235, 215, 0.18);
+      background: rgba(41, 37, 36, 0.06);
+      border: 1px solid rgba(41, 37, 36, 0.108);
       color: var(--text);
       opacity: 0.8;
       padding: 0.18rem 0.6rem;
@@ -2735,12 +2736,12 @@
       margin-bottom: 1rem;
       padding: 1rem 1.3rem;
       border-radius: 16px;
-      border: 1px solid rgba(232, 148, 74, 0.5);
-      background: linear-gradient(135deg, rgba(232, 148, 74, 0.24), rgba(226, 114, 91, 0.14));
+      border: 1px solid rgba(232, 130, 122, 0.5);
+      background: linear-gradient(135deg, rgba(232, 130, 122, 0.24), rgba(214, 112, 104, 0.14));
       color: var(--text);
       text-decoration: none;
       text-align: left;
-      box-shadow: 0 8px 26px rgba(20, 10, 5, 0.4);
+      box-shadow: 0 8px 26px rgba(41, 37, 36, 0.06);
       animation: easyGlow 2.6s var(--ease-emphasized) infinite;
       transition:
         border-color var(--dur-short) var(--ease-emphasized),
@@ -2756,7 +2757,7 @@
       width: 35%;
       background: linear-gradient(100deg,
           transparent,
-          rgba(255, 235, 215, 0.16),
+          rgba(41, 37, 36, 0.096),
           transparent);
       transform: skewX(-18deg);
       pointer-events: none;
@@ -2770,8 +2771,8 @@
       border-color: var(--amber);
       transform: translateY(-2px);
       box-shadow:
-        0 14px 34px rgba(20, 10, 5, 0.5),
-        0 0 26px rgba(232, 148, 74, 0.3);
+        0 14px 34px rgba(41, 37, 36, 0.075),
+        0 0 26px rgba(232, 130, 122, 0.3);
     }
 
     .easy-cta:hover::after,
@@ -2793,7 +2794,7 @@
       border-radius: 12px;
       background: linear-gradient(135deg, var(--amber), var(--terracotta));
       font-size: 1.15rem;
-      box-shadow: 0 0 18px rgba(232, 148, 74, 0.35);
+      box-shadow: 0 0 18px rgba(232, 130, 122, 0.35);
     }
 
     .easy-body {
@@ -2803,7 +2804,7 @@
 
     .easy-title {
       display: block;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 700;
       font-size: 1.02rem;
       color: #fff;
@@ -2851,7 +2852,7 @@
       width: 100%;
       padding: 0.4rem 0.6rem 0.4rem 0.45rem;
       border-radius: 9px;
-      background: rgba(20, 10, 5, 0.45);
+      background: rgba(41, 37, 36, 0.068);
       border-left: 4px solid var(--amber);
     }
 
@@ -2863,8 +2864,8 @@
       height: 20px;
       border-radius: 50%;
       background: var(--amber);
-      color: #1c140f;
-      font-family: 'Sora', -apple-system, sans-serif;
+      color: #FFFFFF;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-size: 0.8rem;
       font-weight: 800;
       line-height: 1;
@@ -2891,7 +2892,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      font-family: 'Sora', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, sans-serif;
       font-weight: 700;
       font-size: 0.78rem;
       color: var(--amber-pale);
@@ -2911,14 +2912,14 @@
 
       0%,
       100% {
-        box-shadow: 0 8px 26px rgba(20, 10, 5, 0.4);
+        box-shadow: 0 8px 26px rgba(41, 37, 36, 0.06);
       }
 
       50% {
         box-shadow:
-          0 8px 26px rgba(20, 10, 5, 0.4),
-          0 0 0 6px rgba(232, 148, 74, 0.1),
-          0 0 26px rgba(232, 148, 74, 0.26);
+          0 8px 26px rgba(41, 37, 36, 0.06),
+          0 0 0 6px rgba(232, 130, 122, 0.1),
+          0 0 26px rgba(232, 130, 122, 0.26);
       }
     }
 
@@ -3061,7 +3062,7 @@
       border: none;
       background: rgba(255, 255, 255, 0.07);
       color: var(--text-light);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       letter-spacing: 0.02em;
@@ -3127,9 +3128,9 @@
        Tiruan tampilan Jenkins memakai HTML/CSS, dipakai sebagai ganti
        screenshot supaya tetap tajam di segala zoom & tanpa file gambar. */
     .jk {
-      --jk-blue: #e8944a;
-      --jk-line: rgba(255,235,215,0.12);
-      background: #241a13;
+      --jk-blue: #FFB7B2;
+      --jk-line: rgba(41, 37, 36, 0.072);
+      background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: 9px;
       overflow: hidden;
@@ -3160,7 +3161,7 @@
       gap: 0.3rem;
       flex-wrap: wrap;
       min-width: 0;
-      color: rgba(243,236,228,0.62);
+      color: rgba(41, 37, 36, 0.72);
     }
 
     .jk-crumb b {
@@ -3169,7 +3170,7 @@
     }
 
     .jk-crumb .sep {
-      color: rgba(243,236,228,0.35);
+      color: rgba(41, 37, 36, 0.45);
     }
 
     .jk-body {
@@ -3187,7 +3188,7 @@
     }
 
     .jk-side {
-      background: rgba(255,235,215,0.04);
+      background: rgba(41, 37, 36, 0.024);
       border-right: 1px solid var(--jk-line);
       padding: 0.4rem 0.3rem;
       display: flex;
@@ -3198,14 +3199,14 @@
     .jk-nav {
       padding: 0.26rem 0.45rem;
       border-radius: 5px;
-      color: rgba(243,236,228,0.62);
+      color: rgba(41, 37, 36, 0.72);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .jk-nav.on {
-      background: rgba(232,148,74,0.16);
+      background: rgba(232, 130, 122, 0.16);
       color: var(--text);
       font-weight: 700;
     }
@@ -3229,8 +3230,8 @@
       height: 15px;
       flex-shrink: 0;
       border-radius: 50%;
-      border: 1.5px solid #a8d5ba;
-      color: #a8d5ba;
+      border: 1.5px solid #5E8466;
+      color: #5E8466;
       font-size: 0.52rem;
       font-weight: 900;
       display: flex;
@@ -3258,19 +3259,19 @@
     }
 
     .jk-dim {
-      color: rgba(243,236,228,0.62);
+      color: rgba(41, 37, 36, 0.72);
       font-weight: 400;
     }
 
     .jk-row ul {
       margin: 0.15rem 0 0 1rem;
-      color: rgba(243,236,228,0.62);
+      color: rgba(41, 37, 36, 0.72);
     }
 
     /* Baris yang menjadi fokus langkah */
     .jk-row.hot,
     .jk-file.hot {
-      background: rgba(232,148,74,0.14);
+      background: rgba(232, 130, 122, 0.14);
       box-shadow: inset 0 0 0 2px var(--amber);
       border-radius: 6px;
     }
@@ -3278,7 +3279,7 @@
     .jk-hot-tag {
       flex-shrink: 0;
       background: var(--amber);
-      color: #1c140f;
+      color: #FFFFFF;
       font-size: 0.55rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -3310,7 +3311,7 @@
       flex: 1;
       min-width: 0;
       height: 21px;
-      border: 1px solid rgba(255,235,215,0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       border-radius: 5px;
     }
 
@@ -3318,10 +3319,10 @@
       flex-shrink: 0;
       width: 25px;
       height: 21px;
-      border: 1px solid rgba(255,235,215,0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       border-radius: 5px;
-      background: rgba(255,235,215,0.05);
-      color: rgba(243,236,228,0.62);
+      background: rgba(41, 37, 36, 0.03);
+      color: rgba(41, 37, 36, 0.72);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -3332,7 +3333,7 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.3rem 0.75rem;
-      border-top: 1px solid rgba(255,235,215,0.06);
+      border-top: 1px solid rgba(41, 37, 36, 0.036);
     }
 
     .jk-fname {
@@ -3355,7 +3356,7 @@
 
     .jk-fmeta {
       flex-shrink: 0;
-      color: rgba(243,236,228,0.42);
+      color: rgba(41, 37, 36, 0.52);
       font-size: 0.65rem;
       white-space: nowrap;
     }
@@ -3364,7 +3365,7 @@
       flex-shrink: 0;
       min-width: 62px;
       text-align: right;
-      color: rgba(243,236,228,0.62);
+      color: rgba(41, 37, 36, 0.72);
       font-size: 0.65rem;
       white-space: nowrap;
     }
@@ -3406,25 +3407,25 @@
 
     .jk-field span {
       font-size: 0.62rem;
-      color: rgba(243, 236, 228, 0.62);
+      color: rgba(41, 37, 36, 0.72);
     }
 
     .jk-input {
       height: 24px;
-      border: 1px solid rgba(255, 235, 215, 0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       border-radius: 5px;
-      background: rgba(255, 235, 215, 0.05);
+      background: rgba(41, 37, 36, 0.03);
       display: flex;
       align-items: center;
       padding: 0 0.45rem;
       font-size: 0.66rem;
-      color: rgba(243, 236, 228, 0.52);
+      color: rgba(41, 37, 36, 0.62);
     }
 
     .jk-btn {
       margin-top: 0.35rem;
       background: var(--amber);
-      color: #1c140f;
+      color: #FFFFFF;
       font-size: 0.66rem;
       font-weight: 800;
       border-radius: 5px;
@@ -3434,7 +3435,7 @@
 
     .jk-btn.is-ghost {
       background: none;
-      border: 1px solid rgba(255, 235, 215, 0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       color: var(--jk-blue);
       font-weight: 600;
     }
@@ -3479,14 +3480,14 @@
     .jk-filter {
       width: min(150px, 60%);
       height: 21px;
-      border: 1px solid rgba(255, 235, 215, 0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       border-radius: 5px;
-      background: rgba(255, 235, 215, 0.05);
+      background: rgba(41, 37, 36, 0.03);
       display: flex;
       align-items: center;
       padding: 0 0.45rem;
       font-size: 0.64rem;
-      color: rgba(243, 236, 228, 0.52);
+      color: rgba(41, 37, 36, 0.62);
       margin-top: 0.1rem;
     }
 
@@ -3502,8 +3503,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      border: 1px solid rgba(255, 235, 215, 0.18);
-      background: rgba(255, 235, 215, 0.07);
+      border: 1px solid rgba(41, 37, 36, 0.108);
+      background: rgba(41, 37, 36, 0.042);
       border-radius: 5px;
       padding: 0.22rem 0.55rem;
       font-size: 0.64rem;
@@ -3514,7 +3515,7 @@
 
     .jk-upload span {
       font-size: 0.64rem;
-      color: rgba(243, 236, 228, 0.52);
+      color: rgba(41, 37, 36, 0.62);
     }
 
     /* Daftar build di bawah menu sidebar */
@@ -3541,11 +3542,11 @@
       padding: 0 0.45rem;
       font-size: 0.6rem;
       line-height: 1.35;
-      color: rgba(243, 236, 228, 0.62);
+      color: rgba(41, 37, 36, 0.72);
     }
 
     .jk-build .ok {
-      color: #a8d5ba;
+      color: #5E8466;
     }
 
     .jk-build time {
@@ -3557,9 +3558,9 @@
       flex: 1;
       min-width: 0;
       height: 22px;
-      border: 1px solid rgba(255, 235, 215, 0.16);
+      border: 1px solid rgba(41, 37, 36, 0.096);
       border-radius: 5px;
-      background: rgba(255, 235, 215, 0.05);
+      background: rgba(41, 37, 36, 0.03);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -4047,10 +4048,1174 @@
     .table-scroll>table {
       min-width: 680px;
     }
+
+    /* =========================================================
+       SOFTLY — lapisan tema
+       Krem hangat, pastel, grain kertas, gerak pelan. Ditaruh
+       paling bawah supaya menimpa gaya gelap di atasnya tanpa
+       mengubah struktur slide.
+       ========================================================= */
+
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    ::selection {
+      background: var(--coral);
+      color: var(--ink);
+    }
+
+    /* Blob latar — peach & lavender, blur tinggi, mengapung 6 detik */
+    body::before,
+    body::after,
+    .orb-c {
+      filter: blur(90px);
+      opacity: 0.6;
+      animation: sfFloat 6s ease-in-out infinite;
+    }
+
+    body::before {
+      background: #FFE4E1;
+    }
+
+    body::after {
+      background: #E6E6FA;
+      animation-delay: -3s;
+    }
+
+    .orb-c {
+      background: var(--sage);
+      animation-delay: -1.5s;
+    }
+
+    @keyframes sfFloat {
+      0%, 100% { transform: translateY(-10px); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* Grain — overlay fractal noise, terasa seperti kertas */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── Tipografi ─── */
+    h1, h2, h3, h4,
+    .slide-title,
+    .cv-hero,
+    .cv-callout-head,
+    .easy-title {
+      letter-spacing: -0.025em;
+    }
+
+    .slide-title {
+      font-weight: 600;
+    }
+
+    .sf-script {
+      font-family: 'Reenie Beanie', cursive;
+      font-weight: 400;
+      font-size: 1.25em;
+      letter-spacing: 0;
+      color: var(--amber);
+      line-height: 0.8;
+    }
+
+    /* Teks gradient tidak terbaca di atas krem — jadi tinta solid */
+    .topbar-brand,
+    .cover-slide .slide-title,
+    .cv-hero {
+      background: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: currentColor;
+      color: var(--ink);
+    }
+
+    .cv-hero {
+      font-weight: 600;
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      flex-wrap: wrap;
+    }
+
+    .cv-hero svg {
+      animation: sfFloat 6s ease-in-out infinite;
+    }
+
+    .cv-sub {
+      color: var(--text-muted);
+      opacity: 1;
+      max-width: 500px;
+    }
+
+    /* Sentence case saja — label & badge tidak lagi huruf kapital */
+    .slide-label,
+    .kbar-label,
+    .cv-bar-label,
+    .wn-tag,
+    .tag-pill,
+    .rep-badge,
+    .plat-head,
+    .jk-hot-tag {
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .highlight-version {
+      color: var(--ink);
+      background: var(--coral);
+      box-shadow: var(--shadow-sm);
+      border-radius: 999px;
+    }
+
+    /* ─── Nav — pill mengambang ─── */
+    .topbar {
+      width: calc(100% - 32px);
+      max-width: 1180px;
+      margin: 12px auto 0;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      padding-inline: 0.75rem 0.5rem;
+    }
+
+    .topbar-brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Logo — lingkaran coral dengan titik putih */
+    .brand-pip {
+      width: 22px;
+      height: 22px;
+      flex: none;
+      background: var(--coral);
+      box-shadow: none;
+      animation: none;
+      display: grid;
+      place-items: center;
+    }
+
+    .brand-pip::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .step-dot {
+      background: var(--border);
+    }
+
+    .step-dot.active {
+      background: var(--coral);
+      box-shadow: none;
+    }
+
+    .step-dot.done {
+      background: var(--amber);
+      opacity: 0.35;
+    }
+
+    .nav-btn {
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--ink);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #fff;
+      border-color: var(--border-strong);
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-btn.primary,
+    .nav-btn.primary:hover:not(:disabled) {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-hl {
+      border-radius: 999px;
+      background: var(--amber-tint);
+      box-shadow: none;
+    }
+
+    .nav-btn:focus-visible,
+    .tocfab-btn:focus-visible,
+    .kbar-item:focus-visible,
+    .cv-bar-item:focus-visible,
+    .cv-toc:focus-visible,
+    .easy-cta:focus-visible,
+    .toc-item:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        border-radius: 2rem;
+      }
+
+      /* Pill daftar isi mengambang di bawah topbar — beri ruang supaya
+         tidak menutupi baris pertama slide yang panjang */
+      .slide {
+        padding-top: 3.5rem;
+      }
+    }
+
+    /* ─── Kontainer — radius 2rem, bayangan lembut ─── */
+    .card,
+    .cmd-panel,
+    .how-step,
+    .terminal,
+    .cv-callout,
+    .cv-toc,
+    .cv-bar,
+    .cv-term,
+    .easy-cta,
+    .squad-card,
+    .cif-card,
+    .tag-card,
+    .mode-card,
+    .jk,
+    .table-scroll,
+    .env-table,
+    .tocfab-pop,
+    .wn-body {
+      border-radius: 2rem;
+    }
+
+    .card,
+    .cmd-panel,
+    .how-step,
+    .squad-card,
+    .cif-card,
+    .tag-card,
+    .mode-card,
+    .yml-item,
+    .file-item,
+    .doc-link,
+    .cover-step {
+      background: #fff;
+      border-color: var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+
+    .card,
+    .cmd-panel,
+    .how-step {
+      padding: 1.4rem 1.6rem;
+    }
+
+    .yml-item,
+    .file-item,
+    .doc-link,
+    .toc-item {
+      border-radius: 1.25rem;
+    }
+
+    .card:hover {
+      background: #fff;
+      border-color: var(--border);
+      box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Kartu berwarna: isi pastel, tanpa garis kiri tebal */
+    .card-danger,
+    .card-red {
+      background: #FFF1EF;
+      border-left: 1px solid rgba(181, 72, 63, 0.18);
+    }
+
+    .card-success {
+      background: var(--sage);
+      border-left: 1px solid var(--emerald-border);
+    }
+
+    .card-warning,
+    .card-neutral {
+      background: #FFF4F2;
+      border-left: 1px solid var(--amber-border);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-info {
+      background: var(--lavender);
+      border-left: 1px solid rgba(122, 106, 166, 0.2);
+    }
+
+    .card-info h4 {
+      color: var(--terracotta);
+    }
+
+    .tag-card-include {
+      background: var(--sage);
+      border-left: 1px solid var(--emerald-border);
+    }
+
+    .tag-card-exclude {
+      background: #FFF4F2;
+      border-left: 1px solid var(--amber-border);
+    }
+
+    .env-table {
+      background: #fff;
+    }
+
+    .env-table th {
+      background: var(--surface-2);
+    }
+
+    .env-table td {
+      background: #fff;
+    }
+
+    .env-table tr:hover td {
+      background: var(--bg);
+    }
+
+    code {
+      background: var(--surface-2);
+      border-color: var(--border);
+      color: var(--amber);
+    }
+
+    kbd {
+      background: #fff;
+      border-color: var(--border);
+      color: var(--ink);
+    }
+
+    /* ─── Terminal — tetap gelap, token teks dibalik di dalamnya ─── */
+    .terminal,
+    .cv-term,
+    .cmd-block-solo,
+    .cmd-block.cmd-block-solo {
+      --text: #FAFAF9;
+      --text-muted: #D6D3D1;
+      --text-light: #A8A29E;
+      --amber: #FFB7B2;
+      --amber-light: #FFCFCB;
+      --amber-pale: #FFE4E1;
+      --border: rgba(255, 255, 255, 0.12);
+      background: var(--terminal-bg);
+      color: var(--amber-pale);
+      border-color: transparent;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+    }
+
+    .cmd-block.cmd-block-solo {
+      border-radius: 1.25rem;
+    }
+
+    .terminal code,
+    .cv-term code {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--amber-pale);
+    }
+
+    /* Placeholder yang harus diganti tetap "kuning" seperti disebut di teks */
+    .cmd-scroll .ph,
+    .yml-code .ph {
+      color: #F5D08A;
+    }
+
+    .cv-term {
+      color: var(--lavender);
+    }
+
+    .cv-term-line .prompt,
+    .cv-caret {
+      color: var(--coral);
+    }
+
+    .cv-copy:hover {
+      border-color: var(--coral);
+      color: var(--coral);
+      box-shadow: none;
+    }
+
+    /* ─── Cover ─── */
+    .cv-tag {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .cv-bar {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-soft);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .cv-bar-label {
+      color: var(--amber);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .cv-bar-label::before {
+      background: var(--coral);
+    }
+
+    .cv-bar-item:hover,
+    .cv-bar-item.is-pressed {
+      color: var(--amber);
+    }
+
+    .cv-kbd {
+      background: #fff;
+      border-color: var(--border);
+      color: var(--ink);
+    }
+
+    .cv-bar-item.is-pressed .cv-kbd {
+      border-color: var(--coral);
+      background: var(--amber-pale);
+      color: var(--ink);
+    }
+
+    .cv-callout {
+      background: var(--lavender);
+      border: 1px solid rgba(122, 106, 166, 0.14);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      padding: 2rem 2.2rem;
+    }
+
+    .cv-callout-head {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .cv-callout-head svg {
+      animation: none;
+    }
+
+    .cv-callout p {
+      color: var(--text);
+      opacity: 1;
+    }
+
+    .cv-toc {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .cv-toc:hover {
+      border-color: var(--coral);
+      box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    .cv-toc-count {
+      background: var(--sage);
+      border-color: transparent;
+      opacity: 1;
+    }
+
+    /* ─── CTA "mau lebih mudah?" — kartu coral lembut ─── */
+    .easy-cta {
+      background: linear-gradient(135deg, #FFE4E1, #FFF1EF);
+      border: 1px solid rgba(184, 90, 82, 0.22);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      animation: none;
+    }
+
+    .easy-cta:hover,
+    .easy-cta:focus-visible {
+      border-color: var(--coral);
+      box-shadow: 0 10px 30px -6px rgba(184, 90, 82, 0.22);
+    }
+
+    .easy-cta::after {
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    }
+
+    .easy-icon {
+      background: var(--coral);
+      border-radius: 1rem;
+      box-shadow: none;
+    }
+
+    .easy-title {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .easy-desc,
+    .easy-go {
+      color: var(--text-muted);
+    }
+
+    .easy-go {
+      color: var(--amber);
+    }
+
+    .easy-warn {
+      background: rgba(255, 255, 255, 0.8);
+      border-left-color: var(--amber);
+    }
+
+    .easy-warn strong {
+      color: var(--ink);
+    }
+
+    .easy-warn-icon {
+      color: #fff;
+    }
+
+    /* ─── Popover & pill daftar isi — kaca putih ─── */
+    .tocfab-btn,
+    .wn-badge {
+      background: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 0 1px var(--border), 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      color: var(--ink);
+    }
+
+    .tocfab-btn:hover,
+    .wn-badge:hover {
+      box-shadow: 0 0 0 1px var(--coral), 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    .tocfab-dot {
+      background: var(--coral);
+    }
+
+    .tocfab-kbd {
+      background: #fff;
+      color: var(--amber);
+      border-color: var(--border);
+    }
+
+    .tocfab-pop,
+    .wn-body {
+      background: rgba(255, 255, 255, 0.92);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 0 1px var(--border-soft), 0 20px 50px -20px rgba(0, 0, 0, 0.15);
+      padding: 0.9rem;
+    }
+
+    .toc-item {
+      background: #fff;
+      border-color: var(--border-soft);
+    }
+
+    .toc-item:hover,
+    .toc-item.is-current {
+      background: #FFF4F2;
+      border-color: var(--coral);
+    }
+
+    .toc-item.is-current {
+      box-shadow: inset 0 0 0 1px var(--coral);
+    }
+
+    .toc-item.is-current .toc-num,
+    .toc-item.is-done .toc-num {
+      background: var(--coral);
+      color: var(--ink);
+    }
+
+    /* ─── Command bar (kbar) — kaca terang ─── */
+    .kbar {
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 0 1px var(--border-soft), 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      color: var(--text-muted);
+      border-radius: 999px;
+    }
+
+    .kbar::after {
+      display: none;
+    }
+
+    .kbar::before {
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+          rgba(255, 183, 178, 0.25), transparent 62%);
+    }
+
+    .kbar-label {
+      color: var(--text-light);
+    }
+
+    .kbar-label::before {
+      background: var(--coral);
+      box-shadow: none;
+    }
+
+    .kbar-item {
+      color: var(--text-muted);
+      border-radius: 999px;
+    }
+
+    .kbar-item:hover,
+    .kbar-item.is-pressed {
+      background: var(--amber-tint);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .kbar kbd,
+    .kbar-item:hover kbd,
+    .kbar-item.is-pressed kbd {
+      background: #fff;
+      border-color: var(--border);
+      color: var(--ink);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    /* ─── Mockup Jenkins di atas kartu putih ─── */
+    .jk {
+      --jk-blue: #B85A52;
+      background: #fff;
+      border-color: var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .jk-side {
+      background: var(--bg);
+    }
+
+    .jk-btn,
+    .jk-hot-tag {
+      color: #fff;
+    }
+
+    .jk-row.hot,
+    .jk-file.hot {
+      background: #FFF4F2;
+      box-shadow: inset 0 0 0 1.5px var(--coral);
+    }
+
+    /* Label & badge kecil */
+    .lbl-indigo,
+    .lbl-amber {
+      background: var(--amber-tint);
+      border-color: transparent;
+      color: var(--amber);
+    }
+
+    .lbl-red {
+      background: var(--lavender);
+      border-color: transparent;
+      color: var(--terracotta);
+    }
+
+    .lbl-emerald {
+      background: var(--sage);
+      border-color: transparent;
+      color: var(--emerald);
+    }
+
+    .lbl-teal {
+      background: var(--teal-light);
+      border-color: transparent;
+      color: var(--teal);
+    }
+
+    .slide-label {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 0.78rem;
+      border-radius: 999px;
+    }
+
+    .how-num,
+    .step-num {
+      background: var(--coral);
+      color: var(--ink);
+    }
+
+    .lightbox img {
+      background: #fff;
+    }
+
+    .slide::-webkit-scrollbar-thumb {
+      background: var(--border-strong);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after,
+      .orb-c,
+      .cv-hero svg {
+        animation: none;
+      }
+    }
+
+    /* ─── HASIL RUNNING JENKINS (cover) ───
+       Ringkasan angka dulu, baru tabel. Status cukup tiga warna supaya
+       bisa dibaca sekilas: hijau done, merah failed, kuning terkendala. */
+    .jr {
+      width: 100%;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+
+    .jr-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.75rem 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .jr-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .jr-sub {
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .jr-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xs);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .jr-date strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .jr-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .jr-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 1rem 1.25rem;
+      border-radius: 1.5rem;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .jr-stat b {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.025em;
+    }
+
+    .jr-stat span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .jr-stat.is-done b { color: #3F6B49; }
+    .jr-stat.is-failed b { color: #A33A31; }
+    .jr-stat.is-blocked b { color: #8A5A12; }
+
+    .jr-scroll {
+      border-radius: 1.5rem;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .jr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .jr-table thead th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      white-space: nowrap;
+    }
+
+    .jr-table td {
+      padding: 0.75rem 1rem;
+      vertical-align: top;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .jr-table code {
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    /* Baris judul squad */
+    .jr-group th {
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .jr-feat {
+      font-weight: 500;
+      color: var(--ink);
+      min-width: 8.5rem;
+    }
+
+    .jr-os {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.72rem;
+      color: var(--text-light);
+    }
+
+    .jr-pill {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .jr-pill.is-done { background: var(--sage); color: #3F6B49; }
+    .jr-pill.is-failed { background: #FDE2DF; color: #A33A31; }
+    .jr-pill.is-blocked { background: #FFF1D6; color: #8A5A12; }
+
+    .jr-table tr.is-failed td:not(.jr-feat) {
+      background: #FFF7F6;
+    }
+
+    .jr-link {
+      color: var(--amber);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .jr-link:hover {
+      text-decoration: underline;
+    }
+
+    .jr-link:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .jr-none {
+      color: var(--text-light);
+    }
+
+    .jr-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .jr-legend .jr-pill {
+      margin-right: 0.3rem;
+    }
+
+    /* Penanda evidence — menghubungkan baris tabel ke kartu evidence di bawahnya */
+    .jr-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: fit-content;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #FFF8EA;
+      border: 1px solid #F3D9A8;
+      color: #8A5A12;
+      font-size: 0.72rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .jr-note .jr-ref {
+      display: flex;
+      margin-top: 0.45rem;
+    }
+
+    a.jr-ref {
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    a.jr-ref:hover {
+      background: #FFF1D6;
+      border-color: #E9C483;
+      text-decoration: underline;
+    }
+
+    a.jr-ref:focus-visible {
+      outline: 2px solid #8A5A12;
+      outline-offset: 2px;
+    }
+
+    /* Evidence — selalu terlihat, screenshot di-crop ke bagian yang relevan */
+    .jr-ev-head {
+      margin: 1.75rem 0 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .jr-ev {
+      display: grid;
+      grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+      align-items: center;
+      gap: 1.25rem 1.5rem;
+      margin: 0;
+      padding: 1.25rem;
+      border-radius: 2rem;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .jr-ev {
+      scroll-margin: 1.5rem;
+      transition: box-shadow 0.4s ease;
+    }
+
+    .jr-ev:focus {
+      outline: none;
+    }
+
+    /* Nyala sebentar setelah didatangi dari penanda di tabel */
+    .jr-ev.is-target {
+      box-shadow: 0 0 0 3px #F3D9A8, 0 8px 28px -4px rgba(138, 90, 18, 0.18);
+    }
+
+    /* Squad / fitur yang bermasalah — disorot dengan warna Terkendala */
+    .jr-hl {
+      display: inline-block;
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      background: #FFF1D6;
+      border: 1px solid #F3D9A8;
+      color: #8A5A12;
+      font-weight: 600;
+    }
+
+    .jr-ev + .jr-ev {
+      margin-top: 1rem;
+    }
+
+    .jr-hl.is-done {
+      background: var(--sage);
+      border-color: #C9D9CB;
+      color: #3F6B49;
+    }
+
+    .jr-ev img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 1.25rem;
+    }
+
+    .jr-ev figcaption {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .jr-ev-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .jr-ev p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .jr-ev-meta {
+      display: grid;
+      gap: 0.4rem;
+      margin: 0.25rem 0 0;
+      font-size: 0.82rem;
+    }
+
+    .jr-ev-meta div {
+      display: grid;
+      grid-template-columns: 8rem minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .jr-ev-meta dt {
+      color: var(--text-light);
+    }
+
+    .jr-ev-meta dd {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .jr-ev-meta code {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .jr-ev {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1rem;
+        border-radius: 1.5rem;
+      }
+
+      .jr-ev-meta div {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.1rem;
+      }
+    }
+
+
+    @media (max-width: 640px) {
+      .jr-summary {
+        gap: 0.5rem;
+      }
+
+      .jr-stat {
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.85rem 1rem;
+      }
+
+      .jr-stat b {
+        font-size: 1.6rem;
+      }
+
+      /* Di HP tabel berubah jadi kartu per baris — tidak perlu geser ke samping:
+         tag + status sebaris, catatan di bawahnya, lalu link report. */
+      .jr-scroll > .jr-table {
+        min-width: 0;
+      }
+
+      .jr-table,
+      .jr-table tbody,
+      .jr-table tr,
+      .jr-table th,
+      .jr-table td {
+        display: block;
+      }
+
+      .jr-table thead {
+        display: none;
+      }
+
+      .jr-table tr:not(.jr-group) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.4rem 0.75rem;
+        padding: 0.85rem 1rem;
+        border-top: 1px solid var(--border-soft);
+      }
+
+      .jr-table td {
+        padding: 0;
+        border: 0;
+      }
+
+      .jr-table .jr-feat {
+        grid-column: 1 / -1;
+        min-width: 0;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+
+      .jr-table .jr-tag { grid-column: 1; }
+      .jr-table .jr-status { grid-column: 2; justify-self: end; }
+      .jr-table .jr-note,
+      .jr-table .jr-rep { grid-column: 1 / -1; }
+
+      .jr-table .jr-note.jr-none,
+      .jr-table .jr-rep.jr-none {
+        display: none;
+      }
+
+      .jr-table tr.is-failed {
+        background: #FFF7F6;
+      }
+
+      .jr-table tr.is-failed td:not(.jr-feat) {
+        background: none;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+  <div class="grain" aria-hidden="true"></div>
 
   <div class="orb-c" aria-hidden="true"></div>
 
@@ -4159,12 +5324,12 @@
 
           <!-- 4 — hero -->
           <h1 class="cv-hero">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#f2b073" stroke-width="2"
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#B85A52" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m3 11 18-5v12L3 14v-3z" />
               <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
             </svg>
-            Update Maestro Automation
+            <span>Maestro Automation <span class="sf-script">Docs and Update</span></span>
           </h1>
 
           <!-- 5 — subjudul -->
@@ -4190,7 +5355,7 @@
           <!-- 7 — kartu rekomendasi versi -->
           <div class="cv-callout">
             <div class="cv-callout-head">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#f7d9b8" stroke-width="2"
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B85A52" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M15 14c.2-1 .7-1.7 1.5-2.5a5.5 5.5 0 1 0-9 0c.8.8 1.3 1.5 1.5 2.5" />
                 <path d="M9 18h6" />
@@ -4221,7 +5386,7 @@
           <!-- 8 — baris daftar isi -->
           <button type="button" class="cv-toc" data-toc-trigger onclick="openToc()">
             <span class="cv-toc-left">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#e2725b" stroke-width="2"
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B85A52" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 7v14" />
                 <path
@@ -4236,13 +5401,202 @@
             </svg>
           </button>
 
+          <!-- 9 — hasil running Jenkins -->
+          <section class="jr" aria-labelledby="jrTitle">
+            <div class="jr-head">
+              <div>
+                <h2 class="jr-title" id="jrTitle">Hasil running Jenkins <span class="sf-script">R6.2</span></h2>
+                <p class="jr-sub">Status terakhir tiap tag, dikelompokkan per squad.</p>
+              </div>
+              <span class="jr-date">🗓️ Latest update · <strong>October 21, 2026</strong></span>
+            </div>
+
+            <div class="jr-summary">
+              <div class="jr-stat is-done"><b>4</b><span>Done</span></div>
+              <div class="jr-stat is-failed"><b>1</b><span>Failed</span></div>
+              <div class="jr-stat is-blocked"><b>4</b><span>Terkendala</span></div>
+            </div>
+
+            <div class="table-scroll jr-scroll">
+              <table class="jr-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Fitur</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Catatan</th>
+                    <th scope="col">Report</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="jr-group">
+                    <th colspan="5" scope="colgroup">💰 Savings</th>
+                  </tr>
+                  <tr>
+                    <td class="jr-feat" rowspan="2">dcm</td>
+                    <td class="jr-tag"><code>v6.1.6-savings</code><span class="jr-os">Android</span></td>
+                    <td class="jr-status"><span class="jr-pill is-blocked">Terkendala</span></td>
+                    <td class="jr-note">CASA bermasalah</td>
+                    <td class="jr-rep jr-none">—</td>
+                    <!-- <td class="jr-rep"><a class="jr-link" href="http://10.54.134.99:8082/job/testing-mobile/676/artifact/archive-report/"
+                        target="_blank" rel="noopener">Folder ↗</a></td> -->
+                  </tr>
+                  <tr>
+                    <td class="jr-tag"><code>v6.1.5-savings</code><span class="jr-os">iOS</span></td>
+                    <td class="jr-status"><span class="jr-pill is-blocked">Terkendala</span></td>
+                    <td class="jr-note">CASA bermasalah</td>
+                    <td class="jr-rep jr-none">—</td>
+                  </tr>
+                  <tr>
+                    <td class="jr-feat" rowspan="2">Branch</td>
+                    <td class="jr-tag"><code>v6.5.3-savings</code><span class="jr-os">iOS</span></td>
+                    <td class="jr-status"><span class="jr-pill is-blocked">Terkendala</span></td>
+                    <td class="jr-note">CIF test sudah punya rekening wondr multicurrency, jadi tidak bisa buka lagi (maks. 1 per
+                      CIF).
+                      <a class="jr-ref" href="#evidence-1" onclick="goEvidence(event)">📎 Evidence 1
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 5v14" />
+                          <path d="m19 12-7 7-7-7" />
+                        </svg>
+                      </a>
+                    </td>
+                    <td class="jr-rep jr-none">—</td>
+                  </tr>
+                  <tr>
+                    <td class="jr-tag"><code>v6.5.2-savings</code><span class="jr-os">Android</span></td>
+                    <td class="jr-status"><span class="jr-pill is-blocked">Terkendala</span></td>
+                    <td class="jr-note">CIF test sudah punya rekening wondr multicurrency, jadi tidak bisa buka lagi (maks. 1 per
+                      CIF).
+                      <a class="jr-ref" href="#evidence-1" onclick="goEvidence(event)">📎 Evidence 1
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 5v14" />
+                          <path d="m19 12-7 7-7-7" />
+                        </svg>
+                      </a>
+                    </td>
+                    <td class="jr-rep jr-none">—</td>
+                    <!-- <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8082/job/testing-mobile/681/execution/node/3/ws/archive-report/"
+                        target="_blank" rel="noopener">Folder ↗</a></td> -->
+                  </tr>
+
+                  <tr class="jr-group">
+                    <th colspan="5" scope="colgroup">🧭 Onboarding — journey</th>
+                  </tr>
+                  <tr>
+                    <td class="jr-feat" rowspan="2">QR Tracking Referral</td>
+                    <td class="jr-tag"><code>v6.1.5-onboarding</code><span class="jr-os">Android</span></td>
+                    <td class="jr-status"><span class="jr-pill is-done">Done</span></td>
+                    <td class="jr-note">Tidak ada ticket untuk Android</td>
+                    <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8082/job/testing-mobile/lastSuccessfulBuild/execution/node/3/ws/archive-report/"
+                        target="_blank" rel="noopener">Folder ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td class="jr-tag"><code>v6.1.4-onboarding</code><span class="jr-os">iOS</span></td>
+                    <td class="jr-status"><span class="jr-pill is-done">Done</span></td>
+                    <td class="jr-note">TS_RFL_01 sempat ada kendala, sudah di-execute ulang</td>
+                    <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8080/archive-report/onboarding_Tags_iOS_2026-10-16_15%3A43.html#ios-TS-RFL-01"
+                        target="_blank" rel="noopener">Report ↗</a></td>
+                  </tr>
+                  <tr class="is-failed">
+                    <td class="jr-feat" rowspan="2">ETB Child POV Parent</td>
+                    <td class="jr-tag"><code>v6.5.6-onboarding</code><span class="jr-os">Android</span></td>
+                    <td class="jr-status"><span class="jr-pill is-failed">Failed</span></td>
+                    <td class="jr-note"><code>MavStateIndicatorLabel</code> not visible — sudah disampaikan</td>
+                    <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8080/archive-report/onboarding_Tags_Android_2026-10-19_11%3A47.html"
+                        target="_blank" rel="noopener">Report ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td class="jr-tag"><code>v6.5.7-onboarding</code><span class="jr-os">iOS</span></td>
+                    <td class="jr-status"><span class="jr-pill is-done">Done</span></td>
+                    <td class="jr-note jr-none">—</td>
+                    <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8082/job/testing-mobile/lastSuccessfulBuild/artifact/archive-report/"
+                        target="_blank" rel="noopener">Folder ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td class="jr-feat">Inbox</td>
+                    <td class="jr-tag"><code>v6.3.7-onboarding</code><span class="jr-os">iOS</span></td>
+                    <td class="jr-status"><span class="jr-pill is-done">Done</span></td>
+                    <td class="jr-note">TS_40 sempat error (pop up rating belum di-handle) — done setelah diulang 3×
+                      <a class="jr-ref" href="#evidence-2" onclick="goEvidence(event)">📎 Evidence 2
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 5v14" />
+                          <path d="m19 12-7 7-7-7" />
+                        </svg>
+                      </a>
+                    </td>
+                    <td class="jr-rep"><a class="jr-link"
+                        href="http://10.54.134.99:8080/archive-report/onboarding_Tags_iOS_2026-10-20_10%3A53.html"
+                        target="_blank" rel="noopener">Report ↗</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="jr-legend">
+              <span><span class="jr-pill is-done">Done</span> lolos dijalankan</span>
+              <span><span class="jr-pill is-failed">Failed</span> dijalankan, ada test yang gagal</span>
+              <span><span class="jr-pill is-blocked">Terkendala</span> belum bisa jalan karena data / CASA</span>
+            </p>
+
+            <h3 class="jr-ev-head">Evidence</h3>
+            <figure class="jr-ev" id="evidence-1" tabindex="-1">
+              <img src="assets/evidence/branch-wondr-multicurrency.jpg" width="800" height="608" loading="lazy"
+                alt="Pop-up di app: Kamu udah punya rekening tabungan wondr multicurrency. Saat ini kamu hanya bisa punya 1 rekening tabungan wondr multicurrency.">
+              <figcaption>
+                <span class="jr-ref">📎 Evidence 1</span>
+                <strong class="jr-ev-title">CIF test sudah punya rekening wondr multicurrency</strong>
+                <p>Saat buka tabungan, app menolak membuat rekening wondr multicurrency baru karena satu CIF hanya boleh
+                  punya satu. Akibatnya data test ini tidak bisa dipakai ulang.</p>
+                <dl class="jr-ev-meta">
+                  <div>
+                    <dt>Squad / fitur</dt>
+                    <dd><mark class="jr-hl">Savings / Branch</mark></dd>
+                  </div>
+                  <div>
+                    <dt>Tag</dt>
+                    <dd><code>v6.5.3-savings</code> iOS<br><code>v6.5.2-savings</code> Android</dd>
+                  </div>
+                </dl>
+              </figcaption>
+            </figure>
+
+            <figure class="jr-ev" id="evidence-2" tabindex="-1">
+              <img src="assets/evidence/inbox-app-store-rating.jpg" width="800" height="774" loading="lazy"
+                alt="Pop-up rating iOS: Enjoying Wondr UAT? Tap a star to rate it on the App Store, dengan lima bintang dan tombol Not Now.">
+              <figcaption>
+                <span class="jr-ref">📎 Evidence 2</span>
+                <strong class="jr-ev-title">Pop-up rating App Store muncul di tengah test</strong>
+                <p>Setelah transfer berhasil, iOS menampilkan pop-up “Enjoying Wondr UAT?”. Test belum menangani pop-up
+                  ini, jadi TS_40 sempat error. Setelah diulang 3×, hasilnya done.</p>
+                <dl class="jr-ev-meta">
+                  <div>
+                    <dt>Squad / fitur</dt>
+                    <dd><mark class="jr-hl is-done">Onboarding — journey / Inbox</mark></dd>
+                  </div>
+                  <div>
+                    <dt>Tag</dt>
+                    <dd><code>v6.3.7-onboarding</code> iOS</dd>
+                  </div>
+                </dl>
+              </figcaption>
+            </figure>
+          </section>
+
         </div>
 
       </div>
     </div>
 
-    <!-- ═══ SLIDE 1: BACKUP ═══ -->
-    <div class="slide" id="slide-1">
+    <!-- ═══ DISEMBUNYIKAN (dulu slide 1): BACKUP ═══ -->
+    <div class="slide" id="hidden-slide-1" hidden>
       <div class="slide-inner">
         <div class="slide-label lbl-red">⚠️ Step 1 — WAJIB SEBELUM APAPUN</div>
         <div class="slide-title">🛑 Backup File Lokal Squad</div>
@@ -4292,8 +5646,8 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 2: CHERRY-PICK ═══ -->
-    <div class="slide" id="slide-2">
+    <!-- ═══ DISEMBUNYIKAN (dulu slide 2): CHERRY-PICK ═══ -->
+    <div class="slide" id="hidden-slide-2" hidden>
       <div class="slide-inner">
         <div class="slide-label lbl-amber">🔄 Step 2 — Update File</div>
         <div class="slide-title">Replace atau tambahkan File dari Master</div>
@@ -4303,7 +5657,7 @@
         <!-- CHERRY-PICK CALLOUT -->
         <div style="display:flex;align-items:stretch;gap:0.9rem;margin-bottom:0.9rem;">
           <div
-            style="background:linear-gradient(135deg,#e8944a,#e2725b);border-radius:12px;padding:1rem 1.2rem;flex:1;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 16px rgba(232,148,74,0.25);">
+            style="background:#292524;border-radius:2rem;padding:1rem 1.2rem;flex:1;display:flex;flex-direction:column;justify-content:center;box-shadow:0 4px 20px -2px rgba(0,0,0,0.05);">
             <div
               style="font-size:0.65rem;font-weight:800;letter-spacing:0.12em;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:0.3rem;">
               Metode yang Digunakan</div>
@@ -4341,7 +5695,7 @@
             <li class="file-item"><span class="file-num">2</span><span
                 class="file-name">src/process_allure_attachments.js</span></li>
             <li class="file-item"
-              style="background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(5,150,105,0.04));border-color:rgba(5,150,105,0.25);">
+              style="background:linear-gradient(135deg,rgba(94,132,102,0.08),rgba(94,132,102,0.04));border-color:rgba(94,132,102,0.25);">
               <span class="file-num">3</span>
               <div style="flex:1;">
                 <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.2rem;">
@@ -4364,8 +5718,8 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 2B: CHERRY-PICK WITH COMMIT ID ═══ -->
-    <div class="slide" id="slide-3">
+    <!-- ═══ DISEMBUNYIKAN (dulu slide 3): CHERRY-PICK WITH COMMIT ID ═══ -->
+    <div class="slide" id="hidden-slide-3" hidden>
       <div class="slide-inner">
         <div class="slide-label lbl-amber">🔄 Step 3 — Alternatif: Cherry-pick by Commit ID</div>
         <div class="slide-title">Cherry-pick dengan Commit ID</div>
@@ -4411,10 +5765,10 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 4: .ENV ═══ -->
-    <div class="slide" id="slide-4">
+    <!-- ═══ SLIDE 1: .ENV ═══ -->
+    <div class="slide" id="slide-1">
       <div class="slide-inner">
-        <div class="slide-label lbl-indigo">📝 Step 4 — Konfigurasi</div>
+        <div class="slide-label lbl-indigo">📝 Step 1 — Konfigurasi</div>
         <div class="slide-title">Perubahan pada <code
             style="-webkit-text-fill-color:var(--indigo);font-size:1.4rem;">.env</code></div>
         <p class="slide-sub">Ada penyesuaian struktur <code>.env</code>. Template kosong tersedia di:
@@ -4477,7 +5831,7 @@
                     - <strong>sharepoint</strong> : Buka Upload Queue Dashboard<br>
                     - <strong>both</strong> : Buka keduanya (Allure &amp; Dashboard)<br>
                     - <strong
-                      style="background:linear-gradient(135deg,rgba(5,150,105,0.15),rgba(5,150,105,0.08));padding:0.15rem 0.35rem;border-radius:4px;">custom-report
+                      style="background:linear-gradient(135deg,rgba(94,132,102,0.15),rgba(94,132,102,0.08));padding:0.15rem 0.35rem;border-radius:4px;">custom-report
                       <span class="badge badge-new" style="margin-left:0.2rem;">NEW</span></strong> : Buka report.html
                     hasil generate_debug_report.js (+ report.pdf)<br>
                     - <strong>none</strong> : Jangan buka otomatis
@@ -4488,13 +5842,94 @@
           </table>
         </div>
 
+        <div class="divider" style="margin-top:1.2rem;"><span>Contoh isi .env lengkap</span></div>
+
+        <p class="slide-sub" style="margin-bottom:0.6rem;">Urutan dan nama variabel mengikuti <code>.env</code> terbaru.
+          Ganti bagian berwarna kuning dengan nilai asli, dan sesuaikan nilai yang ditandai per mesin / per squad.</p>
+
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-amber"></div>
+            <div class="dot dot-green"></div>
+            <span>.env</span>
+          </div>
+          <div class="terminal-body">
+            <div class="yml-code">
+              <span class="y-key"># Jira</span><br>
+              <span class="y-key">JIRA_VERSION_NAME=</span><span class="y-val">Regression R6</span><br>
+              <span class="y-key">JIRA_CYCLE_NAME=</span><span class="y-val">Feature R6.2</span><br>
+              <span class="y-key">AUTO_UPLOAD_JIRA=</span><span class="y-val">0</span><br>
+              <br>
+              <span class="y-key"># Android</span><br>
+              <span class="y-key">APP_ID_ANDROID=</span><span class="y-val">id.bni.wondr.uat</span><br>
+              <span class="y-key">DEVICE_NAME_ANDROID=</span><span class="y-val">jenkins-andro</span><br>
+              <span class="y-key">DEVICE_ID_ANDROID=</span><span class="y-val">emulator-5554</span><span class="y-note"># sesuaikan per mesin</span><br>
+              <span class="y-key">PLATFORM_ANDROID=</span><span class="y-val">Android</span><br>
+              <br>
+              <span class="y-key"># iOS</span><br>
+              <span class="y-key">APP_ID_IOS=</span><span class="y-val">id.bni.wondr.uat2</span><br>
+              <span class="y-key">DEVICE_NAME_IOS=</span><span class="y-val">jenkins-ios</span><br>
+              <span class="y-key">DEVICE_ID_IOS=</span><span class="y-val">73227968-E838-4C8A-9A06-2E5F449389B0</span><span class="y-note"># sesuaikan per mesin</span><br>
+              <span class="y-key">PLATFORM_IOS=</span><span class="y-val">iOS</span><br>
+              <br>
+              <span class="y-key"># Akun test — sesuaikan per squad</span><br>
+              <span class="y-key">CIF=</span><span class="y-val">10001192673</span><br>
+              <span class="y-key">CIF_IOS=</span><span class="y-val">10001391339</span><br>
+              <span class="y-key">CIF_ANDROID=</span><span class="y-val">10001192673</span><br>
+              <span class="y-key">USER_ID_IOS=</span><span class="y-val">50d5781c-5ff1-4d09-b1</span><br>
+              <span class="y-key">USER_ID_ANDROID=</span><span class="ph">&lt;user id milik CIF_ANDROID&gt;</span><br>
+              <br>
+              <span class="y-key"># Shard &amp; suite</span><br>
+              <span class="y-key">DEVICE_NAME_0=</span><span class="y-val">ikkyshard</span><br>
+              <span class="y-key">DEVICE_NAME_1=</span><span class="y-val">Pixel_7_Pro_API_34</span><br>
+              <span class="y-key">FOLDER_SUITE=</span><span class="y-val">continuous-integration</span><br>
+              <br>
+              <span class="y-key"># Evidence &amp; report</span><br>
+              <span class="y-key">EVIDENCE_PATH=</span><span class="ph">&lt;path folder reports/ di mesin ini&gt;</span><br>
+              <span class="y-key">EVIDENCE_PATH_FOLDER=</span><span class="y-val">TVT_DC_KNG</span><br>
+              <span class="y-key">PORT=</span><span class="y-val">4301</span><br>
+              <span class="y-key">OPEN_REPORT_TARGET=</span><span class="y-val">custom-report</span><br>
+              <br>
+              <span class="y-key"># Oracle DB</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST1=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <span class="y-key">ORACLE_DB_USERNAME_TEST2=</span><span class="ph">&lt;username_kamu&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_TEST2=</span><span class="ph">&lt;password_kamu&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST2=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key"># SharePoint / Azure</span><br>
+              <span class="y-key">SHAREPOINT_TOKEN=</span><span class="y-val">Bearer </span><span class="ph">&lt;token lengkap&gt;</span><br>
+              <span class="y-key">AZURE_CLIENT_ID=</span><span class="ph">&lt;client id&gt;</span><br>
+              <span class="y-key">AZURE_CLIENT_SECRET=</span><span class="ph">&lt;client secret&gt;</span><br>
+              <span class="y-key">SHAREPOINT_SITE_ID=</span><span class="ph">&lt;site id&gt;</span><br>
+              <span class="y-key">SHAREPOINT_DRIVE_ID=</span><span class="ph">&lt;drive id&gt;</span><br>
+              <span class="y-key">SHAREPOINT_SPRINT_FOLDER=</span><span class="y-val">R6 Sprint</span><br>
+              <span class="y-key">SHAREPOINT_FOLDER=</span><span class="y-val">onboarding</span><br>
+              <span class="y-key">SHAREPOINT_SQUAD_FOLDER=</span><span class="y-val">Squad - Wealth+Lifestyle</span><br>
+              <br>
+              <span class="y-key"># Redis — format redis://user:password@host:port</span><br>
+              <span class="y-key">REDIS_URL=</span><span class="ph">&lt;redis url&gt;</span><br>
+              <span class="y-key">REDIS_URL_TEST1=</span><span class="ph">&lt;redis url&gt;</span><br>
+              <span class="y-key">REDIS_URL_TEST2=</span><span class="ph">&lt;redis url&gt;</span><br>
+              <span class="y-key">REDIS_URL_VIDEO_UPLOAD=</span><span class="ph">&lt;redis url&gt;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="how-note is-warn">
+          <span>⚠️</span>
+          <span>Simpan <code>.env</code> dengan line ending <strong>LF</strong> (bukan CRLF). Token, secret, password,
+            URL Redis, dan alamat database sengaja tidak ditulis di panduan ini — isi dengan nilai asli milik tim, dan
+            jangan di-commit.</span>
+        </div>
+
       </div>
     </div>
 
-    <!-- ═══ SLIDE 5: RUNNING ═══ -->
-    <div class="slide" id="slide-5">
+    <!-- ═══ SLIDE 2: RUNNING ═══ -->
+    <div class="slide" id="slide-2">
       <div class="slide-inner">
-        <div class="slide-label lbl-emerald">🚀 Step 5 — Running</div>
+        <div class="slide-label lbl-emerald">🚀 Step 2 — Running</div>
         <div class="slide-title">Mode Running Test</div>
         <p class="slide-sub">Klik mode di bawah untuk melihat command yang digunakan:</p>
 
@@ -4534,7 +5969,7 @@
             <h4>🔗 Running By Tag</h4>
             <p>Running semua TS di device yang sama</p>
             <div
-              style="font-size:0.7rem;background:rgba(217,119,6,0.12);border:1px solid rgba(217,119,6,0.25);border-radius:6px;padding:0.5rem;margin-top:0.4rem;color:var(--text-muted);">
+              style="font-size:0.7rem;background:rgba(255,183,178,0.22);border:1px solid rgba(184,90,82,0.28);border-radius:6px;padding:0.5rem;margin-top:0.4rem;color:var(--text-muted);">
               ⚠️ Mode ini akan <strong>check semua file</strong> sebelum dijalankan — pastikan <strong>ALL SCRIPTS tanpa
                 error</strong>
             </div>
@@ -4556,10 +5991,10 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 5B: RUNNING BY TAGS ═══ -->
-    <div class="slide" id="slide-6">
+    <!-- ═══ SLIDE 3: RUNNING BY TAGS ═══ -->
+    <div class="slide" id="slide-3">
       <div class="slide-inner">
-        <div class="slide-label lbl-emerald">🏷️ Step 6 — Running By Tags</div>
+        <div class="slide-label lbl-emerald">🏷️ Step 3 — Running By Tags</div>
         <div class="slide-title">Include Tags &amp; Exclude Tags</div>
         <p class="slide-sub">Menjalankan test berdasarkan tag — dipakai lewat config squad maupun running by tag.</p>
 
@@ -4660,8 +6095,8 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 7: CONFIG YML ═══ -->
-    <div class="slide" id="slide-7">
+    <!-- ═══ DISEMBUNYIKAN (dulu slide 7): CONFIG YML ═══ -->
+    <div class="slide" id="hidden-slide-7" hidden>
       <div class="slide-inner">
         <div class="slide-label lbl-teal">⚙️ Step 7 — Referensi Config</div>
         <div class="slide-title">Penamaan Config YML</div>
@@ -4719,17 +6154,17 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 7: PACKAGE.JSON ═══ -->
-    <div class="slide" id="slide-8">
+    <!-- ═══ SLIDE 4: PACKAGE.JSON ═══ -->
+    <div class="slide" id="slide-4">
       <div class="slide-inner">
-        <div class="slide-label lbl-indigo">📦 Step 8 — Dependencies</div>
+        <div class="slide-label lbl-indigo">📦 Step 4 — Dependencies</div>
         <div class="slide-title">Update <code
             style="-webkit-text-fill-color:var(--indigo);font-size:1.4rem;">package.json</code></div>
         <p class="slide-sub">Silakan copy konfigurasi <code>package.json</code> terbaru di bawah ini untuk memastikan
           semua dependencies sinkron.</p>
 
         <div
-          style="position: relative; background: #120b07; border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
+          style="position: relative; background: #292524; border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
           <div
             style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); padding: 0.55rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 10px 10px 0 0;">
             <div style="display: flex; gap: 0.4rem; align-items: center;">
@@ -4740,7 +6175,7 @@
                 style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.3); margin-left: 0.5rem;">package.json</span>
             </div>
             <button onclick="copyPackageJson(this)"
-              style="background: var(--indigo); border: none; color: white; border-radius: 6px; padding: 0.3rem 0.8rem; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s;">📋
+              style="background: var(--indigo); border: none; color: white; border-radius: 6px; padding: 0.3rem 0.8rem; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: background 0.2s;">📋
               Copy All</button>
           </div>
           <pre id="packageJsonContent"
@@ -4811,10 +6246,10 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 8: GIT TAGGING ═══ -->
-    <div class="slide" id="slide-9">
+    <!-- ═══ SLIDE 5: GIT TAGGING ═══ -->
+    <div class="slide" id="slide-5">
       <div class="slide-inner">
-        <div class="slide-label lbl-emerald">🏷️ Step 9 — Git Tagging</div>
+        <div class="slide-label lbl-emerald">🏷️ Step 5 — Git Tagging</div>
         <div class="slide-title">Push with Tag in Git</div>
 
         <div class="two-col" style="margin-bottom:1rem;">
@@ -4873,8 +6308,8 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 9: HOW TO USE JENKINS ═══ -->
-    <div class="slide" id="slide-10">
+    <!-- ═══ DISEMBUNYIKAN (dulu slide 10): HOW TO USE JENKINS ═══ -->
+    <div class="slide" id="hidden-slide-10" hidden>
       <div class="slide-inner">
         <div class="slide-label lbl-indigo">⚙️ Step 10 — Jenkins Execution</div>
         <div class="slide-title">
@@ -5075,15 +6510,15 @@
             <span>🏷️</span>
             <span><strong>TAG_NAME</strong> hanya aktif kalau <strong>Run_By</strong> diisi mode
               <code>Tags_*</code>. Daftar tag-nya diambil dari tag Git yang Anda push di
-              <a href="#" onclick="goTo(9); return false;">Step 9 — Push with Tag in Git →</a></span>
+              <a href="#" onclick="goTo(5); return false;">Step 5 — Push with Tag in Git →</a></span>
           </div>
         </div>
       </div>
     </div>
 
 
-    <!-- ═══ SLIDE 10: DEVICE LIST MAC MINI ═══ -->
-    <div class="slide" id="slide-11">
+    <!-- ═══ SLIDE 6: DEVICE LIST MAC MINI ═══ -->
+    <div class="slide" id="slide-6">
       <div class="slide-inner">
         <div class="slide-label lbl-amber">Device List Mac Mini</div>
         <div class="slide-title">📱 Daftar Device untuk .env</div>
@@ -5302,8 +6737,8 @@
       </div>
     </div>
 
-    <!-- ═══ SLIDE 11: DEVICE COMMANDS ═══ -->
-    <div class="slide" id="slide-12">
+    <!-- ═══ SLIDE 7: DEVICE COMMANDS ═══ -->
+    <div class="slide" id="slide-7">
       <div class="slide-inner">
         <div class="slide-label lbl-emerald">Device Commands</div>
         <div class="slide-title">💻 Menyalakan &amp; Mematikan Device</div>
@@ -5346,7 +6781,7 @@
           </span>
         </a>
 
-        <!-- ── LANGKAH 1: SSH ── -->
+        <!-- ── LANGKAH 1: SSH ──
         <div class="how-step">
           <div class="how-head">
             <div class="how-num">1</div>
@@ -5383,207 +6818,8 @@
           </div>
         </div>
 
-        <!-- ── LANGKAH 2: CEK ── -->
-        <div class="how-step">
-          <div class="how-head">
-            <div class="how-num">2</div>
-            <h4>🔍 Cek device mana yang sedang menyala</h4>
-          </div>
-          <p class="how-why">
-            Selalu cek dulu sebelum menyalakan device baru — supaya tidak dobel dan tidak melebihi kapasitas Mac Mini.
-            Dari langkah ini pula Anda mendapatkan nilai yang dibutuhkan di Langkah 3 &amp; 4.
-          </p>
-          <div class="plat-grid">
-            <div>
-              <div class="plat-head">🍏 iOS — Simulator</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                  <div class="cmd-note"># simulator yang sedang nyala — beserta UDID-nya</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl list devices booted</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># semua simulator yang tersedia (nyala maupun mati)</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl list devices</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="plat-head">🤖 Android — Emulator</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                 
-
-                  <div class="cmd-note"># Device-id emulator berdasarkan squad name</div>
-                  <div class="cmd-line has-script">
-                    <div class="cmd-scroll is-script">for device in $(adb devices | grep "emulator" | awk '{print $1}'); do
-  sleep 1
-  avd_name=$(adb -s $device shell getprop ro.boot.qemu.avd_name)
-  echo "$device: $avd_name"
-done</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># daftar semua AVD yang tersedia</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>emulator -list-avds</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="how-note">
-            <span>📝</span>
-            <span><strong>Catat hasilnya.</strong> Dari iOS Anda dapat <code>UDID</code>; dari Android Anda dapat
-              <code>AVD Name</code> (mis. <code>squad1</code>) dan <code>Emulator ID</code> (mis.
-              <code>emulator-5554</code>). Nilai-nilai inilah yang dipakai di Langkah 3 &amp; 4.</span>
-          </div>
-        </div>
-
-        <!-- ── LANGKAH 3: BOOTING ── -->
-        <div class="how-step is-boot">
-          <div class="how-head">
-            <div class="how-num">3</div>
-            <h4>🚀 Menyalakan device (booting)</h4>
-          </div>
-          <p class="how-why">
-            Ganti bagian <strong style="color:#b45309;">berwarna kuning</strong> dengan nilai asli dari Langkah 2 —
-            <strong>tanda kurung sikunya ikut dihapus</strong>. Contoh: <code>&lt;AVD_NAME&gt;</code> →
-            <code>squad1</code>.
-          </p>
-          <div class="plat-grid">
-            <div>
-              <div class="plat-head">🍏 iOS — pakai UDID</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl boot <span
-                        class="ph">&lt;UDID&gt;</span></div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># contoh setelah diisi:</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl boot
-                      A1B2C3D4-5E6F-7A8B-9C0D-1E2F3A4B5C6D</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="plat-head">🤖 Android — pakai AVD Name</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>emulator -avd <span
-                        class="ph">&lt;AVD_NAME&gt;</span> &amp;</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># contoh setelah diisi:</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>emulator -avd squad1 &amp;</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># kalau muncul "command not found", pakai path lengkapnya:</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>~/Library/Android/sdk/emulator/emulator -avd
-                      <span class="ph">&lt;AVD_NAME&gt;</span> &amp;</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="how-note">
-            <span>💡</span>
-            <span>Tanda <code>&amp;</code> di akhir command Android berarti emulator berjalan di belakang layar,
-              sehingga terminal Anda tetap bisa dipakai. Tunggu sampai layar HP muncul — booting butuh sekitar 30–60
-              detik.</span>
-          </div>
-        </div>
-
-        <!-- ── LANGKAH 4: MEMATIKAN ── -->
-        <div class="how-step is-kill">
-          <div class="how-head">
-            <div class="how-num">4</div>
-            <h4>🛑 Mematikan device (shutdown / kill)</h4>
-          </div>
-          <p class="how-why">
-            Selalu matikan device yang sudah tidak dipakai — device yang menumpuk membuat Mac Mini berat dan test gagal.
-            <strong>Pakai cara normal dulu</strong>; cara paksa hanya untuk device yang nge-<em>hang</em>.
-          </p>
-          <div class="plat-grid">
-            <div>
-              <div class="plat-head">🍏 iOS — Simulator</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                  <div class="cmd-note"># cara normal — matikan satu simulator</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl shutdown <span
-                        class="ph">&lt;UDID&gt;</span></div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># matikan semua simulator sekaligus</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>xcrun simctl shutdown all</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="plat-head">🤖 Android — Emulator</div>
-              <div class="terminal term-mini">
-                <div class="terminal-body">
-                  <div class="cmd-note"># cara normal — pakai Emulator ID dari adb devices</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>adb -s <span
-                        class="ph">&lt;EMULATOR_ID&gt;</span> emu kill</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                  <div class="cmd-note"># cara paksa — hanya kalau cara normal gagal</div>
-                  <div class="cmd-line">
-                    <div class="cmd-scroll"><span class="prompt">$</span>pkill -9 -f "emulator -avd <span
-                        class="ph">&lt;AVD_NAME&gt;</span>"</div>
-                    <button class="cmd-copy" onclick="copyRow(this)">📋 copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="how-note is-warn">
-            <span>⚠️</span>
-            <span><strong>Kenapa cara paksa jadi pilihan terakhir?</strong> <code>pkill -9</code> mematikan device
-              seketika tanpa proses shutdown, sehingga data di dalam device bisa tidak tersimpan dan device berpotensi
-              rusak saat dinyalakan lagi.</span>
-          </div>
-        </div>
-
-        <!-- ── KAPASITAS ── -->
-        <div class="card card-warning" style="margin: 0 auto 1.5rem; text-align: left; padding:1.1rem 1.2rem;">
-          <h4 style="margin-bottom:0.25rem; color:var(--text);">📊 Batas Maksimal Device di Mac Mini</h4>
-          <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.7rem;">
-            Melebihi angka ini membuat Mac Mini kewalahan dan test gagal tanpa sebab yang jelas.
-          </p>
-          <ul style="font-size:0.8rem; color:var(--text-muted); margin-left:1.3rem; line-height:1.6;">
-            <li style="margin-bottom:0.35rem;"><strong>Simulator / Emulator:</strong> maksimal <strong>3 device
-                virtual</strong> (mis. 2 iOS + 1 Android, atau 2 Android + 1 iOS)</li>
-            <li><strong>Real Device:</strong> 4–8 device fisik</li>
-          </ul>
-          <div class="how-note" style="margin-top:0.7rem;">
-            <span>🧯</span>
-            <span>Sebelum menjalankan pipeline Jenkins mobile, cek dulu berapa pipeline yang sedang berjalan —
-              jangan sampai total device melebihi batas di atas.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ SLIDE 12: REPORT ═══ -->
-    <div class="slide" id="slide-13">
+    <-- ═══ SLIDE 8: REPORT ═══ -->
+    <div class="slide" id="slide-8">
       <div class="slide-inner">
         <div class="slide-label lbl-teal">📊 Report</div>
         <div class="slide-title">📊 Melihat Report Hasil Test</div>
@@ -5669,7 +6905,7 @@ done</div>
           <div class="how-note">
             <span>🔎</span>
             <span>Contoh pada tampilan di atas: build <code>#291_v6.2.0-rnd_Tags_iOS</code> di project
-              <strong>testing-mobile</strong>. Tanda <strong style="color:#059669;">✓ hijau</strong> di samping nama
+              <strong>testing-mobile</strong>. Tanda <strong style="color:#5E8466;">✓ hijau</strong> di samping nama
               build berarti pipeline-nya sukses — kalau merah, cek <strong>Console Output</strong> dulu sebelum
               membaca report.</span>
           </div>
@@ -5798,13 +7034,13 @@ done</div>
             Cara di atas berlaku untuk report hasil <strong>Jenkins</strong>. Untuk running di lokal, atur
             <code>OPEN_REPORT_TARGET=custom-report</code> di file <code>.env</code> agar
             <code>report.html</code> + <code>report.pdf</code> terbuka sendiri setelah test selesai —
-            <a href="#" onclick="goTo(4); return false;">lihat detailnya di Step 4 — Update .env →</a>
+            <a href="#" onclick="goTo(1); return false;">lihat detailnya di Step 1 — Update .env →</a>
           </p>
         </div>
       </div>
     </div>
 
-    <div class="slide" id="slide-14">
+    <div class="slide" id="slide-9">
       <div class="slide-inner">
         <div class="slide-label lbl-indigo">CIF List</div>
         <div class="slide-title">🆔 List CIF per Squad</div>
@@ -5995,22 +7231,22 @@ done</div>
   </div><!-- end slides-wrapper -->
 
   <script>
-    const TOTAL = 15;
+    const TOTAL = 10;
     let cur = 0;
 
     // Judul tiap halaman — dipakai untuk daftar isi, tooltip dot, dan label tombol.
     const SLIDES = [
       { title: '📢 Update Maestro Automation', sub: 'Cover — Maverick' },
-      { title: '🛑 Backup File Lokal Squad', sub: 'Step 1 — Wajib sebelum apapun' },
-      { title: '🔄 Replace / Tambah File dari Master', sub: 'Step 2 — Update file' },
-      { title: '🍒 Cherry-pick by Commit ID', sub: 'Step 3 — Alternatif update' },
-      { title: '📝 Perubahan pada .env', sub: 'Step 4 — Konfigurasi' },
-      { title: '🚀 Mode Running Test', sub: 'Step 5 — Running' },
-      { title: '🏷️ Include Tags & Exclude Tags', sub: 'Step 6 — Running by tags' },
-      { title: '⚙️ Penamaan Config YML', sub: 'Step 7 — Referensi config' },
-      { title: '📦 Update package.json', sub: 'Step 8 — Dependencies' },
-      { title: '🏷️ Push with Tag in Git', sub: 'Step 9 — Git tagging' },
-      { title: '⚙️ How to Use Jenkins', sub: 'Step 10 — Jenkins execution' },
+      // disembunyikan: { title: '🛑 Backup File Lokal Squad', sub: 'Step 1 — Wajib sebelum apapun' },
+      // disembunyikan: { title: '🔄 Replace / Tambah File dari Master', sub: 'Step 2 — Update file' },
+      // disembunyikan: { title: '🍒 Cherry-pick by Commit ID', sub: 'Step 3 — Alternatif update' },
+      { title: '📝 Perubahan pada .env', sub: 'Step 1 — Konfigurasi' },
+      { title: '🚀 Mode Running Test', sub: 'Step 2 — Running' },
+      { title: '🏷️ Include Tags & Exclude Tags', sub: 'Step 3 — Running by tags' },
+      // disembunyikan: { title: '⚙️ Penamaan Config YML', sub: 'Step 7 — Referensi config' },
+      { title: '📦 Update package.json', sub: 'Step 4 — Dependencies' },
+      { title: '🏷️ Push with Tag in Git', sub: 'Step 5 — Git tagging' },
+      // disembunyikan: { title: '⚙️ How to Use Jenkins', sub: 'Step 10 — Jenkins execution' },
       { title: '📱 Daftar Device untuk .env', sub: 'Device list Mac Mini' },
       { title: '💻 Menyalakan & Mematikan Device', sub: 'Device commands' },
       { title: '📊 Melihat Report Hasil Test', sub: 'Report' },
@@ -6314,7 +7550,7 @@ done</div>
     (function trackTopbarHeight() {
       const bar = document.querySelector('.topbar');
       const apply = () => document.documentElement.style
-        .setProperty('--topbar-h', bar.getBoundingClientRect().height + 'px');
+        .setProperty('--topbar-h', bar.getBoundingClientRect().bottom + 'px');
       apply();
       window.addEventListener('resize', apply);
       if (window.ResizeObserver) new ResizeObserver(apply).observe(bar);
@@ -6476,6 +7712,21 @@ done</div>
           btn.textContent = '📋 copy';
         }, 1500);
       });
+    }
+
+    // Penanda "Evidence N" di tabel cover → gulir ke kartunya, lalu kartu menyala
+    // sebentar supaya jelas di mana mendarat. Hash URL tidak diubah karena dipakai
+    // untuk nomor halaman (#slide-N).
+    function goEvidence(e) {
+      e.preventDefault();
+      const card = document.getElementById(e.currentTarget.getAttribute('href').slice(1));
+      if (!card) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      card.focus({ preventScroll: true });
+      card.classList.add('is-target');
+      clearTimeout(card._targetTimer);
+      card._targetTimer = setTimeout(() => card.classList.remove('is-target'), 1800);
     }
 
     // Perbesar screenshot. Dipanggil dari onclick pada .shot dan slide Jenkins.
