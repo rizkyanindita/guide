@@ -75,6 +75,24 @@
       /* Terminal tetap gelap — stone #292524 */
       --terminal-bg: #292524;
 
+      /* ─── TIPOGRAFI ───
+         Skala dipakai di release notes; bagian lain menyusul.
+         display 32 · title 22 · subtitle 18 · body 16 · small 14 · micro 12 */
+      --fs-display: 2rem;
+      --fs-title: 1.375rem;
+      --fs-subtitle: 1.125rem;
+      --fs-body: 1rem;
+      --fs-small: 0.875rem;
+      --fs-micro: 0.75rem;
+      --fw-regular: 400;
+      --fw-medium: 500;
+      --fw-bold: 700;
+      --lh-heading: 1.3;
+      --lh-body: 1.6;
+
+      /* Teks kode inline: 5.66:1 di latar kode, 5.84:1 di kotak krem */
+      --code-ink: #9E463F;
+
       --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
       --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
       --ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
@@ -1317,7 +1335,7 @@
       border: 1px solid var(--border);
       padding: 0.15em 0.45em;
       border-radius: 5px;
-      color: var(--indigo);
+      color: var(--code-ink);
     }
 
     /* ─── FILE LIST ─── */
@@ -4398,7 +4416,7 @@
     code {
       background: var(--surface-2);
       border-color: var(--border);
-      color: var(--amber);
+      color: var(--code-ink);
     }
 
     kbd {
@@ -4798,15 +4816,15 @@
 
     .jr-title {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      font-weight: 600;
+      font-size: clamp(1.5rem, 4vw, var(--fs-display));
+      font-weight: var(--fw-bold);
       line-height: 1.15;
       color: var(--ink);
     }
 
     .jr-sub {
       margin-top: 0.25rem;
-      font-size: 0.9rem;
+      font-size: var(--fs-small);
       color: var(--text-muted);
     }
 
@@ -5139,57 +5157,67 @@
 
     /* ─── RELEASE NOTES (cover) ───
        Bingkai kartunya tetap di tempat; isinya yang bergeser. Satu halaman
-       per versi dalam track scroll-snap, terbaru paling depan, versi lama di
-       kanannya. Urutan, badge "Terbaru", titik, dan penghitung diatur JS
-       (initReleaseNotes), jadi rilis baru cukup ditambah satu <article>. */
+       per topik dalam track scroll-snap. Segmented control dibuat JS
+       (initReleaseNotes) dari data-title tiap <article>. */
     .rn {
       width: 100%;
       margin-top: 0.75rem;
       text-align: left;
     }
 
-    .rn-nav {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.15rem;
-      padding: 0.25rem;
+    /* Pemilih topik: segmented control, bukan titik halaman — Maestro dan
+       AI & Express API setara, bukan urutan. Thumb putih mengikuti posisi geser
+       kartu (--pos diset JS), jadi klik dan swipe terlihat sebagai satu gerakan. */
+    .rn-seg {
+      --n: 2;
+      --pad: 0.25rem;
+      position: relative;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      margin: 0 0 0.9rem;
+      padding: var(--pad);
+      border-radius: 999px;
+      background: #EFE9E2;
+      border: 1px solid var(--border-soft);
+    }
+
+    .rn-seg-thumb {
+      position: absolute;
+      top: var(--pad);
+      bottom: var(--pad);
+      left: var(--pad);
+      width: calc((100% - 2 * var(--pad)) / var(--n));
       border-radius: 999px;
       background: #fff;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-xs);
+      box-shadow: 0 1px 2px rgba(41, 37, 36, 0.08), 0 3px 10px rgba(41, 37, 36, 0.06);
+      transform: translateX(calc(var(--pos, 0) * 100%));
     }
 
-    .rn-btn {
-      display: grid;
-      place-items: center;
-      width: 2.1rem;
-      height: 2.1rem;
-      padding: 0;
+    .rn-seg-btn {
+      position: relative;
+      min-height: 2.75rem;
+      padding: 0.45rem 1rem;
       border: none;
-      border-radius: 50%;
+      border-radius: 999px;
       background: transparent;
-      color: var(--ink);
+      font: inherit;
+      font-size: var(--fs-body);
+      font-weight: var(--fw-medium);
+      line-height: 1.25;
+      text-wrap: balance;
+      color: #5F5853;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: color 0.2s ease;
     }
 
-    .rn-btn:hover:not(:disabled) {
-      background: var(--amber-pale);
-      color: var(--amber);
+    .rn-seg-btn:hover {
+      color: var(--ink);
     }
 
-    .rn-btn:disabled {
-      color: var(--border-strong);
-      cursor: default;
-    }
-
-    .rn-count {
-      min-width: 2.8rem;
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      font-variant-numeric: tabular-nums;
+    .rn-seg-btn[aria-selected="true"] {
+      font-weight: var(--fw-bold);
+      color: var(--ink);
     }
 
     .rn-frame {
@@ -5251,24 +5279,14 @@
       color: var(--text-muted);
     }
 
-    .rn-latest {
-      margin-left: auto;
-      padding: 0.2rem 0.7rem;
-      border-radius: 999px;
-      background: var(--sage);
-      color: #3F6B49;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
     .rn-sec {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       margin: 0 0 1.1rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.3;
+      font-size: var(--fs-body);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-heading);
       color: var(--ink);
       letter-spacing: 0;
     }
@@ -5311,17 +5329,17 @@
     }
 
     .rn-body h4 {
-      margin: 0.15rem 0 0.25rem;
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.35;
+      margin: 0.05rem 0 0.35rem;
+      font-size: var(--fs-title);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-heading);
       color: var(--ink);
     }
 
     .rn-body p {
       margin: 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
       color: var(--text-muted);
     }
 
@@ -5379,15 +5397,25 @@
       border: 1px solid #F3D9A8;
     }
 
+    /* Tanpa "Yang baru" di bawahnya, jarak bawah tidak perlu */
+    .rn-warn:last-child {
+      margin-bottom: 0;
+    }
+
     .rn-warn .rn-sec {
       margin-bottom: 0.2rem;
-      font-size: 1.15rem;
       color: #7A4E0E;
     }
 
     .rn-warn .rn-sec svg {
       flex: none;
       color: #C98A1B;
+    }
+
+    .rn-empty {
+      margin: 0.5rem 0 1rem;
+      font-size: var(--fs-body);
+      color: #8A5A12;
     }
 
     /* Tiap poin dipisah garis tipis dan jarak lega, supaya bisa dibahas satu
@@ -5410,7 +5438,7 @@
     }
 
     .rn-warn .rn-body p {
-      font-size: 0.93rem;
+      font-size: var(--fs-body);
       color: var(--text);
     }
 
@@ -5420,8 +5448,8 @@
       gap: 0.65rem;
       margin: 0.55rem 0 0;
       padding-left: 1.1rem;
-      font-size: 0.93rem;
-      line-height: 1.6;
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
       color: var(--text);
     }
 
@@ -5432,14 +5460,30 @@
     /* Catatan kecil di bawah satu item "Yang baru" */
     .rn-body .rn-note {
       margin-top: 0.65rem;
-      font-size: 0.85rem;
+      font-size: var(--fs-small);
       color: var(--text-light);
     }
 
     /* Di kotak peringatan: cokelat supaya kontrasnya cukup di latar krem */
     .rn-warn .rn-body .rn-note {
-      font-size: 0.85rem;
-      color: #8A5A12;
+      font-size: var(--fs-small);
+      color: #6B645F;
+    }
+
+    /* Kode inline di release notes ikut ukuran teks di sekitarnya */
+    .rn code {
+      font-size: 0.875em;
+    }
+
+    /* Nama file di bar terminal: 7.13:1 (sebelumnya 2.93:1) */
+    .rn .terminal-bar span {
+      margin-left: 0;
+      font-size: var(--fs-micro);
+      color: #A8A29E;
+    }
+
+    .rn .terminal-bar .dot {
+      display: none;
     }
 
     /* Contoh YAML — blok terminal yang sama dengan slide lain, selebar isinya
@@ -5459,7 +5503,7 @@
 
     .rn-warn a {
       color: #8A5A12;
-      font-weight: 600;
+      font-weight: var(--fw-medium);
       text-decoration: underline;
       text-decoration-color: #E2B866;
       text-underline-offset: 3px;
@@ -5498,81 +5542,185 @@
       max-width: 100%;
       height: 200px;
       object-fit: cover;
-      object-position: 50% 67%;
+      object-position: var(--focus, 50% 67%);
     }
 
-    .rn-shot span {
+    .rn-shot > span,
+    .rn-shot > figcaption {
       display: block;
       padding: 0.35rem 0.7rem;
       border-top: 1px solid #F3D9A8;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #8A5A12;
+      font-size: var(--fs-small);
+      font-weight: var(--fw-regular);
+      color: var(--text-muted);
       text-align: left;
     }
 
+    /* Status hasil di atas screenshot: hijau = perlindungan bekerja */
+    .rn-shot .rn-proof {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-top: 0;
+      border-bottom: 1px solid #D5E2D7;
+      background: var(--sage);
+      font-weight: var(--fw-bold);
+      line-height: 1.35;
+      color: #2F5A3A;
+    }
+
+    .rn-proof svg {
+      flex: none;
+      color: #5E8466;
+    }
+
+    .rn-proof code {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+    }
+
+    /* Tautan ke dokumen lengkap (PDF) — dibuka di tab baru, bukan diunduh */
+    .rn-warn a.rn-doc {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.55rem;
+      min-height: 2.75rem;
+      margin-top: 0.8rem;
+      padding: 0.5rem 1.1rem 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid #E2B866;
+      font-size: var(--fs-body);
+      font-weight: var(--fw-bold);
+      line-height: 1.3;
+      color: #7A4E0E;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .rn-warn a.rn-doc:hover {
+      background: #FBEBCB;
+      border-color: #C9973F;
+      color: #7A4E0E;
+    }
+
+    .rn-doc svg {
+      flex: none;
+      color: #C98A1B;
+    }
+
+    .rn-doc-meta {
+      font-size: var(--fs-small);
+      font-weight: var(--fw-regular);
+      color: #8A5A12;
+    }
+
+    /* Satu alat AI: konfigurasi di kiri, evidence di kanan; turun ke bawah
+       kalau tidak muat */
+    /* Satu blok per alat, tanpa panel: nama alat + garis tipis di bawahnya
+       jadi header. Jarak antar-alat jauh lebih besar dari jarak di dalamnya,
+       jadi pengelompokannya dibawa oleh jarak, bukan kotak. */
+    .rn-tool {
+      margin-top: 1.6rem;
+    }
+
+    .rn-tool + .rn-tool {
+      margin-top: 2.25rem;
+    }
+
+    .rn-tool h5 {
+      margin: 0 0 0.75rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 1px solid #EBCF98;
+      font-size: var(--fs-subtitle);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-heading);
+      color: var(--ink);
+    }
+
+    /* Aturan (kiri, bisa disalin) | evidence (kanan). Kolom tetap supaya
+       evidence Claude dan Gemini sejajar di posisi yang sama */
+    .rn-pair {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 200px;
+      align-items: start;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .rn-pair .rn-term,
+    .rn-pair .rn-shot {
+      margin-top: 0;
+    }
+
+    .rn-pair .rn-term {
+      width: auto;
+      min-width: 0;
+    }
+
+    /* Bingkai sama, tapi bukan tombol: gambar tampil utuh di ukuran aslinya */
+    .rn-shot.is-static {
+      margin: 0.75rem 0 0;
+      cursor: default;
+    }
+
+    .rn-shot.is-static:hover {
+      border-color: #F3D9A8;
+      box-shadow: none;
+    }
+
+    .rn-shot.is-static img {
+      width: 388px;
+      height: auto;
+      object-fit: fill;
+    }
+
+    /* Lebar evidence tetap; gambar mengisi penuh, status hijau membungkus di dalamnya */
+    .rn-shot.is-proof {
+      width: 200px;
+    }
+
+    .rn-shot.is-proof img {
+      width: 100%;
+      height: 220px;
+    }
+
     .rn-warn a:focus-visible,
+    .rn-warn a.rn-doc:focus-visible,
     .rn-shot:focus-visible {
       outline: 2px solid var(--amber);
       outline-offset: 2px;
     }
 
-    .rn-foot {
-      display: flex;
-      justify-content: center;
-      margin-top: 0.85rem;
+    @media (forced-colors: active) {
+      .rn-seg-thumb {
+        display: none;
+      }
+
+      .rn-seg-btn[aria-selected="true"] {
+        outline: 2px solid CanvasText;
+        outline-offset: -3px;
+      }
     }
 
-    .rn-dots {
-      display: flex;
-      gap: 0.2rem;
-    }
-
-    /* Titik kecil, area klik tetap 24px */
-    .rn-dot {
-      display: grid;
-      place-items: center;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
-
-    .rn-dot::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--border-strong);
-      transition: width 0.25s var(--ease-emphasized), background 0.2s ease;
-    }
-
-    .rn-dot[aria-current="true"]::before {
-      width: 22px;
-      background: var(--amber);
-    }
-
-    .rn-dot[aria-current="true"] {
-      width: 34px;
-    }
-
-    /* Baru satu versi: titik & petunjuk geser belum ada gunanya */
-    .rn.is-single .rn-foot,
+    /* Baru satu topik: pemilih & petunjuk geser belum ada gunanya */
+    .rn.is-single .rn-seg,
     .rn.is-single .rn-hint {
       display: none;
     }
 
-    .rn-btn:focus-visible,
-    .rn-dot:focus-visible,
-    .rn-track:focus-visible {
+    .rn-seg-btn:focus-visible {
       outline: 2px solid var(--amber);
       outline-offset: 2px;
     }
 
-    .rn-track:focus-visible {
-      outline-offset: -2px;
+    /* Kartu bisa difokus (tabpanel), garisnya di dalam bingkai */
+    .rn-card:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: -4px;
       border-radius: 2rem;
     }
 
@@ -5585,8 +5733,9 @@
         padding: 1.25rem 1.1rem 1.4rem;
       }
 
-      .rn-latest {
-        margin-left: 0;
+      .rn-seg-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: var(--fs-small);
       }
 
       .rn-warn {
@@ -5596,6 +5745,14 @@
 
       .rn-warn .rn-item {
         gap: 0.7rem;
+      }
+
+      .rn-pair {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .rn-shot.is-proof {
+        width: min(100%, 260px);
       }
 
       .rn-diff div {
@@ -5850,40 +6007,27 @@
             </div>
           </div>
 
-          <!-- 7 — release notes per versi.
-               Rilis baru: salin satu <article class="rn-card"> di #rnTrack, ganti
-               data-version, <time datetime>, dan isinya. Urutan diambil dari
-               tanggal, jadi kartu terbaru otomatis paling depan & dapat badge
-               "Terbaru"; versi lama bergeser ke kanan. -->
+          <!-- 7 — release notes per topik.
+               Satu topik = satu <article class="rn-card" data-title="…"> di #rnTrack.
+               Segmented control di atasnya dibuat JS dari data-title, jadi topik
+               baru cukup ditambah satu <article>. -->
           <section class="rn" id="rn" aria-labelledby="rnTitle">
             <div class="jr-head">
               <div>
                 <h2 class="jr-title" id="rnTitle">Release <span class="sf-script">notes</span></h2>
-                <p class="jr-sub">Perubahan per versi, terbaru paling depan.<span class="rn-hint"> Geser ke kiri untuk
-                    versi sebelumnya.</span></p>
-              </div>
-              <div class="rn-nav">
-                <button type="button" class="rn-btn" data-rn="newer" aria-label="Versi lebih baru">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
-                </button>
-                <span class="rn-count" aria-live="polite">1 / 1</span>
-                <button type="button" class="rn-btn" data-rn="older" aria-label="Versi sebelumnya">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </button>
+                <p class="jr-sub">Catatan per topik.<span class="rn-hint"> Pilih topik di bawah, atau geser
+                    kartunya.</span></p>
               </div>
             </div>
 
+            <div class="rn-seg" role="tablist" aria-label="Topik release notes">
+              <span class="rn-seg-thumb" aria-hidden="true"></span>
+            </div>
+
             <div class="rn-frame">
-              <div class="rn-track" id="rnTrack" tabindex="0" role="group" aria-label="Release notes per versi">
+              <div class="rn-track" id="rnTrack">
 
-                <article class="rn-card">
-
+                <article class="rn-card" data-title="Maestro">
 
                   <!-- Dibaca sebelum running, jadi diletakkan paling atas. Tiap poin
                        punya judul pendek supaya mudah disebut saat presentasi. -->
@@ -5926,6 +6070,13 @@
                           <p>Gunakan <strong>login</strong> dan <strong>MPIN</strong> dari general handling.
                             <strong>login</strong> sudah menangani kondisi belum ETB, coachmark, biometrik, dan
                             verifikasi email.</p>
+                          <!-- Lokasi file general handling: screenshot asli (tidak diubah), bingkai sama dengan
+                               screenshot lain. Tidak bisa diklik karena sudah tampil di ukuran aslinya. -->
+                          <figure class="rn-shot is-static">
+                            <img src="assets/evidence/general-handling-common.png" width="388" height="196" loading="lazy"
+                              alt="Folder common berisi general_etb.yml, general_login.yml, dan general_mpin.yml">
+                            <figcaption>Lokasi file general handling</figcaption>
+                          </figure>
                           <p class="rn-note">* MPIN dan password sudah tersedia sebagai variabel di <code>.env</code> sehingga configurable.</p>
                         </div>
                       </li>
@@ -5944,7 +6095,7 @@
                             <li><strong>Squad 4</strong> tidak bisa jalan karena rekening tidak punya kartu.
                             <p class="rn-note">*  Jangan cepat merasa aman. Pastikan mengantisipasi segala kemungkinan atau antisipasi berbagai risiko yang mungkin muncul.</p>
                             </li>
-                            
+                          
                             <li><strong>SAC</strong>: Saat di layar <em>Pilih jenis tabungan</em>, pastikan pemilihan kartu
                               jenis tabungan sudah di-handle. Kemarin run terhambat karena test mengklik wondr
                               multicurrency (<a href="#evidence-1" onclick="goEvidence(event)">lihat Evidence 1</a>).
@@ -5996,14 +6147,127 @@
                           <code>.env</code>, jika tidak diisi flow otomatis memakai nilai default.</p>
                       </div>
                     </li> -->
-                  </ol>
+                  <!-- </ol> -->
+                </article>
+
+                <article class="rn-card" data-title="AI dan Express API Handling">
+                  <div class="rn-warn">
+                    <h3 class="rn-sec">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                      </svg>
+                      Perlu diperhatikan
+                    </h3>
+                    <ol class="rn-list" role="list">
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Pencegahan pada penggunaan AI (Preventive AI)</h4>
+                          <p>Pasang aturan supaya asisten AI tidak bisa membaca file rahasia seperti
+                            <code>.env</code>.</p>
+                          <!-- Dibuka di tab baru oleh viewer PDF browser; jangan beri atribut download -->
+                          <a class="rn-doc" href="assets/docs/handling-block-ai-coding-assistant.pdf" target="_blank"
+                            rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <path d="M14 2v6h6" />
+                              <path d="M8 13h8" />
+                              <path d="M8 17h5" />
+                            </svg>
+                            Buka full documentation
+                            <span class="rn-doc-meta">PDF, 12 halaman <span aria-hidden="true">↗</span></span>
+                            <span class="sr-only">(terbuka di tab baru)</span>
+                          </a>
+
+                          <!-- Tiap alat: konfigurasi (bisa disalin) + evidence bahwa aksesnya ditolak -->
+                          <div class="rn-tool">
+                            <h5>Claude</h5>
+                            <p>Tambahkan aturan <code>deny</code> di <code>.claude/settings.json</code> pada root
+                              project.</p>
+                            <div class="rn-pair">
+                              <div class="terminal rn-term">
+                                <div class="terminal-bar">
+                                  <div class="dot dot-red"></div>
+                                  <div class="dot dot-amber"></div>
+                                  <div class="dot dot-green"></div>
+                                  <span>.claude/settings.json</span>
+                                </div>
+                                <div class="terminal-body">
+<pre class="yml-code">{
+  <span class="y-key">"permissions"</span>: {
+    <span class="y-key">"deny"</span>: [
+      <span class="y-val">"Read(./.env)"</span>,
+      <span class="y-val">"Read(./.env.*)"</span>,
+      <span class="y-val">"Read(./**/*.pem)"</span>,
+      <span class="y-val">"Read(./**/*.key)"</span>,
+      <span class="y-val">"Read(./**/*.p12)"</span>,
+      <span class="y-val">"Read(./secrets/**)"</span>,
+      <span class="y-val">"Read(./config/credentials*)"</span>
+    ]
+  }
+}</pre>
+                                </div>
+                              </div>
+                              <button type="button" class="rn-shot is-proof"
+                                onclick="openLightbox('assets/evidence/ai-claude-deny-env.jpg')"
+                                aria-label="Perbesar evidence Claude: akses .env ditolak">
+                                <span class="rn-proof"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                                    <path d="m9 12 2 2 4-4" />
+                                  </svg>
+                                  <span>Evidence: akses <code>.env</code> ditolak</span></span>
+                                <img src="assets/evidence/ai-claude-deny-env.jpg" width="824" height="1152"
+                                  loading="lazy" style="--focus: 50% 100%"
+                                  alt="Claude diminta membacakan JIRA_USERNAME di .env. Perintah Bash untuk membacanya ditolak oleh permission, lalu Claude menjawab tidak bisa membacakan isinya.">
+                                <span>Ketuk untuk memperbesar</span>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="rn-tool">
+                            <h5>Gemini</h5>
+                            <p>Buat file <code>.aiexclude</code> di root project, isi dengan file yang tidak boleh
+                              dibaca.</p>
+                            <div class="rn-pair">
+                              <div class="terminal rn-term">
+                                <div class="terminal-bar">
+                                  <div class="dot dot-red"></div>
+                                  <div class="dot dot-amber"></div>
+                                  <div class="dot dot-green"></div>
+                                  <span>.aiexclude</span>
+                                </div>
+                                <div class="terminal-body">
+<pre class="yml-code"><span class="y-val">.env</span>
+<span class="y-val">.env.*</span></pre>
+                                </div>
+                              </div>
+                              <button type="button" class="rn-shot is-proof"
+                                onclick="openLightbox('assets/evidence/ai-gemini-aiexclude.jpg')"
+                                aria-label="Perbesar evidence Gemini: akses .env ditolak">
+                                <span class="rn-proof"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                                    <path d="m9 12 2 2 4-4" />
+                                  </svg>
+                                  <span>Evidence: akses <code>.env</code> ditolak</span></span>
+                                <img src="assets/evidence/ai-gemini-aiexclude.jpg" width="560" height="766"
+                                  loading="lazy" style="--focus: 50% 0%"
+                                  alt="Gemini ditanya apakah bisa membaca .env, lalu menjawab tidak bisa karena akses ditolak oleh pengecekan keamanan dan aturan .aiexclude.">
+                                <span>Ketuk untuk memperbesar</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
                 </article>
 
               </div>
-            </div>
-
-            <div class="rn-foot">
-              <div class="rn-dots" role="group" aria-label="Pilih versi"></div>
             </div>
           </section>
 
@@ -8441,51 +8705,48 @@
     }
 
     // ─── Release notes di cover ───
-    // Tiap versi = satu <article class="rn-card"> di #rnTrack. Urutan diambil dari
-    // <time datetime>, jadi rilis baru boleh ditempel di mana saja: yang terbaru
-    // otomatis paling depan & dapat badge "Terbaru", versi lama bergeser ke kanan.
+    // Satu topik = satu <article class="rn-card" data-title="…"> di #rnTrack.
+    // Segmen di .rn-seg dibuat dari data-title tiap kartu. Kartu dipilih lewat
+    // segmen, digeser (swipe / trackpad), atau panah ←/→.
     (function initReleaseNotes() {
       const root = document.getElementById('rn');
       if (!root) return;
       const track = root.querySelector('.rn-track');
-      const dots = root.querySelector('.rn-dots');
-      const count = root.querySelector('.rn-count');
-      const btnNewer = root.querySelector('[data-rn="newer"]');
-      const btnOlder = root.querySelector('[data-rn="older"]');
-      const stamp = c => c.querySelector('time[datetime]')?.getAttribute('datetime') || '';
-      const cards = [...track.querySelectorAll('.rn-card')]
-        .sort((a, b) => stamp(b).localeCompare(stamp(a)));
+      const seg = root.querySelector('.rn-seg');
+      const thumb = seg.querySelector('.rn-seg-thumb');
+      const cards = [...track.querySelectorAll('.rn-card')];
       if (!cards.length) return;
       let idx = 0;
+      let lock = -1;      // tujuan klik yang sedang di-scroll halus
+      let lockTimer = 0;
 
-      // Snap dimatikan sebentar: tanpa ini browser "mengikuti" kartu yang tadinya
-      // paling depan, sehingga cover terbuka di versi lama setelah diurutkan.
-      track.style.scrollSnapType = 'none';
-      cards.forEach(card => track.appendChild(card));
-      track.scrollLeft = 0;
-      track.style.scrollSnapType = '';
-
-      cards.forEach((card, i) => {
-        card.setAttribute('aria-label', `${card.dataset.version} (${i + 1} dari ${cards.length})`);
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'rn-dot';
-        dot.setAttribute('aria-label', card.dataset.version);
-        dot.addEventListener('click', () => show(i));
-        dots.appendChild(dot);
+      seg.style.setProperty('--n', cards.length);
+      const tabs = cards.map((card, i) => {
+        if (!card.id) card.id = `rnPanel${i}`;
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'rn-seg-btn';
+        tab.id = `rnTab${i}`;
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', card.id);
+        tab.textContent = card.dataset.title || card.dataset.version || `Topik ${i + 1}`;
+        tab.addEventListener('click', () => show(i));
+        seg.appendChild(tab);
+        card.setAttribute('role', 'tabpanel');
+        card.setAttribute('aria-labelledby', tab.id);
+        card.tabIndex = 0;
+        return tab;
       });
-      cards[0].querySelector('.rn-card-head')
-        ?.insertAdjacentHTML('beforeend', '<span class="rn-latest">Terbaru</span>');
       root.classList.toggle('is-single', cards.length < 2);
 
       const clamp = i => Math.max(0, Math.min(cards.length - 1, i));
 
       function render() {
-        count.textContent = `${idx + 1} / ${cards.length}`;
-        btnNewer.disabled = idx === 0;
-        btnOlder.disabled = idx === cards.length - 1;
-        [...dots.children].forEach((d, i) => d.setAttribute('aria-current', String(i === idx)));
-        // Versi yang sedang tidak tampil keluar dari urutan Tab
+        tabs.forEach((t, i) => {
+          t.setAttribute('aria-selected', String(i === idx));
+          t.tabIndex = i === idx ? 0 : -1;
+        });
+        // Kartu yang sedang tidak tampil keluar dari urutan Tab
         cards.forEach((c, i) => { c.inert = i !== idx; });
         fitHeight();
       }
@@ -8495,33 +8756,54 @@
         if (h) track.style.height = `${h}px`;
       }
 
+      // Thumb ikut posisi geser, termasuk di tengah swipe
+      function moveThumb() {
+        const w = track.clientWidth;
+        if (w) thumb.style.setProperty('--pos', track.scrollLeft / w);
+      }
+
       // Lebar layar berubah → teks membungkus ulang → tinggi kartu ikut berubah
       if ('ResizeObserver' in window) {
-        const ro = new ResizeObserver(fitHeight);
+        const ro = new ResizeObserver(() => { fitHeight(); moveThumb(); });
         cards.forEach(c => ro.observe(c));
       }
 
-      function show(i) {
+      function show(i, focusTo) {
         idx = clamp(i);
+        lock = idx;
+        clearTimeout(lockTimer);
+        lockTimer = setTimeout(release, 800);
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         track.scrollTo({ left: cards[idx].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
         render();
+        if (focusTo === 'tab') tabs[idx].focus();
+        if (focusTo === 'panel') cards[idx].focus({ preventScroll: true });
       }
 
-      btnNewer.addEventListener('click', () => show(idx - 1));
-      btnOlder.addEventListener('click', () => show(idx + 1));
+      // Selesai scroll halus: lepas kunci, lalu samakan dengan posisi akhir
+      function release() {
+        lock = -1;
+        syncFromScroll();
+      }
 
-      // Digeser manual (swipe / trackpad) → penghitung & titik ikut
+      function syncFromScroll() {
+        const i = clamp(Math.round(track.scrollLeft / track.clientWidth));
+        if (i !== idx) { idx = i; render(); }
+      }
+
+      // Digeser manual (swipe / trackpad) → segmen ikut. Selama scroll halus
+      // dari klik, segmen tidak berkedip balik ke kartu yang dilewati.
       let raf = 0;
       track.addEventListener('scroll', () => {
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
-          const i = clamp(Math.round(track.scrollLeft / track.clientWidth));
-          if (i !== idx) { idx = i; render(); }
+          moveThumb();
+          if (lock === -1) syncFromScroll();
         });
       }, { passive: true });
+      track.addEventListener('scrollend', release);
 
-      // Panah ←/→ saat fokus di dalam release notes memindah versi. Di versi
+      // Panah ←/→ saat fokus di dalam release notes memindah topik. Di topik
       // pertama/terakhir event dilepas, supaya panah tetap memindah halaman.
       root.addEventListener('keydown', e => {
         if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -8529,10 +8811,12 @@
         if (target !== clamp(target)) return;
         e.preventDefault();
         e.stopPropagation();
-        show(target);
+        show(target, e.target.getAttribute('role') === 'tab' ? 'tab'
+          : e.target.closest('.rn-card') ? 'panel' : null);
       });
 
       render();
+      moveThumb();
     })();
 
     // Jumlah halaman di baris daftar isi ikut TOTAL, supaya tidak basi saat slide bertambah.
