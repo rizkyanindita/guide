@@ -5137,6 +5137,473 @@
       }
     }
 
+    /* ─── RELEASE NOTES (cover) ───
+       Bingkai kartunya tetap di tempat; isinya yang bergeser. Satu halaman
+       per versi dalam track scroll-snap, terbaru paling depan, versi lama di
+       kanannya. Urutan, badge "Terbaru", titik, dan penghitung diatur JS
+       (initReleaseNotes), jadi rilis baru cukup ditambah satu <article>. */
+    .rn {
+      width: 100%;
+      margin-top: 0.75rem;
+      text-align: left;
+    }
+
+    .rn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.15rem;
+      padding: 0.25rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .rn-btn {
+      display: grid;
+      place-items: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .rn-btn:hover:not(:disabled) {
+      background: var(--amber-pale);
+      color: var(--amber);
+    }
+
+    .rn-btn:disabled {
+      color: var(--border-strong);
+      cursor: default;
+    }
+
+    .rn-count {
+      min-width: 2.8rem;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rn-frame {
+      border-radius: 2rem;
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    /* Tinggi track diset JS mengikuti versi yang tampil, supaya versi pendek
+       tidak ikut setinggi versi terpanjang */
+    .rn-track {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      overflow-x: auto;
+      overflow-y: hidden;
+      transition: height 0.3s var(--ease-emphasized);
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+
+    .rn-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .rn-card {
+      flex: 0 0 100%;
+      min-width: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 1.75rem 2rem 2rem;
+    }
+
+    .rn-card-head {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 1.1rem;
+      margin-bottom: 1.35rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .rn-ver {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--coral);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+    }
+
+    .rn-date {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .rn-latest {
+      margin-left: auto;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--sage);
+      color: #3F6B49;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .rn-sec {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 1.1rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    .rn-list {
+      list-style: none;
+      counter-reset: rn;
+      display: grid;
+      /* minmax(0, …): baris YAML yang panjang digeser di bloknya sendiri,
+         bukan melebarkan seluruh list keluar kotak */
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rn-item {
+      display: flex;
+      gap: 0.85rem;
+    }
+
+    .rn-item::before {
+      counter-increment: rn;
+      content: counter(rn);
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 50%;
+      background: var(--amber-pale);
+      color: var(--amber);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .rn-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rn-body h4 {
+      margin: 0.15rem 0 0.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .rn-body p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .rn-body code,
+    .rn-warn code {
+      overflow-wrap: anywhere;
+    }
+
+    /* Nama file sebelum → sesudah */
+    .rn-diff {
+      display: grid;
+      gap: 0.45rem;
+      margin: 0.75rem 0 0;
+      padding: 0.85rem 1rem;
+      border-radius: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      font-size: 0.82rem;
+    }
+
+    .rn-diff div {
+      display: grid;
+      grid-template-columns: 6.5rem minmax(0, 1fr);
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    .rn-diff dt {
+      color: var(--text-light);
+    }
+
+    .rn-diff dd {
+      margin: 0;
+    }
+
+    .rn-diff .is-old code {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      text-decoration-color: rgba(181, 72, 63, 0.55);
+    }
+
+    .rn-diff .is-new code {
+      background: var(--sage);
+      border-color: #C9D9CB;
+      color: #3F6B49;
+    }
+
+    /* Catatan yang perlu diwaspadai — warna "Terkendala" dari tabel Jenkins.
+       Diletakkan paling atas kartu karena harus dibaca sebelum running. */
+    .rn-warn {
+      margin: 0 0 2.25rem;
+      padding: 1.4rem 1.6rem 0.5rem;
+      border-radius: 1.25rem;
+      background: #FFF8EA;
+      border: 1px solid #F3D9A8;
+    }
+
+    .rn-warn .rn-sec {
+      margin-bottom: 0.2rem;
+      font-size: 1.15rem;
+      color: #7A4E0E;
+    }
+
+    .rn-warn .rn-sec svg {
+      flex: none;
+      color: #C98A1B;
+    }
+
+    /* Tiap poin dipisah garis tipis dan jarak lega, supaya bisa dibahas satu
+       per satu saat presentasi */
+    .rn-warn .rn-list {
+      gap: 0;
+    }
+
+    .rn-warn .rn-item {
+      padding: 1.15rem 0;
+    }
+
+    .rn-warn .rn-item + .rn-item {
+      border-top: 1px solid #F1DFBA;
+    }
+
+    .rn-warn .rn-item::before {
+      background: #F7E1B5;
+      color: #7A4E0E;
+    }
+
+    .rn-warn .rn-body p {
+      font-size: 0.93rem;
+      color: var(--text);
+    }
+
+    /* Contoh kendala di bawah satu poin */
+    .rn-eg {
+      display: grid;
+      gap: 0.65rem;
+      margin: 0.55rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .rn-eg li::marker {
+      color: #C9973F;
+    }
+
+    /* Catatan kecil di bawah satu item "Yang baru" */
+    .rn-body .rn-note {
+      margin-top: 0.65rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Di kotak peringatan: cokelat supaya kontrasnya cukup di latar krem */
+    .rn-warn .rn-body .rn-note {
+      font-size: 0.85rem;
+      color: #8A5A12;
+    }
+
+    /* Contoh YAML — blok terminal yang sama dengan slide lain, selebar isinya
+       supaya tidak jadi blok gelap yang mendominasi kotak */
+    .rn-term {
+      width: fit-content;
+      max-width: 100%;
+      margin-top: 0.8rem;
+      box-shadow: none;
+    }
+
+    .rn-term pre.yml-code {
+      margin: 0;
+      padding: 0.1rem 0.2rem;
+      white-space: pre;
+    }
+
+    .rn-warn a {
+      color: #8A5A12;
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: #E2B866;
+      text-underline-offset: 3px;
+    }
+
+    .rn-warn a:hover {
+      color: var(--ink);
+      text-decoration-color: currentColor;
+    }
+
+    /* Screenshot contoh: dipotong ke bagian "Pilih jenis tabungan",
+       versi penuhnya dibuka lewat lightbox */
+    .rn-shot {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin-top: 0.65rem;
+      padding: 0;
+      border: 1px solid #F3D9A8;
+      border-radius: 0.85rem;
+      overflow: hidden;
+      background: #fff;
+      font: inherit;
+      cursor: zoom-in;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .rn-shot:hover {
+      border-color: #C9973F;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .rn-shot img {
+      display: block;
+      width: 240px;
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: 50% 67%;
+    }
+
+    .rn-shot span {
+      display: block;
+      padding: 0.35rem 0.7rem;
+      border-top: 1px solid #F3D9A8;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8A5A12;
+      text-align: left;
+    }
+
+    .rn-warn a:focus-visible,
+    .rn-shot:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    .rn-foot {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.85rem;
+    }
+
+    .rn-dots {
+      display: flex;
+      gap: 0.2rem;
+    }
+
+    /* Titik kecil, area klik tetap 24px */
+    .rn-dot {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .rn-dot::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--border-strong);
+      transition: width 0.25s var(--ease-emphasized), background 0.2s ease;
+    }
+
+    .rn-dot[aria-current="true"]::before {
+      width: 22px;
+      background: var(--amber);
+    }
+
+    .rn-dot[aria-current="true"] {
+      width: 34px;
+    }
+
+    /* Baru satu versi: titik & petunjuk geser belum ada gunanya */
+    .rn.is-single .rn-foot,
+    .rn.is-single .rn-hint {
+      display: none;
+    }
+
+    .rn-btn:focus-visible,
+    .rn-dot:focus-visible,
+    .rn-track:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    .rn-track:focus-visible {
+      outline-offset: -2px;
+      border-radius: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .rn-frame {
+        border-radius: 1.5rem;
+      }
+
+      .rn-card {
+        padding: 1.25rem 1.1rem 1.4rem;
+      }
+
+      .rn-latest {
+        margin-left: 0;
+      }
+
+      .rn-warn {
+        padding: 1.15rem 1rem 0.35rem;
+        border-radius: 1rem;
+      }
+
+      .rn-warn .rn-item {
+        gap: 0.7rem;
+      }
+
+      .rn-diff div {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.1rem;
+      }
+    }
+
 
     @media (max-width: 640px) {
       .jr-summary {
@@ -5352,7 +5819,7 @@
             </button>
           </div>
 
-          <!-- 7 — kartu rekomendasi versi -->
+          <!-- 6b — kartu rekomendasi versi -->
           <div class="cv-callout">
             <div class="cv-callout-head">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B85A52" stroke-width="2"
@@ -5364,7 +5831,7 @@
               Rekomendasi Versi Maestro
             </div>
             <p>To minimize risk during the update, we recommend using</p>
-            <div class="highlight-version" style="margin:0.4rem 0 0.9rem;">Maestro version 2.8.0</div>
+            <div class="highlight-version" style="margin:0.4rem 0 0.9rem;">Maestro version 2.12.1</div>
             <p style="margin-bottom:1rem;">
               Install / update Maestro — jalankan di <strong>Terminal</strong> (macOS &amp; Linux) atau
               <strong>WSL / Git Bash</strong> (Windows):
@@ -5382,6 +5849,163 @@
               </button>
             </div>
           </div>
+
+          <!-- 7 — release notes per versi.
+               Rilis baru: salin satu <article class="rn-card"> di #rnTrack, ganti
+               data-version, <time datetime>, dan isinya. Urutan diambil dari
+               tanggal, jadi kartu terbaru otomatis paling depan & dapat badge
+               "Terbaru"; versi lama bergeser ke kanan. -->
+          <section class="rn" id="rn" aria-labelledby="rnTitle">
+            <div class="jr-head">
+              <div>
+                <h2 class="jr-title" id="rnTitle">Release <span class="sf-script">notes</span></h2>
+                <p class="jr-sub">Perubahan per versi, terbaru paling depan.<span class="rn-hint"> Geser ke kiri untuk
+                    versi sebelumnya.</span></p>
+              </div>
+              <div class="rn-nav">
+                <button type="button" class="rn-btn" data-rn="newer" aria-label="Versi lebih baru">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m15 18-6-6 6-6" />
+                  </svg>
+                </button>
+                <span class="rn-count" aria-live="polite">1 / 1</span>
+                <button type="button" class="rn-btn" data-rn="older" aria-label="Versi sebelumnya">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="rn-frame">
+              <div class="rn-track" id="rnTrack" tabindex="0" role="group" aria-label="Release notes per versi">
+
+                <article class="rn-card">
+
+
+                  <!-- Dibaca sebelum running, jadi diletakkan paling atas. Tiap poin
+                       punya judul pendek supaya mudah disebut saat presentasi. -->
+                  <div class="rn-warn">
+                    <h3 class="rn-sec">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                      </svg>
+                      Perlu diperhatikan
+                    </h3>
+                    <ol class="rn-list" role="list">
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Record video</h4>
+                          <p>Panggil <code>onflowendts.js</code> lewat <code>runScript</code> di
+                            <code>onFlowComplete</code>, lalu isi <code>NO_TS</code> dengan ID TS-nya.</p>
+                          <div class="terminal rn-term">
+                            <div class="terminal-bar">
+                              <div class="dot dot-red"></div>
+                              <div class="dot dot-amber"></div>
+                              <div class="dot dot-green"></div>
+                              <span>flow .yaml</span>
+                            </div>
+                            <div class="terminal-body">
+<pre class="yml-code"><span class="y-key">onFlowComplete:</span>
+  <span class="y-key">- runScript:</span>
+      <span class="y-key">file:</span> <span class="y-val">../../configs/onflowend/onflowendts.js</span>
+      <span class="y-key">env:</span>
+        <span class="y-key">NO_TS:</span> <span class="y-val">"TS_APP_CC_ENHC_01"</span></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Pakai general handling</h4>
+                          <p>Gunakan <strong>login</strong> dan <strong>MPIN</strong> dari general handling.
+                            <strong>login</strong> sudah menangani kondisi belum ETB, coachmark, biometrik, dan
+                            verifikasi email.</p>
+                          <p class="rn-note">* MPIN dan password sudah tersedia sebagai variabel di <code>.env</code> sehingga configurable.</p>
+                        </div>
+                      </li>
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Cek isi .env</h4>
+                          <p>Pastikan semua variabel yang <b>Baru</b> sudah terisi. Daftarnya ada di
+                            <a href="#slide-1" onclick="goTo(1); return false;">Step 1 — Perubahan pada .env →</a></p>
+                        </div>
+                      </li>
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Siapkan handling atau data untuk tiap fitur</h4>
+                          <p>Contoh kendala run kemarin:</p>
+                          <ul class="rn-eg">
+                            <li><strong>Squad 4</strong> tidak bisa jalan karena rekening tidak punya kartu.
+                            <p class="rn-note">*  Jangan cepat merasa aman. Pastikan mengantisipasi segala kemungkinan atau antisipasi berbagai risiko yang mungkin muncul.</p>
+                            </li>
+                            
+                            <li><strong>SAC</strong>: Saat di layar <em>Pilih jenis tabungan</em>, pastikan pemilihan kartu
+                              jenis tabungan sudah di-handle. Kemarin run terhambat karena test mengklik wondr
+                              multicurrency (<a href="#evidence-1" onclick="goEvidence(event)">lihat Evidence 1</a>).
+                              CMIIW.
+                              <button type="button" class="rn-shot"
+                                onclick="openLightbox('assets/evidence/sac-pilih-jenis-tabungan.jpg')"
+                                aria-label="Perbesar screenshot layar Pilih jenis tabungan">
+                                <img src="assets/evidence/sac-pilih-jenis-tabungan.jpg" width="800" height="1734"
+                                  loading="lazy"
+                                  alt="Layar Buka tabungan, bagian Pilih jenis tabungan: tab Rupiah aktif, kartu pertama wondr multicurrency (Pilihan wondr, biaya admin Rp0/bulan), di bawahnya TAPLUS.">
+                                <span>Ketuk untuk memperbesar</span>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+
+                  <!-- <h3 class="rn-sec">Yang baru</h3>
+                  <ol class="rn-list" role="list"> -->
+                    <!-- <li class="rn-item">
+                      <div class="rn-body">
+                        <h4>Nama arsip report lebih mudah dibaca</h4>
+                        <p>Arsip report dari run mode Tags sekarang langsung menunjukkan squad, versi, platform, dan
+                          waktu run.</p>
+                        <dl class="rn-diff">
+                          <div class="is-old">
+                            <dt>Sebelumnya</dt>
+                            <dd><code>751_v6.2.15-rnd_Tags_iOS.html</code></dd>
+                          </div>
+                          <div class="is-new">
+                            <dt>Sekarang</dt>
+                            <dd><code>rnd_6.2.16_iOS_2026-11-05_14-30.html</code></dd>
+                          </div>
+                          <div>
+                            <dt>Format</dt>
+                            <dd><code>{squad}_{versi}_{platform}_{tanggal}_{jam-menit}</code></dd>
+                          </div>
+                        </dl>
+                        <p class="rn-note">Format baru hanya berlaku untuk tag ini dan tag sesudahnya. Run dari tag
+                          lama tetap memakai format lamanya.</p>
+                      </div>
+                    </li> -->
+                    <!-- <li class="rn-item">
+                      <div class="rn-body">
+                        <h4>Password dan MPIN Define pada .env</h4>
+                        <p>Saat ini menggunakan <code>PASSWORD_ACCOUNT</code> dan <code>MPIN_ACCOUNT</code> yang diisi di
+                          <code>.env</code>, jika tidak diisi flow otomatis memakai nilai default.</p>
+                      </div>
+                    </li> -->
+                  </ol>
+                </article>
+
+              </div>
+            </div>
+
+            <div class="rn-foot">
+              <div class="rn-dots" role="group" aria-label="Pilih versi"></div>
+            </div>
+          </section>
 
           <!-- 8 — baris daftar isi -->
           <button type="button" class="cv-toc" data-toc-trigger onclick="openToc()">
@@ -7815,6 +8439,101 @@
         }, 1600);
       });
     }
+
+    // ─── Release notes di cover ───
+    // Tiap versi = satu <article class="rn-card"> di #rnTrack. Urutan diambil dari
+    // <time datetime>, jadi rilis baru boleh ditempel di mana saja: yang terbaru
+    // otomatis paling depan & dapat badge "Terbaru", versi lama bergeser ke kanan.
+    (function initReleaseNotes() {
+      const root = document.getElementById('rn');
+      if (!root) return;
+      const track = root.querySelector('.rn-track');
+      const dots = root.querySelector('.rn-dots');
+      const count = root.querySelector('.rn-count');
+      const btnNewer = root.querySelector('[data-rn="newer"]');
+      const btnOlder = root.querySelector('[data-rn="older"]');
+      const stamp = c => c.querySelector('time[datetime]')?.getAttribute('datetime') || '';
+      const cards = [...track.querySelectorAll('.rn-card')]
+        .sort((a, b) => stamp(b).localeCompare(stamp(a)));
+      if (!cards.length) return;
+      let idx = 0;
+
+      // Snap dimatikan sebentar: tanpa ini browser "mengikuti" kartu yang tadinya
+      // paling depan, sehingga cover terbuka di versi lama setelah diurutkan.
+      track.style.scrollSnapType = 'none';
+      cards.forEach(card => track.appendChild(card));
+      track.scrollLeft = 0;
+      track.style.scrollSnapType = '';
+
+      cards.forEach((card, i) => {
+        card.setAttribute('aria-label', `${card.dataset.version} (${i + 1} dari ${cards.length})`);
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'rn-dot';
+        dot.setAttribute('aria-label', card.dataset.version);
+        dot.addEventListener('click', () => show(i));
+        dots.appendChild(dot);
+      });
+      cards[0].querySelector('.rn-card-head')
+        ?.insertAdjacentHTML('beforeend', '<span class="rn-latest">Terbaru</span>');
+      root.classList.toggle('is-single', cards.length < 2);
+
+      const clamp = i => Math.max(0, Math.min(cards.length - 1, i));
+
+      function render() {
+        count.textContent = `${idx + 1} / ${cards.length}`;
+        btnNewer.disabled = idx === 0;
+        btnOlder.disabled = idx === cards.length - 1;
+        [...dots.children].forEach((d, i) => d.setAttribute('aria-current', String(i === idx)));
+        // Versi yang sedang tidak tampil keluar dari urutan Tab
+        cards.forEach((c, i) => { c.inert = i !== idx; });
+        fitHeight();
+      }
+
+      function fitHeight() {
+        const h = cards[idx].offsetHeight;
+        if (h) track.style.height = `${h}px`;
+      }
+
+      // Lebar layar berubah → teks membungkus ulang → tinggi kartu ikut berubah
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(fitHeight);
+        cards.forEach(c => ro.observe(c));
+      }
+
+      function show(i) {
+        idx = clamp(i);
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({ left: cards[idx].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+        render();
+      }
+
+      btnNewer.addEventListener('click', () => show(idx - 1));
+      btnOlder.addEventListener('click', () => show(idx + 1));
+
+      // Digeser manual (swipe / trackpad) → penghitung & titik ikut
+      let raf = 0;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const i = clamp(Math.round(track.scrollLeft / track.clientWidth));
+          if (i !== idx) { idx = i; render(); }
+        });
+      }, { passive: true });
+
+      // Panah ←/→ saat fokus di dalam release notes memindah versi. Di versi
+      // pertama/terakhir event dilepas, supaya panah tetap memindah halaman.
+      root.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const target = idx + (e.key === 'ArrowRight' ? 1 : -1);
+        if (target !== clamp(target)) return;
+        e.preventDefault();
+        e.stopPropagation();
+        show(target);
+      });
+
+      render();
+    })();
 
     // Jumlah halaman di baris daftar isi ikut TOTAL, supaya tidak basi saat slide bertambah.
     document.getElementById('cvTocCount').textContent = `${TOTAL} Halaman`;
