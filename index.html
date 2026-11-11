@@ -5661,6 +5661,18 @@
       min-width: 0;
     }
 
+    /* Screenshot kode: utuh selebar kolom (tanpa crop), detailnya lewat lightbox */
+    .rn-shot.is-wide {
+      width: 100%;
+      margin-top: 0.75rem;
+    }
+
+    .rn-shot.is-wide img {
+      width: 100%;
+      height: auto;
+      object-fit: fill;
+    }
+
     /* Bingkai sama, tapi bukan tombol: gambar tampil utuh di ukuran aslinya */
     .rn-shot.is-static {
       margin: 0.75rem 0 0;
@@ -6115,9 +6127,9 @@
                     </ol>
                   </div>
 
-                  <!-- <h3 class="rn-sec">Yang baru</h3>
-                  <ol class="rn-list" role="list"> -->
-                    <!-- <li class="rn-item">
+                  <h3 class="rn-sec">Yang baru</h3>
+                  <ol class="rn-list" role="list">
+                    <li class="rn-item">
                       <div class="rn-body">
                         <h4>Nama arsip report lebih mudah dibaca</h4>
                         <p>Arsip report dari run mode Tags sekarang langsung menunjukkan squad, versi, platform, dan
@@ -6139,15 +6151,15 @@
                         <p class="rn-note">Format baru hanya berlaku untuk tag ini dan tag sesudahnya. Run dari tag
                           lama tetap memakai format lamanya.</p>
                       </div>
-                    </li> -->
-                    <!-- <li class="rn-item">
+                    </li>
+                    <li class="rn-item">
                       <div class="rn-body">
                         <h4>Password dan MPIN Define pada .env</h4>
                         <p>Saat ini menggunakan <code>PASSWORD_ACCOUNT</code> dan <code>MPIN_ACCOUNT</code> yang diisi di
                           <code>.env</code>, jika tidak diisi flow otomatis memakai nilai default.</p>
                       </div>
-                    </li> -->
-                  <!-- </ol> -->
+                    </li>
+                  </ol>
                 </article>
 
                 <article class="rn-card" data-title="AI dan Express API Handling">
@@ -6260,6 +6272,42 @@
                                 <span>Ketuk untuk memperbesar</span>
                               </button>
                             </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="rn-item">
+                        <div class="rn-body">
+                          <h4>Validasi pembuatan API</h4>
+                          <p>Setiap parameter dari request (mis. <code>cif</code>, <code>userId</code>) wajib lewat
+                            validator sebelum dipakai di query. Input yang tidak valid langsung di-reject dengan
+                            <code>BadRequestException</code> (400), jadi tidak pernah sampai ke database.</p>
+
+                          <!-- Screenshot kode: tampil utuh selebar kolom, versi besar lewat lightbox -->
+                          <div class="rn-tool">
+                            <h5>Helper</h5>
+                            <p>Validator terpusat di <code>src/helper/validators.js</code>. Contohnya
+                              <code>sanitizeAlphanumericField</code> menolak nilai kosong, array, object, dan karakter
+                              di luar <code>[a-zA-Z0-9_-]</code> (panjang default 1–50).</p>
+                            <button type="button" class="rn-shot is-wide"
+                              onclick="openLightbox('assets/evidence/api-validators-helper.jpg')"
+                              aria-label="Perbesar screenshot helper validators.js">
+                              <img src="assets/evidence/api-validators-helper.jpg" width="2532" height="1470" loading="lazy"
+                                alt="validators.js di src/helper: fungsi sanitizeAlphanumericField dengan default minLength 1, maxLength 50, regex huruf, angka, underscore, dan strip. Nilai undefined atau null, array, object, dan tipe selain string atau number ditolak dengan BadRequestException.">
+                              <span>Ketuk untuk memperbesar</span>
+                            </button>
+                          </div>
+
+                          <div class="rn-tool">
+                            <h5>Penggunaan</h5>
+                            <p>Import validator di service, lalu sanitasi parameter di awal method sebelum memanggil
+                              model. Contoh di <code>src/services/profile-services.js</code>.</p>
+                            <button type="button" class="rn-shot is-wide"
+                              onclick="openLightbox('assets/evidence/api-validators-usage.jpg')"
+                              aria-label="Perbesar screenshot penggunaan validator di profile-services.js">
+                              <img src="assets/evidence/api-validators-usage.jpg" width="2532" height="1470" loading="lazy"
+                                alt="profile-services.js mengimpor validateAndSanitizeCif, validateAndSanitizeUserId, dan normalizeEmailStatus dari helper/validators.js. Method getUserId dan getProfileData memanggil validateAndSanitizeCif(cif) dulu, baru query ProfileModel dengan sanitizedCif.">
+                              <span>Ketuk untuk memperbesar</span>
+                            </button>
                           </div>
                         </div>
                       </li>
