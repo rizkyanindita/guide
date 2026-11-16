@@ -5707,6 +5707,55 @@
       outline-offset: 2px;
     }
 
+    /* Tabel Q & A: penyebab di kiri, solusi di kanan, dipisah garis tipis seperti
+       baris daftar (bukan kotak berlapis). Kolom penyebab adalah header baris, jadi
+       dibuat <th scope="row"> dan sedikit lebih tebal supaya bisa dipindai. Di layar
+       sempit tiap baris menumpuk, penyebab di atas solusi, supaya nama perintah tidak
+       terpotong. */
+    .rn-qa {
+      width: 100%;
+      margin-top: 0.85rem;
+      border-collapse: collapse;
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--text);
+    }
+
+    .rn-qa thead th {
+      padding: 0 1rem 0.6rem 0;
+      border-bottom: 1px solid var(--border-strong);
+      text-align: left;
+      font-size: var(--fs-small);
+      font-weight: var(--fw-bold);
+      /* 5.9:1 di latar putih */
+      color: #6B645F;
+    }
+
+    .rn-qa tbody th,
+    .rn-qa td {
+      padding: 0.9rem 1rem 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .rn-qa tbody th {
+      width: 36%;
+      font-weight: var(--fw-medium);
+      color: var(--ink);
+    }
+
+    .rn-qa thead th:last-child,
+    .rn-qa td:last-child {
+      padding-right: 0;
+    }
+
+    .rn-qa tbody tr:last-child th,
+    .rn-qa tbody tr:last-child td {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
     @media (forced-colors: active) {
       .rn-seg-thumb {
         display: none;
@@ -5770,6 +5819,65 @@
       .rn-diff div {
         grid-template-columns: minmax(0, 1fr);
         gap: 0.1rem;
+      }
+
+      /* Tabel Q & A menumpuk: header kolom disembunyikan secara visual (tetap
+         dibaca pembaca layar), label "Penyebab" / "Solusi" muncul di tiap baris.
+         Role ARIA di markup menjaga semantik tabel setelah display diubah. */
+      .rn-qa thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      .rn-qa,
+      .rn-qa tbody,
+      .rn-qa tr,
+      .rn-qa tbody th,
+      .rn-qa td {
+        display: block;
+        width: auto;
+      }
+
+      .rn-qa tbody tr {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .rn-qa tbody tr:first-child {
+        padding-top: 0.25rem;
+      }
+
+      .rn-qa tbody tr:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .rn-qa tbody th,
+      .rn-qa td,
+      .rn-qa tbody tr:last-child th,
+      .rn-qa tbody tr:last-child td {
+        padding: 0;
+        border: none;
+      }
+
+      .rn-qa td {
+        margin-top: 0.75rem;
+      }
+
+      .rn-qa tbody th::before,
+      .rn-qa td::before {
+        content: attr(data-label);
+        /* teks alternatif kosong: label visual saja, header kolom sudah ada untuk pembaca layar */
+        content: attr(data-label) / "";
+        display: block;
+        margin-bottom: 0.15rem;
+        font-size: var(--fs-small);
+        font-weight: var(--fw-bold);
+        color: #6B645F;
       }
     }
 
@@ -6317,6 +6425,55 @@
                       </li>
                     </ol>
                   </div>
+                </article>
+
+                <!-- Q & A: satu poin = satu pertanyaan + jawabannya. Angka di lingkaran
+                     mengikuti nomor kategori (1. Timing dan loading); kategori berikutnya
+                     cukup ditambah satu <li class="rn-item"> lagi. -->
+                <article class="rn-card" data-title="Q &amp; A">
+                  <h3 class="rn-sec">Flow tidak stabil (flaky)</h3>
+                  <ol class="rn-list" role="list">
+                    <li class="rn-item">
+                      <div class="rn-body">
+                        <h4 id="qaTimingQ">Flow gagal karena timing dan loading. Apa solusinya?</h4>
+                        <p>Cocokkan penyebabnya dengan kondisi di layar, lalu pakai solusinya.</p>
+                        <table class="rn-qa" role="table" aria-labelledby="qaTimingQ">
+                          <thead role="rowgroup">
+                            <tr role="row">
+                              <th role="columnheader" scope="col">Penyebab</th>
+                              <th role="columnheader" scope="col">Solusi</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup">
+                            <tr role="row">
+                              <th role="rowheader" scope="row" data-label="Penyebab">API lambat, layar belum siap</th>
+                              <td role="cell" data-label="Solusi"><code>extendedWaitUntil</code> ke elemen yang hanya
+                                ada setelah data muncul</td>
+                            </tr>
+                            <tr role="row">
+                              <th role="rowheader" scope="row" data-label="Penyebab">Shimmer atau skeleton punya ID</th>
+                              <td role="cell" data-label="Solusi">Tunggu <code>notVisible</code> pada shimmer, atau
+                                tunggu teks data asli</td>
+                            </tr>
+                            <tr role="row">
+                              <th role="rowheader" scope="row" data-label="Penyebab">Splash screen atau cold start lama</th>
+                              <td role="cell" data-label="Solusi">Tunggu elemen layar utama dengan timeout besar
+                                setelah <code>launchApp</code></td>
+                            </tr>
+                            <tr role="row">
+                              <th role="rowheader" scope="row" data-label="Penyebab">Animasi transisi sekali jalan</th>
+                              <td role="cell" data-label="Solusi"><code>waitForAnimationToEnd</code></td>
+                            </tr>
+                            <tr role="row">
+                              <th role="rowheader" scope="row" data-label="Penyebab">Banner atau carousel auto-rotate</th>
+                              <td role="cell" data-label="Solusi">Jangan tap berdasarkan posisi. Pakai teks atau ID,
+                                atau scroll ke elemen target</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ol>
                 </article>
 
               </div>
