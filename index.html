@@ -2756,6 +2756,11 @@
       border-radius: 10px;
     }
 
+    /* Kartu dengan teks panjang: kode berada di tengah tinggi teksnya, bukan menempel di atas */
+    .envx-sec.is-centered {
+      align-items: center;
+    }
+
     .envx-head {
       display: flex;
       align-items: center;
@@ -2807,8 +2812,70 @@
     }
 
     .envx-desc code,
-    .envx-hints code {
+    .envx-hints code,
+    .envx-sub code,
+    .envx-warn code {
       font-size: 0.85em;
+    }
+
+    /* Jalur folder SharePoint: satu chip per folder, tebal = berasal dari isian .env */
+    .envx-path {
+      list-style: none;
+      margin: 0.4rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.3rem;
+      font-size: var(--fs-small);
+      line-height: 1.4;
+    }
+
+    .envx-path li {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .envx-path li:not(:last-child)::after {
+      content: "›";
+      color: #6B645F;
+    }
+
+    .envx-path span {
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: #6B645F;
+    }
+
+    .envx-path .is-env {
+      font-weight: var(--fw-bold);
+      color: var(--code-ink);
+      background: var(--amber-tint);
+      border-color: var(--amber-border);
+    }
+
+    .envx-sub {
+      margin: 0.45rem 0 0;
+      font-size: var(--fs-small);
+      line-height: 1.5;
+      color: #6B645F;
+    }
+
+    .envx-sub strong {
+      color: var(--text);
+    }
+
+    .envx-warn {
+      margin: 0.6rem 0 0;
+      padding: 0.45rem 0.6rem;
+      font-size: var(--fs-small);
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--amber-tint);
+      border: 1px solid var(--amber-border);
+      border-radius: 8px;
     }
 
     .envx-code {
@@ -7051,8 +7118,8 @@
 
         <div class="divider" style="margin-top:1.2rem;"><span>Contoh isi .env lengkap</span></div>
 
-        <p class="slide-sub" style="margin-bottom:0.6rem;">Urutan sama dengan <code>.env</code> terbaru. Kiri:
-          penjelasan tiap bagian. Kanan: isi <code>.env</code>-nya. Nilai kuning dalam <code>&lt;...&gt;</code>
+        <p class="slide-sub" style="margin-bottom:0.6rem;">Urutan sama dengan <code>.env</code> terbaru. Tiap
+          bagian berisi penjelasan, lalu isi <code>.env</code>-nya di kotak gelap. Nilai kuning dalam <code>&lt;...&gt;</code>
           <strong>wajib diganti</strong> dengan nilai asli; sisanya bisa dipakai apa adanya atau disesuaikan.</p>
 
         <div class="envx">
@@ -7063,12 +7130,12 @@
                 <h4>Device</h4>
                 <span class="envx-tag is-soft">Sesuaikan per mesin</span>
               </div>
-              <p class="envx-desc">Device dan app yang dites. Key berakhiran <code>_ANDROID</code> / <code>_IOS</code> dipakai otomatis sesuai platform yang dijalankan.</p>
+              <p class="envx-desc">Device dan app yang dites. Android dan iOS punya baris sendiri (<code>_ANDROID</code>, <code>_IOS</code>); yang dipakai otomatis mengikuti platform yang dijalankan.</p>
                 <ul class="envx-hints">
-                  <li><code>APP_ID</code> — package / bundle app</li>
-                  <li><code>DEVICE_ID</code> — serial adb (Android) atau UDID simulator (iOS)</li>
-                  <li><code>DEVICE_NAME</code> — nama device di laporan</li>
-                  <li><code>PLATFORM</code> — label platform di laporan</li>
+                  <li><code>APP_ID</code> — ID app yang dites: package name (Android) atau bundle ID (iOS)</li>
+                  <li><code>DEVICE_ID</code> — ID device yang dipakai. Android: serial dari <code>adb devices</code>. iOS: UDID simulator dari <code>xcrun simctl list devices</code></li>
+                  <li><code>DEVICE_NAME</code> — nama device yang tampil di laporan</li>
+                  <li><code>PLATFORM</code> — tulisan platform di laporan. Biarkan <code>Android</code> / <code>iOS</code></li>
                 </ul>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Device">
@@ -7094,7 +7161,11 @@
                 <h4>Shard</h4>
                 <span class="envx-tag is-soft">Opsional</span>
               </div>
-              <p class="envx-desc">Nama device untuk shard ke-0 dan ke-1. Boleh dibiarkan kosong.</p>
+              <p class="envx-desc">Hanya untuk mode shard (test dibagi rata ke 2 device). Kalau tidak memakai shard, biarkan kosong.</p>
+                <ul class="envx-hints">
+                  <li><code>DEVICE_NAME_0</code> — nama device pertama, misalnya <code>Pixel_6a_API_34</code></li>
+                  <li><code>DEVICE_NAME_1</code> — nama device kedua, misalnya <code>Pixel_7_Pro_API_34</code></li>
+                </ul>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Shard">
               <div class="terminal-body">
@@ -7112,7 +7183,7 @@
                 <h4>Akun test</h4>
                 <span class="envx-tag is-soft">Sesuaikan per squad</span>
               </div>
-              <p class="envx-desc">CIF akun test, satu per platform.</p>
+              <p class="envx-desc">Nomor CIF akun test untuk tiap platform. Boleh sama untuk Android dan iOS.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Akun test">
               <div class="terminal-body">
@@ -7130,10 +7201,10 @@
                 <h4>Suite &amp; environment</h4>
                 
               </div>
-              <p class="envx-desc">Pilih suite yang dijalankan dan environment tujuannya.</p>
+              <p class="envx-desc">Pilih kumpulan test yang dijalankan (suite) dan environment tempat test berjalan.</p>
                 <ul class="envx-hints">
-                  <li><code>FOLDER_SUITE</code> — folder di <code>flow/</code>: <code>test-scenario</code>, <code>test-scenario-tech-improvement</code>, atau <code>continuous-integration</code></li>
-                  <li><code>ENV_CONFIG</code> — <code>DEV2</code>, <code>DEV3</code>, <code>TEST1</code>, <code>TEST2</code>, atau <code>TEST3</code>. Menentukan DB, Redis, Kibana, dan public key yang dipakai</li>
+                  <li><code>FOLDER_SUITE</code> — folder di <code>flow/</code> yang dijalankan. Pilih satu: <code>test-scenario</code>, <code>test-scenario-tech-improvement</code>, atau <code>continuous-integration</code></li>
+                  <li><code>ENV_CONFIG</code> — pilih satu: <code>DEV2</code>, <code>DEV3</code>, <code>TEST1</code>, <code>TEST2</code>, atau <code>TEST3</code>. Pilihan ini menentukan Kibana, public key, database, dan Redis yang dipakai (bagian 6, 7, 8, dan 13)</li>
                 </ul>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Suite &amp; environment">
@@ -7152,10 +7223,12 @@
                 <h4>Jira Zephyr</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Tujuan upload hasil test, beserta akun Jira.</p>
+              <p class="envx-desc">Ke mana hasil test diunggah di Jira Zephyr, beserta akun Jira untuk mengunggahnya.</p>
                 <ul class="envx-hints">
-                  <li><code>AUTO_UPLOAD_JIRA</code> — <code>1</code> = upload otomatis, <code>0</code> = tidak</li>
-                  <li><code>JIRA_FOLDER_NAME</code> — jangan diisi di sini. Sudah diatur di tiap file flow, dan kalau diisi nilainya terkirim ke semua flow</li>
+                  <li><code>JIRA_VERSION_NAME</code> — nama Version di Jira tujuan upload</li>
+                  <li><code>JIRA_CYCLE_NAME</code> — nama Test Cycle di Jira tujuan upload</li>
+                  <li><code>AUTO_UPLOAD_JIRA</code> — <code>1</code> = hasil test langsung diunggah, <code>0</code> = tidak diunggah</li>
+                  <li><code>JIRA_FOLDER_NAME</code> — tidak ada di <code>.env</code> ini, dan jangan ditambahkan. Folder Jira sudah diatur di tiap file flow; kalau ditambahkan, nilainya dipakai untuk semua flow</li>
                 </ul>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Jira Zephyr">
@@ -7177,7 +7250,7 @@
                 <h4>Kibana</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Cek telemetry. Satu set per environment.</p>
+              <p class="envx-desc">Alamat dan akun Kibana untuk mengecek data telemetry. Satu set per environment (<code>TEST1</code> dan <code>TEST2</code>).</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Kibana">
               <div class="terminal-body">
@@ -7200,10 +7273,10 @@
                 <h4>Public key</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Untuk mengenkripsi password dan MPIN akun test.</p>
+              <p class="envx-desc">Kunci untuk mengenkripsi password dan MPIN akun test. Yang dipakai mengikuti <code>ENV_CONFIG</code>.</p>
                 <ul class="envx-hints">
-                  <li><code>PUBLIC_KEY_TEST</code> — dipakai <code>TEST1</code>–<code>TEST3</code></li>
-                  <li><code>PUBLIC_KEY_DEV</code> — dipakai <code>DEV2</code>–<code>DEV3</code></li>
+                  <li><code>PUBLIC_KEY_TEST</code> — dipakai kalau <code>ENV_CONFIG</code> = <code>TEST1</code>, <code>TEST2</code>, atau <code>TEST3</code></li>
+                  <li><code>PUBLIC_KEY_DEV</code> — dipakai kalau <code>ENV_CONFIG</code> = <code>DEV2</code> atau <code>DEV3</code></li>
                 </ul>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Public key">
@@ -7222,8 +7295,9 @@
                 <h4>Database Oracle</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Satu set per environment. Yang dipakai mengikuti <code>ENV_CONFIG</code>.</p>
+              <p class="envx-desc">Akun dan alamat database Oracle, satu set per environment. Yang dipakai hanya set sesuai <code>ENV_CONFIG</code> (bagian 4). Contoh: <code>ENV_CONFIG=TEST1</code> memakai set <code>_TEST1</code>.</p>
                 <ul class="envx-hints">
+                  <li><code>ORACLE_DB_CONNECTION_STRING</code> — alamat database, formatnya <code>host:port/service</code></li>
                   <li><code>DEV3</code> — belum dipakai, biarkan kosong</li>
                 </ul>
             </div>
@@ -7260,12 +7334,7 @@
                 <h4>Database lain</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Database di luar environment test.</p>
-                <ul class="envx-hints">
-                  <li><code>GLIFF</code> — DB Core</li>
-                  <li><code>ODS</code> — DB ODS</li>
-                  <li><code>SOASYS</code> — DB SOASYS</li>
-                </ul>
+              <p class="envx-desc">Tiga database tambahan: Core (<code>GLIFF</code>), <code>ODS</code>, dan <code>SOASYS</code>. Masing-masing satu set, tidak dibedakan per environment.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Database lain">
               <div class="terminal-body">
@@ -7292,7 +7361,7 @@
                 <h4>Gmail</h4>
                 
               </div>
-              <p class="envx-desc">Akses Gmail lewat OAuth Google. Path relatif ke root project.</p>
+              <p class="envx-desc">Nama dua file untuk akses Gmail lewat Google (OAuth). Lokasinya dihitung dari folder utama project, jadi nilai contoh bisa dipakai apa adanya kalau file-nya ada di sana.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Gmail">
               <div class="terminal-body">
@@ -7310,7 +7379,7 @@
                 <h4>POEditor</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Ambil teks / terjemahan aplikasi.</p>
+              <p class="envx-desc">Token dan ID project POEditor, supaya test bisa mengambil teks dan terjemahan aplikasi.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian POEditor">
               <div class="terminal-body">
@@ -7321,20 +7390,31 @@
               </div>
             </div>
           </div>
-          <div class="envx-sec">
+          <div class="envx-sec is-centered">
             <div class="envx-info">
               <div class="envx-head">
                 <span class="how-num">12</span>
                 <h4>SharePoint &amp; Azure</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Upload video evidence. Lokasinya: <code>General / 05 QUALITY EXCELLENCE / SPRINT / SQUAD / VERSION / CYCLE / PLATFORM</code>.</p>
+              <p class="envx-desc">Video evidence otomatis diunggah ke SharePoint. Isi akses Azure dan dua nama folder. Sisanya terisi otomatis.</p>
                 <ul class="envx-hints">
-                  <li><code>SPRINT</code> — dari <code>SHAREPOINT_SPRINT_FOLDER</code></li>
-                  <li><code>SQUAD</code> — dari <code>SHAREPOINT_FOLDER</code>. <strong>Wajib diisi</strong>, kalau kosong foldernya bernama &quot;undefined&quot;</li>
-                  <li><code>VERSION &amp; CYCLE</code> — ikut <code>JIRA_VERSION_NAME</code> &amp; <code>JIRA_CYCLE_NAME</code></li>
-                  <li><code>PLATFORM</code> — <code>iOS</code> atau <code>Android</code></li>
+                  <li><code>AZURE_…</code> dan <code>SHAREPOINT_…_ID</code> (4 baris pertama) — akses ke SharePoint. Isi dengan nilai asli milik tim.</li>
+                  <li><code>SHAREPOINT_SPRINT_FOLDER</code> — nama folder sprint, misalnya <code>R6 Sprint</code></li>
+                  <li><code>SHAREPOINT_FOLDER</code> — nama folder squad, misalnya <code>onboarding</code>. <strong>Wajib diisi.</strong></li>
                 </ul>
+                <p class="envx-desc" style="margin-top:0.7rem;">Dengan isian contoh ini, video tersimpan di:</p>
+                <ol class="envx-path" aria-label="Urutan folder tempat video tersimpan">
+                  <li><span>General</span></li>
+                  <li><span>05 QUALITY EXCELLENCE</span></li>
+                  <li><span class="is-env">R6 Sprint</span></li>
+                  <li><span class="is-env">onboarding</span></li>
+                  <li><span>Regression R5</span></li>
+                  <li><span>Feature R2</span></li>
+                  <li><span>iOS</span></li>
+                </ol>
+                <p class="envx-sub">Yang <strong>tebal</strong> berasal dari dua folder di atas. Version dan cycle (<code>Regression R5</code>, <code>Feature R2</code>) ikut Jira di bagian 5. Platform jadi <code>Android</code> kalau yang berjalan device Android.</p>
+                <p class="envx-warn">⚠️ Kalau dikosongkan, <code>SHAREPOINT_FOLDER</code> menghasilkan folder bernama &quot;undefined&quot;, dan <code>SHAREPOINT_SPRINT_FOLDER</code> menghasilkan folder &quot;BELUM DECLARE SPRINT FOLDER&quot;.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian SharePoint &amp; Azure">
               <div class="terminal-body">
@@ -7356,7 +7436,7 @@
                 <h4>Redis</h4>
                 <span class="envx-tag is-must">Wajib diganti</span>
               </div>
-              <p class="envx-desc">Satu URL per environment. Format: <code>redis://user:password@host:port</code>.</p>
+              <p class="envx-desc">Alamat Redis, satu per environment (<code>TEST1</code> dan <code>TEST2</code>). Format: <code>redis://user:password@host:port</code>.</p>
             </div>
             <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Redis">
               <div class="terminal-body">
