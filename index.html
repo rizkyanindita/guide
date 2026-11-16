@@ -2738,6 +2738,107 @@
       border: 1px solid var(--amber-border);
     }
 
+    /* ─── CONTOH .ENV: penjelasan di samping kode, bukan di dalam kode ─── */
+    .envx {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .envx-sec {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: 0.6rem 1rem;
+      align-items: start;
+      padding: 0.8rem 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .envx-head {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .envx-head h4 {
+      margin: 0;
+      font-size: var(--fs-body);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-heading);
+    }
+
+    .envx-tag {
+      font-size: var(--fs-micro);
+      font-weight: var(--fw-medium);
+      line-height: 1.4;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-2);
+      color: #6B645F;
+    }
+
+    .envx-tag.is-must {
+      background: var(--amber-tint);
+      border-color: var(--amber-border);
+      color: var(--code-ink);
+    }
+
+    .envx-desc {
+      margin: 0.4rem 0 0;
+      font-size: var(--fs-small);
+      line-height: var(--lh-body);
+      color: var(--text);
+    }
+
+    .envx-hints {
+      list-style: none;
+      margin: 0.45rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: var(--fs-small);
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .envx-desc code,
+    .envx-hints code {
+      font-size: 0.85em;
+    }
+
+    .envx-code {
+      margin-top: 0;
+      box-shadow: none;
+    }
+
+    .envx-code .terminal-body {
+      padding: 0.6rem 0.75rem;
+      overflow-x: auto;
+    }
+
+    .envx-code .yml-code {
+      padding: 0;
+      white-space: nowrap;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    /* Blok .env utuh di bawah kartu: ada bar nama file, jadi diberi jarak dari teks di atasnya */
+    .envx-full {
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 820px) {
+      .envx-sec {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     /* ─── CTA "MAU LEBIH MUDAH?" (khusus slide Device Commands) ───
        Ditaruh sebelum empat langkah command: kalau ada jalan yang lebih
        singkat, pengguna harus tahu sebelum menempuh jalan panjangnya.
@@ -6950,10 +7051,330 @@
 
         <div class="divider" style="margin-top:1.2rem;"><span>Contoh isi .env lengkap</span></div>
 
-        <p class="slide-sub" style="margin-bottom:0.6rem;">Urutan dan nama variabel mengikuti <code>.env</code> terbaru.
-          Ganti bagian berwarna kuning dengan nilai asli, dan sesuaikan nilai yang ditandai per mesin / per squad.</p>
+        <p class="slide-sub" style="margin-bottom:0.6rem;">Urutan sama dengan <code>.env</code> terbaru. Kiri:
+          penjelasan tiap bagian. Kanan: isi <code>.env</code>-nya. Nilai kuning dalam <code>&lt;...&gt;</code>
+          <strong>wajib diganti</strong> dengan nilai asli; sisanya bisa dipakai apa adanya atau disesuaikan.</p>
 
-        <div class="terminal">
+        <div class="envx">
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">1</span>
+                <h4>Device</h4>
+                <span class="envx-tag is-soft">Sesuaikan per mesin</span>
+              </div>
+              <p class="envx-desc">Device dan app yang dites. Key berakhiran <code>_ANDROID</code> / <code>_IOS</code> dipakai otomatis sesuai platform yang dijalankan.</p>
+                <ul class="envx-hints">
+                  <li><code>APP_ID</code> — package / bundle app</li>
+                  <li><code>DEVICE_ID</code> — serial adb (Android) atau UDID simulator (iOS)</li>
+                  <li><code>DEVICE_NAME</code> — nama device di laporan</li>
+                  <li><code>PLATFORM</code> — label platform di laporan</li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Device">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">APP_ID_ANDROID=</span><span class="y-val">id.bni.wondr.uat</span><br>
+                  <span class="y-key">DEVICE_NAME_ANDROID=</span><span class="y-val">Pixel 7</span><br>
+                  <span class="y-key">DEVICE_ID_ANDROID=</span><span class="y-val">emulator-5554</span><br>
+                  <span class="y-key">PLATFORM_ANDROID=</span><span class="y-val">Android</span><br>
+                  <br>
+                  <span class="y-key">APP_ID_IOS=</span><span class="y-val">id.bni.wondr.uat2</span><br>
+                  <span class="y-key">DEVICE_NAME_IOS=</span><span class="y-val">iPhone 15 Pro</span><br>
+                  <span class="y-key">DEVICE_ID_IOS=</span><span class="y-val">D74083DD-4E85-486F-9474-5BBF34090D22</span><br>
+                  <span class="y-key">PLATFORM_IOS=</span><span class="y-val">iOS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">2</span>
+                <h4>Shard</h4>
+                <span class="envx-tag is-soft">Opsional</span>
+              </div>
+              <p class="envx-desc">Nama device untuk shard ke-0 dan ke-1. Boleh dibiarkan kosong.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Shard">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">DEVICE_NAME_0=</span><br>
+                  <span class="y-key">DEVICE_NAME_1=</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">3</span>
+                <h4>Akun test</h4>
+                <span class="envx-tag is-soft">Sesuaikan per squad</span>
+              </div>
+              <p class="envx-desc">CIF akun test, satu per platform.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Akun test">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">CIF_ANDROID=</span><span class="y-val">10000999302</span><br>
+                  <span class="y-key">CIF_IOS=</span><span class="y-val">10000999302</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">4</span>
+                <h4>Suite &amp; environment</h4>
+                
+              </div>
+              <p class="envx-desc">Pilih suite yang dijalankan dan environment tujuannya.</p>
+                <ul class="envx-hints">
+                  <li><code>FOLDER_SUITE</code> — folder di <code>flow/</code>: <code>test-scenario</code>, <code>test-scenario-tech-improvement</code>, atau <code>continuous-integration</code></li>
+                  <li><code>ENV_CONFIG</code> — <code>DEV2</code>, <code>DEV3</code>, <code>TEST1</code>, <code>TEST2</code>, atau <code>TEST3</code>. Menentukan DB, Redis, Kibana, dan public key yang dipakai</li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Suite &amp; environment">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">FOLDER_SUITE=</span><span class="y-val">continuous-integration</span><br>
+                  <span class="y-key">ENV_CONFIG=</span><span class="y-val">TEST1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">5</span>
+                <h4>Jira Zephyr</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Tujuan upload hasil test, beserta akun Jira.</p>
+                <ul class="envx-hints">
+                  <li><code>AUTO_UPLOAD_JIRA</code> — <code>1</code> = upload otomatis, <code>0</code> = tidak</li>
+                  <li><code>JIRA_FOLDER_NAME</code> — jangan diisi di sini. Sudah diatur di tiap file flow, dan kalau diisi nilainya terkirim ke semua flow</li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Jira Zephyr">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">JIRA_VERSION_NAME=</span><span class="y-val">Regression R5</span><br>
+                  <span class="y-key">JIRA_CYCLE_NAME=</span><span class="y-val">Feature R2</span><br>
+                  <span class="y-key">AUTO_UPLOAD_JIRA=</span><span class="y-val">0</span><br>
+                  <span class="y-key">JIRA_USERNAME=</span><span class="ph">&lt;username jira&gt;</span><br>
+                  <span class="y-key">JIRA_PASSWORD=</span><span class="ph">&lt;password jira&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">6</span>
+                <h4>Kibana</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Cek telemetry. Satu set per environment.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Kibana">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">KIBANA_TEST1_BASE_URL=</span><span class="ph">&lt;url kibana&gt;</span><br>
+                  <span class="y-key">KIBANA_TEST1_USERNAME=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">KIBANA_TEST1_PASSWORD=</span><span class="ph">&lt;password&gt;</span><br>
+                  <br>
+                  <span class="y-key">KIBANA_TEST2_BASE_URL=</span><span class="ph">&lt;url kibana&gt;</span><br>
+                  <span class="y-key">KIBANA_TEST2_USERNAME=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">KIBANA_TEST2_PASSWORD=</span><span class="ph">&lt;password&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">7</span>
+                <h4>Public key</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Untuk mengenkripsi password dan MPIN akun test.</p>
+                <ul class="envx-hints">
+                  <li><code>PUBLIC_KEY_TEST</code> — dipakai <code>TEST1</code>–<code>TEST3</code></li>
+                  <li><code>PUBLIC_KEY_DEV</code> — dipakai <code>DEV2</code>–<code>DEV3</code></li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Public key">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">PUBLIC_KEY_TEST=</span><span class="ph">&lt;public key test&gt;</span><br>
+                  <span class="y-key">PUBLIC_KEY_DEV=</span><span class="ph">&lt;public key dev&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">8</span>
+                <h4>Database Oracle</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Satu set per environment. Yang dipakai mengikuti <code>ENV_CONFIG</code>.</p>
+                <ul class="envx-hints">
+                  <li><code>DEV3</code> — belum dipakai, biarkan kosong</li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Database Oracle">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">ORACLE_DB_USERNAME_TEST1=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_TEST1=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST1=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_TEST2=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_TEST2=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST2=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_TEST3=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_TEST3=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST3=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_DEV2=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_DEV2=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_DEV2=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_DEV3=</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_DEV3=</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_DEV3=</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">9</span>
+                <h4>Database lain</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Database di luar environment test.</p>
+                <ul class="envx-hints">
+                  <li><code>GLIFF</code> — DB Core</li>
+                  <li><code>ODS</code> — DB ODS</li>
+                  <li><code>SOASYS</code> — DB SOASYS</li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Database lain">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">ORACLE_DB_USERNAME_GLIFF=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_GLIFF=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_GLIFF=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_ODS=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_ODS=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_ODS=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+                  <br>
+                  <span class="y-key">ORACLE_DB_USERNAME_SOASYS=</span><span class="ph">&lt;username&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_PASSWORD_SOASYS=</span><span class="ph">&lt;password&gt;</span><br>
+                  <span class="y-key">ORACLE_DB_CONNECTION_STRING_SOASYS=</span><span class="ph">&lt;host:port/service&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">10</span>
+                <h4>Gmail</h4>
+                
+              </div>
+              <p class="envx-desc">Akses Gmail lewat OAuth Google. Path relatif ke root project.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Gmail">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">CREDENTIALS_PATH=</span><span class="y-val">credentials.json</span><br>
+                  <span class="y-key">TOKEN_PATH=</span><span class="y-val">token.json</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">11</span>
+                <h4>POEditor</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Ambil teks / terjemahan aplikasi.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian POEditor">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">PO_EDITOR_TOKEN=</span><span class="ph">&lt;token poeditor&gt;</span><br>
+                  <span class="y-key">PROJECT_ID_PO_EDITOR=</span><span class="ph">&lt;project id&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">12</span>
+                <h4>SharePoint &amp; Azure</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Upload video evidence. Lokasinya: <code>General / 05 QUALITY EXCELLENCE / SPRINT / SQUAD / VERSION / CYCLE / PLATFORM</code>.</p>
+                <ul class="envx-hints">
+                  <li><code>SPRINT</code> — dari <code>SHAREPOINT_SPRINT_FOLDER</code></li>
+                  <li><code>SQUAD</code> — dari <code>SHAREPOINT_FOLDER</code>. <strong>Wajib diisi</strong>, kalau kosong foldernya bernama &quot;undefined&quot;</li>
+                  <li><code>VERSION &amp; CYCLE</code> — ikut <code>JIRA_VERSION_NAME</code> &amp; <code>JIRA_CYCLE_NAME</code></li>
+                  <li><code>PLATFORM</code> — <code>iOS</code> atau <code>Android</code></li>
+                </ul>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian SharePoint &amp; Azure">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">AZURE_CLIENT_ID=</span><span class="ph">&lt;client id&gt;</span><br>
+                  <span class="y-key">AZURE_CLIENT_SECRET=</span><span class="ph">&lt;client secret&gt;</span><br>
+                  <span class="y-key">SHAREPOINT_SITE_ID=</span><span class="ph">&lt;site id&gt;</span><br>
+                  <span class="y-key">SHAREPOINT_DRIVE_ID=</span><span class="ph">&lt;drive id&gt;</span><br>
+                  <span class="y-key">SHAREPOINT_SPRINT_FOLDER=</span><span class="y-val">R6 Sprint</span><br>
+                  <span class="y-key">SHAREPOINT_FOLDER=</span><span class="y-val">onboarding</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="envx-sec">
+            <div class="envx-info">
+              <div class="envx-head">
+                <span class="how-num">13</span>
+                <h4>Redis</h4>
+                <span class="envx-tag is-must">Wajib diganti</span>
+              </div>
+              <p class="envx-desc">Satu URL per environment. Format: <code>redis://user:password@host:port</code>.</p>
+            </div>
+            <div class="terminal envx-code" tabindex="0" role="region" aria-label="Isi .env bagian Redis">
+              <div class="terminal-body">
+                <div class="yml-code">
+                  <span class="y-key">REDIS_URL_TEST1=</span><span class="ph">&lt;redis url&gt;</span><br>
+                  <span class="y-key">REDIS_URL_TEST2=</span><span class="ph">&lt;redis url&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin-top:1.2rem;"><span>Isi .env lengkap</span></div>
+
+        <p class="slide-sub" style="margin-bottom:0.6rem;">Gabungan semua bagian di atas, urutannya sama. Salin, lalu
+          ganti nilai kuning <code>&lt;...&gt;</code> dengan nilai asli.</p>
+
+        <div class="terminal envx-code envx-full" tabindex="0" role="region" aria-label="Isi lengkap file .env">
           <div class="terminal-bar">
             <div class="dot dot-red"></div>
             <div class="dot dot-amber"></div>
@@ -6962,73 +7383,98 @@
           </div>
           <div class="terminal-body">
             <div class="yml-code">
-              <span class="y-key"># Jira</span><br>
-              <span class="y-key">JIRA_VERSION_NAME=</span><span class="y-val">Regression R6</span><br>
-              <span class="y-key">JIRA_CYCLE_NAME=</span><span class="y-val">Feature R6.2</span><br>
-              <span class="y-key">AUTO_UPLOAD_JIRA=</span><span class="y-val">0</span><br>
-              <br>
-              <span class="y-key"># Android</span><br>
               <span class="y-key">APP_ID_ANDROID=</span><span class="y-val">id.bni.wondr.uat</span><br>
-              <span class="y-key">DEVICE_NAME_ANDROID=</span><span class="y-val">jenkins-andro</span><br>
-              <span class="y-key">DEVICE_ID_ANDROID=</span><span class="y-val">emulator-5554</span><span class="y-note"># sesuaikan per mesin</span><br>
+              <span class="y-key">DEVICE_NAME_ANDROID=</span><span class="y-val">Pixel 7</span><br>
+              <span class="y-key">DEVICE_ID_ANDROID=</span><span class="y-val">emulator-5554</span><br>
               <span class="y-key">PLATFORM_ANDROID=</span><span class="y-val">Android</span><br>
               <br>
-              <span class="y-key"># iOS</span><br>
               <span class="y-key">APP_ID_IOS=</span><span class="y-val">id.bni.wondr.uat2</span><br>
-              <span class="y-key">DEVICE_NAME_IOS=</span><span class="y-val">jenkins-ios</span><br>
-              <span class="y-key">DEVICE_ID_IOS=</span><span class="y-val">73227968-E838-4C8A-9A06-2E5F449389B0</span><span class="y-note"># sesuaikan per mesin</span><br>
+              <span class="y-key">DEVICE_NAME_IOS=</span><span class="y-val">iPhone 15 Pro</span><br>
+              <span class="y-key">DEVICE_ID_IOS=</span><span class="y-val">D74083DD-4E85-486F-9474-5BBF34090D22</span><br>
               <span class="y-key">PLATFORM_IOS=</span><span class="y-val">iOS</span><br>
               <br>
-              <span class="y-key"># Akun test — sesuaikan per squad</span><br>
-              <span class="y-key">CIF=</span><span class="y-val">10001192673</span><br>
-              <span class="y-key">CIF_IOS=</span><span class="y-val">10001391339</span><br>
-              <span class="y-key">CIF_ANDROID=</span><span class="y-val">10001192673</span><br>
-              <span class="y-key">USER_ID_IOS=</span><span class="y-val">50d5781c-5ff1-4d09-b1</span><br>
-              <span class="y-key">USER_ID_ANDROID=</span><span class="ph">&lt;user id milik CIF_ANDROID&gt;</span><br>
-              <span class="y-key">PASSWORD_ACCOUNT=</span><span class="y-val">Pass#123</span><br>
-              <span class="y-key">MPIN_ACCOUNT=</span><span class="y-val">124578</span><br>
+              <span class="y-key">DEVICE_NAME_0=</span><br>
+              <span class="y-key">DEVICE_NAME_1=</span><br>
               <br>
-              <span class="y-key"># Shard &amp; suite</span><br>
-              <span class="y-key">DEVICE_NAME_0=</span><span class="y-val">ikkyshard</span><br>
-              <span class="y-key">DEVICE_NAME_1=</span><span class="y-val">Pixel_7_Pro_API_34</span><br>
+              <span class="y-key">CIF_ANDROID=</span><span class="y-val">10000999302</span><br>
+              <span class="y-key">CIF_IOS=</span><span class="y-val">10000999302</span><br>
+              <br>
               <span class="y-key">FOLDER_SUITE=</span><span class="y-val">continuous-integration</span><br>
+              <span class="y-key">ENV_CONFIG=</span><span class="y-val">TEST1</span><br>
               <br>
-              <span class="y-key"># Evidence &amp; report</span><br>
-              <span class="y-key">EVIDENCE_PATH=</span><span class="ph">&lt;path folder reports/ di mesin ini&gt;</span><br>
-              <span class="y-key">EVIDENCE_PATH_FOLDER=</span><span class="y-val">TVT_DC_KNG</span><br>
-              <span class="y-key">PORT=</span><span class="y-val">4301</span><br>
-              <span class="y-key">OPEN_REPORT_TARGET=</span><span class="y-val">custom-report</span><br>
+              <span class="y-key">JIRA_VERSION_NAME=</span><span class="y-val">Regression R5</span><br>
+              <span class="y-key">JIRA_CYCLE_NAME=</span><span class="y-val">Feature R2</span><br>
+              <span class="y-key">AUTO_UPLOAD_JIRA=</span><span class="y-val">0</span><br>
+              <span class="y-key">JIRA_USERNAME=</span><span class="ph">&lt;username jira&gt;</span><br>
+              <span class="y-key">JIRA_PASSWORD=</span><span class="ph">&lt;password jira&gt;</span><br>
               <br>
-              <span class="y-key"># Oracle DB</span><br>
+              <span class="y-key">KIBANA_TEST1_BASE_URL=</span><span class="ph">&lt;url kibana&gt;</span><br>
+              <span class="y-key">KIBANA_TEST1_USERNAME=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">KIBANA_TEST1_PASSWORD=</span><span class="ph">&lt;password&gt;</span><br>
+              <br>
+              <span class="y-key">KIBANA_TEST2_BASE_URL=</span><span class="ph">&lt;url kibana&gt;</span><br>
+              <span class="y-key">KIBANA_TEST2_USERNAME=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">KIBANA_TEST2_PASSWORD=</span><span class="ph">&lt;password&gt;</span><br>
+              <br>
+              <span class="y-key">PUBLIC_KEY_TEST=</span><span class="ph">&lt;public key test&gt;</span><br>
+              <span class="y-key">PUBLIC_KEY_DEV=</span><span class="ph">&lt;public key dev&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_TEST1=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_TEST1=</span><span class="ph">&lt;password&gt;</span><br>
               <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST1=</span><span class="ph">&lt;host:port/service&gt;</span><br>
-              <span class="y-key">ORACLE_DB_USERNAME_TEST2=</span><span class="ph">&lt;username_kamu&gt;</span><br>
-              <span class="y-key">ORACLE_DB_PASSWORD_TEST2=</span><span class="ph">&lt;password_kamu&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_TEST2=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_TEST2=</span><span class="ph">&lt;password&gt;</span><br>
               <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST2=</span><span class="ph">&lt;host:port/service&gt;</span><br>
               <br>
-              <span class="y-key"># SharePoint / Azure</span><br>
-              <span class="y-key">SHAREPOINT_TOKEN=</span><span class="y-val">Bearer </span><span class="ph">&lt;token lengkap&gt;</span><br>
+              <span class="y-key">ORACLE_DB_USERNAME_TEST3=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_TEST3=</span><span class="ph">&lt;password&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_TEST3=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_DEV2=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_DEV2=</span><span class="ph">&lt;password&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_DEV2=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_DEV3=</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_DEV3=</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_DEV3=</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_GLIFF=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_GLIFF=</span><span class="ph">&lt;password&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_GLIFF=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_ODS=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_ODS=</span><span class="ph">&lt;password&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_ODS=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key">ORACLE_DB_USERNAME_SOASYS=</span><span class="ph">&lt;username&gt;</span><br>
+              <span class="y-key">ORACLE_DB_PASSWORD_SOASYS=</span><span class="ph">&lt;password&gt;</span><br>
+              <span class="y-key">ORACLE_DB_CONNECTION_STRING_SOASYS=</span><span class="ph">&lt;host:port/service&gt;</span><br>
+              <br>
+              <span class="y-key">CREDENTIALS_PATH=</span><span class="y-val">credentials.json</span><br>
+              <span class="y-key">TOKEN_PATH=</span><span class="y-val">token.json</span><br>
+              <br>
+              <span class="y-key">PO_EDITOR_TOKEN=</span><span class="ph">&lt;token poeditor&gt;</span><br>
+              <span class="y-key">PROJECT_ID_PO_EDITOR=</span><span class="ph">&lt;project id&gt;</span><br>
+              <br>
               <span class="y-key">AZURE_CLIENT_ID=</span><span class="ph">&lt;client id&gt;</span><br>
               <span class="y-key">AZURE_CLIENT_SECRET=</span><span class="ph">&lt;client secret&gt;</span><br>
               <span class="y-key">SHAREPOINT_SITE_ID=</span><span class="ph">&lt;site id&gt;</span><br>
               <span class="y-key">SHAREPOINT_DRIVE_ID=</span><span class="ph">&lt;drive id&gt;</span><br>
               <span class="y-key">SHAREPOINT_SPRINT_FOLDER=</span><span class="y-val">R6 Sprint</span><br>
               <span class="y-key">SHAREPOINT_FOLDER=</span><span class="y-val">onboarding</span><br>
-              <span class="y-key">SHAREPOINT_SQUAD_FOLDER=</span><span class="y-val">Squad - Wealth+Lifestyle</span><br>
               <br>
-              <span class="y-key"># Redis — format redis://user:password@host:port</span><br>
-              <span class="y-key">REDIS_URL=</span><span class="ph">&lt;redis url&gt;</span><br>
               <span class="y-key">REDIS_URL_TEST1=</span><span class="ph">&lt;redis url&gt;</span><br>
-              <span class="y-key">REDIS_URL_TEST2=</span><span class="ph">&lt;redis url&gt;</span><br>
-              <span class="y-key">REDIS_URL_VIDEO_UPLOAD=</span><span class="ph">&lt;redis url&gt;</span>
+              <span class="y-key">REDIS_URL_TEST2=</span><span class="ph">&lt;redis url&gt;</span>
             </div>
           </div>
         </div>
 
         <div class="how-note is-warn">
           <span>⚠️</span>
-          <span>Simpan <code>.env</code> dengan line ending <strong>LF</strong> (bukan CRLF). Token, secret, password,
-            URL Redis, dan alamat database sengaja tidak ditulis di panduan ini — isi dengan nilai asli milik tim, dan
-            jangan di-commit.</span>
+          <span>Simpan <code>.env</code> dengan line ending <strong>LF</strong> (bukan CRLF). Tulis komentar
+            (<code>#</code>) di baris sendiri, jangan di belakang nilai. Password, token, secret, URL Redis, dan alamat
+            database sengaja tidak ditulis di panduan ini — isi dengan nilai asli milik tim, dan jangan di-commit.</span>
         </div>
 
       </div>
