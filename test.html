@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Automation Flow Animation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body {
+      background: #070b19;
+      color: #e6eefc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .canvas {
+      width: 1180px;
+      background: radial-gradient(circle at top, #101936 0%, #070b19 70%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    h1 { text-align: center; font-size: 26px; letter-spacing: 0.4px; margin-bottom: 6px; }
+    p.sub { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+    svg { width: 100%; height: 540px; display: block; }
+    .box {
+      fill: rgba(15, 23, 42, 0.92);
+      stroke: #38bdf8;
+      stroke-width: 1.8;
+      rx: 14;
+    }
+    .box-accent { stroke: #c084fc; }
+    .title { fill: #f8fafc; font-size: 14px; font-weight: 700; }
+    .code { fill: #7dd3fc; font-size: 11.5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .edge-label { fill: #cbd5e1; font-size: 12px; }
+    .wire { fill: none; stroke: #334155; stroke-width: 2.2; }
+    .flow {
+      fill: none;
+      stroke: #38bdf8;
+      stroke-width: 2.6;
+      stroke-dasharray: 10 14;
+      animation: dash 1.2s linear infinite;
+    }
+    .flow-purple {
+      stroke: #c084fc;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -48; }
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <h1>Test Automation Architecture Flow</h1>
+    <p class="sub">Request &amp; mock routing flow including INT GTW AUTO → Wiremock</p>
+    <svg viewBox="0 0 1120 540">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+        </marker>
+        <marker id="arrow-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc" />
+        </marker>
+      </defs>
+
+      <!-- Base wires -->
+      <path class="wire" d="M 150 110 L 230 110" marker-end="url(#arrow)" />
+      <path class="wire" d="M 430 110 L 500 110" marker-end="url(#arrow)" />
+      <path class="wire" d="M 680 110 L 750 110" marker-end="url(#arrow)" />
+      <path class="wire" d="M 590 165 L 590 330" marker-end="url(#arrow)" />
+      <!-- INT GTW AUTO -> Wiremock (baru ditambahkan) -->
+      <path class="wire" d="M 865 165 L 865 330" marker-end="url(#arrow-p)" />
+      <!-- Wiremock -> DB TEST2 -->
+      <path class="wire" d="M 760 385 L 685 385" marker-end="url(#arrow-p)" />
+      <!-- Wiremock <-> Real Surrounding -->
+      <path class="wire" d="M 865 330 L 865 190" marker-start="url(#arrow-p)" marker-end="url(#arrow-p)" />
+
+      <!-- Animated flows -->
+      <path class="flow" d="M 150 110 L 230 110" />
+      <path class="flow" d="M 430 110 L 500 110" />
+      <path class="flow" d="M 680 110 L 750 110" />
+      <path class="flow" d="M 590 165 L 590 330" />
+      <path class="flow flow-purple" d="M 865 165 L 865 330" />
+      <path class="flow flow-purple" d="M 760 385 L 685 385" />
+
+      <!-- Mobile AUTO (HP Icon) -->
+      <rect class="box" x="20" y="55" width="130" height="110" />
+      <rect x="70" y="68" width="28" height="44" rx="5" fill="none" stroke="#38bdf8" stroke-width="2" />
+      <circle cx="84" cy="106" r="1.8" fill="#38bdf8" />
+      <text class="title" x="85" y="136" text-anchor="middle">Mobile AUTO</text>
+
+      <!-- External gtw AUTO -->
+      <rect class="box" x="230" y="55" width="200" height="110" />
+      <text class="title" x="330" y="92" text-anchor="middle">External gtw AUTO</text>
+      <text class="code" x="330" y="122" text-anchor="middle">credit-card/v1/xxxxx</text>
+
+      <!-- MS AUTO -->
+      <rect class="box" x="500" y="55" width="180" height="110" />
+      <text class="title" x="590" y="92" text-anchor="middle">MS AUTO</text>
+      <text class="code" x="590" y="122" text-anchor="middle">credit-card</text>
+
+      <!-- INT GTW AUTO -->
+      <rect class="box box-accent" x="750" y="55" width="230" height="110" />
+      <text class="title" x="865" y="88" text-anchor="middle">INT GTW AUTO</text>
+      <text class="code" x="865" y="118" text-anchor="middle">cardlink/mvrk/activate-</text>
+      <text class="code" x="865" y="135" text-anchor="middle">card-virtual</text>
+
+      <!-- DB TEST2 -->
+      <rect class="box" x="500" y="335" width="180" height="100" />
+      <ellipse cx="590" cy="362" rx="18" ry="6" fill="none" stroke="#38bdf8" stroke-width="1.8" />
+      <path d="M572 362 v16 a18 6 0 0 0 36 0 v-16" fill="none" stroke="#38bdf8" stroke-width="1.8" />
+      <text class="title" x="590" y="412" text-anchor="middle">DB TEST2</text>
+
+      <!-- Wiremock -->
+      <rect class="box box-accent" x="765" y="335" width="200" height="100" />
+      <text class="title" x="865" y="382" text-anchor="middle">Wiremock</text>
+
+      <!-- Real Surrounding -->
+      <rect class="box box-accent" x="765" y="210" width="200" height="80" />
+      <text class="title" x="865" y="255" text-anchor="middle">Real Surrounding</text>
+
+      <!-- Edge labels -->
+      <text class="edge-label" x="720" y="410" text-anchor="middle">bila data dynamic</text>
+      <text class="edge-label" x="980" y="255">cek ke surrounding</text>
+    </svg>
+  </div>
+</body>
+</html>
